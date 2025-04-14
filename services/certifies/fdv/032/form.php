@@ -49,10 +49,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                         <input class="form-control" type="text" name="id_documento" id="id_documento" value="001" readonly>
                                         <br>
 
-                                        <label><i class="fa fa-user-circle"></i>&nbsp;Técnico Certificado:</label>
-                                        <input class="form-control" type="text" name="tecnico" id="tecnico" readonly value="<?php echo $_SESSION['nombre_completo']." ".$_SESSION['apellido']; ?>">
-                                        <br>
-
+                                        <div class="col-sm-4">
                                         <label><i class="fa fa-star-half-o"></i>&nbsp;Condición física al recibir:</label>
                                         <select class="form-control" name="condicion_fisica" required>
                                             <option value=""> - Selecciona la condición adecuada - </option>
@@ -62,8 +59,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                             <option value="Mal empacado">Mal empacado</option>
                                             <option value="Mal manejo">Mal manejo</option>
                                         </select>
-                                        <br>
+                                        </div>
 
+                                        <div class="col-sm-4">
                                         <label><i class="fa fa-star-o"></i>&nbsp;Condición de calibración encontrada:</label>
                                         <select class="form-control" name="condicion_calibracion" required>
                                             <option value=""> - Selecciona la condición adecuada - </option>
@@ -71,46 +69,60 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                             <option value="En tolerancia">En tolerancia</option>
                                             <option value="Fuera de tolerancia">Fuera de tolerancia</option>
                                         </select>
-                                        <br>
+                                        </div>
 
+                                        <div class="col-sm-4">
                                         <label><i class="fa fa-certificate"></i>&nbsp;Condición de calibración final:</label>
                                         <select class="form-control" name="condicion_final" required>
                                         <option value=""> - Selecciona la condición adecuada - </option>
                                             <option value="Dentro de Especificaciones">Dentro de Especificaciones</option>
-                                        </select>
-                                        <br>
+                                        </select><br>
+                                        </div>
 
-                                        <label><i class="fa fa-comments-o"></i>&nbsp;Comentarios: <i><u>(Opcional)</u></i></label><span class="badge bg-warning" style="margin: 5px;">Solo se permiten hasta 100 caracteres</span>
-                                        <textarea class="form-control" name="comentarios" rows="2" maxlength="100" placeholder="Solo se permiten hasta 100 caracteres"></textarea>
-                                        <br>
+                                        <label><i class="fa fa-comments-o"></i>&nbsp;Comentarios: <i><u>(Opcional)</u></i></label><span class="badge bg-warning" style="margin: 5px;">Solo se permiten hasta 255 caracteres</span>
+                                        <textarea class="form-control" name="comentarios" rows="2" maxlength="255" placeholder="Solo se permiten hasta 100 caracteres"></textarea>
 
+                                        <hr>
+
+                                        <div class="col-sm-4">
                                         <label><i class="fa fa-tachometer"></i>&nbsp;Modelo CI:</label>
                                         <input class="form-control" type="text" name="modelo_ci" id="modelo_ci" value="001" readonly>
-                                        <br>
+                                        </div>
 
+                                        <div class="col-sm-4">
                                         <label><i class="fa fa-barcode"></i>&nbsp;Número de Serie:</label>
                                         <input class="form-control" type="text" name="numero_serie" id="numero_serie" readonly>
-                                        <br>
+                                        </div>
 
+                                        <div class="col-sm-4">
                                         <label><i class="fa fa-calendar"></i>&nbsp;Fecha de Calibración:</label>
-                                        <input class="form-control" type="date" name="fecha_calibracion" min='2025-05-01' required>
-                                        <br>
-
+                                        <input class="form-control" type="date" name="fecha_calibracion" min='2025-05-01' required><br>
+                                        </div>
+                                        
+                                        <div class="col-sm-6">
                                         <label><i class="fa fa-user-o"></i>&nbsp;Identificación del Cliente:</label>
-                                        <input class="form-control" type="text" name="identificacion_cliente" id="identificacion_cliente" readonly>
-                                        <br>
+                                        <input class="form-control" type="text" name="identificacion_cliente" id="identificacion_cliente" readonly><hr>
+                                        </div>
 
+                                        <div class="col-sm-6">
+                                        <label><i class="fa fa-user-circle"></i>&nbsp;Técnico Certificado:</label>
+                                        <input class="form-control" type="text" name="tecnico" id="tecnico" readonly value="<?php echo $_SESSION['nombre_completo']." ".$_SESSION['apellido']; ?>"><hr>
+                                        </div>
+
+                                        <div class="col-sm-4">
                                         <label><i class="fa fa-tachometer"></i>&nbsp;Presión Barométrica:</label>
-                                        <input class="form-control" type="number" min="0" step="0.01" name="presion_barometrica" id="presion_barometrica" required placeholder="Por ejemplo: 77.2 KPa">
-                                        <br>
+                                        <input class="form-control" type="number" min="0" step="0.01" name="presion_barometrica" id="presion_barometrica" required placeholder="Por ejemplo: 77.2 KPa"><hr>
+                                        </div>
 
+                                        <div class="col-sm-4">
                                         <label><i class="fa fa-thermometer-three-quarters"></i>&nbsp;Temperatura (°C):</label>
-                                        <input class="form-control" type="number" min="0" step="0.01" name="temperatura" id="temperatura" required placeholder="Por ejemplo: 26.3° C">
-                                        <br>
+                                        <input class="form-control" type="number" min="0" step="0.01" name="temperatura" id="temperatura" required placeholder="Por ejemplo: 26.3° C"><hr>
+                                        </div>
 
+                                        <div class="col-sm-4">
                                         <label><i class="fa fa-thermometer-full"></i>&nbsp;Humedad Relativa:</label>
-                                        <input class="form-control" type="number" min="0" step="0.01" name="humedad relativa" id="humedad relativa" required placeholder="Por ejemplo: 34.7% HR">
-                                        <br>
+                                        <input class="form-control" type="number" min="0" step="0.01" name="humedad relativa" id="humedad relativa" required placeholder="Por ejemplo: 34.7% HR"><hr><br>
+                                        </div>
 
                                         <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="guardar"></center>
                                     </div>
@@ -120,7 +132,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                 </div>
             </div>
         </div>
-
+<br><br>
     </header>
 </section>
 

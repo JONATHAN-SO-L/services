@@ -69,6 +69,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                                         <select class="form-control" name="pasa_voltaje" required>
                                                             <option value=""> - Selecciona la opción correcta - </option>
                                                             <option value="SI">SI</option>
+                                                            <option value="NO">NO</option>
                                                             <option value="N/A">N/A</option>
                                                         </select>
                                                     </td>
@@ -87,6 +88,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                                         <select class="form-control" name="pasa_flujo" required>
                                                             <option value=""> - Selecciona la opción correcta - </option>
                                                             <option value="SI">SI</option>
+                                                            <option value="NO">NO</option>
                                                             <option value="N/A">N/A</option>
                                                         </select>
                                                     </td>
@@ -100,11 +102,12 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                                     <td><strong>RUIDO MÁXIMO</strong></td>
                                                     <td>< 200 mV</td>
                                                     <td>(Valor de referencia)</td>
-                                                    <td><input class="form-control" type="number" name="condicion_esperada_ruido" step="0.01" min="0" placeholder="Por ejemplo: 105.5" required> mV</td>
+                                                    <td><input class="form-control" type="number" name="condicion_esperada_ruido" step="0.001" min="0" placeholder="Por ejemplo: 105.5" required> mV</td>
                                                     <td>
                                                         <select class="form-control" name="pasa_ruido" required>
                                                             <option value=""> - Selecciona la opción correcta - </option>
                                                             <option value="SI">SI</option>
+                                                            <option value="NO">NO</option>
                                                             <option value="N/A">N/A</option>
                                                         </select>
                                                     </td>
