@@ -51,28 +51,21 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                 </tr>
               </thead>
               <tbody>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                </tr>
+                <td class="text-center">
+                  <a href="#" class="btn btn-sm btn-primary">Ver</a>
+                  <a href="#" class="btn btn-sm btn-warning">Modificar</a>
+                  <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+                <td class="text-center">25-041701</td>
+                <td class="text-center">17ABR25</td>
+                <td class="text-center">Biosense Webster</td>
+                <td class="text-center">150t-01</td>
+                <td class="text-center">154501</td>
+                <td class="text-center">19JUN24</td>
+                <td class="text-center">Jonathan Sánchez</td>
+                <td class="text-center">2025-04-17 14:01:25</td>
 
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                <td class="text-center"></td>
-                </tr>
-                </tr>
+                <tr></tr>
               </tbody>
             </table>
           </div>

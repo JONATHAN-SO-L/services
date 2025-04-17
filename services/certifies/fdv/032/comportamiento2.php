@@ -32,83 +32,99 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     <div class="panel panel-success">
                         <div class="panel-heading text-center"><strong>Para poder crear un nuevo certificado es necesario llenar los todos campos</strong></div>
                             <div class="panel-body">
-                                <form role="form" action="comportamiento.php" method="POST" enctype="multipart/form-data">
+                                <form role="form" action="estandard_trazabilidad.php" method="POST" enctype="multipart/form-data">
                                     <div>
                                         <div class="container">
                                             <table class="table table-responsive table-hover table-bordered table-striped table-primary" style="margin-left: -15px;">
                                                 <thead>
                                                     <tr>
-                                                    <th>PRUEBA</th>
-                                                    <th>ESPERADO</th>
-                                                    <th>TOLERANCIA</th>
-                                                    <th>CONDICIÓN ENCONTRADA</th>
-                                                    <th>PASA</th>
-                                                    <th>CONDICIÓN FINAL</th>
+                                                    <th>TAMAÑO DE PARTÍCULA NOMINAL</th>
+                                                    <th>0.5 µm</th>
+                                                    <th>1.0 µm</th>
+                                                    <th>3.0 µm</th>
+                                                    <th>5.0 µm</th>
                                                     </tr>
                                                 </thead>
 
                                                 <!-- PRIMERA FILA -->
                                                 <tbody>
                                                     <tr>
-                                                    <td><strong>VOLTAJE LÁSER</strong></td>
-                                                    <td><input class="form-control" type="number" name="esperado_voltaje" step="0.01" min="0" placeholder="Por ejemplo: 1.570" required>  Vdc+</td>
-                                                    <td>(Valor de referencia)</td>
-                                                    <td><input class="form-control" type="number" name="condicion_encontrada_voltaje" step="0.01" min="0" placeholder="Por ejemplo: 1.746" required> Vdc</td>
-                                                    <td>
-                                                        <select class="form-control" name="pasa_voltaje" required>
-                                                            <option value=""> - Selecciona la opción correcta - </option>
-                                                            <option value="SI">SI</option>
-                                                            <option value="NO">NO</option>
-                                                            <option value="N/A">N/A</option>
-                                                        </select>
-                                                    </td>
-                                                    <td><input class="form-control" type="number" name="condicion_final_voltaje" step="0.01" min="0" placeholder="Por ejemplo: 1.570" required> Vdc</td>
+                                                    <td><strong>AMPLITUD ESPERADA (desde la última calibración)</strong></td>
+                                                    <td><input class="form-control" type="number" name="amplitud_esperada_05" step="0.01" min="0" placeholder="Por ejemplo: 317" required>  mV</td>
+                                                    <td><input class="form-control" type="number" name="amplitud_esperada_10" step="0.01" min="0" placeholder="Por ejemplo: 275" required> mV</td>
+                                                    <td><input class="form-control" type="number" name="amplitud_esperada_30" step="0.01" min="0" placeholder="Por ejemplo: 1414" required> mV</td>
+                                                    <td><input class="form-control" type="number" name="amplitud_esperada_50" step="0.01" min="0" placeholder="Por ejemplo: 395" required> mV</td>
                                                     </tr>
                                                 </tbody>
 
                                                 <!-- SEGUNDA FILA -->
                                                 <tbody>
                                                     <tr>
-                                                    <td><strong>FLUJO DE AIRE</strong></td>
-                                                    <td><input class="form-control" type="number" name="esperado_flujo" step="0.01" min="0" placeholder="Por ejemplo: 28.3" required> LPM</td>
-                                                    <td>± 1.4 LPM</td>
-                                                    <td><input class="form-control" type="number" name="condicion_encontrada_flujo" step="0.01" min="0" placeholder="Por ejemplo: 28.4" required> LPM<i><strong>*</strong></i></td>
-                                                    <td>
-                                                        <select class="form-control" name="pasa_flujo" required>
-                                                            <option value=""> - Selecciona la opción correcta - </option>
-                                                            <option value="SI">SI</option>
-                                                            <option value="NO">NO</option>
-                                                            <option value="N/A">N/A</option>
-                                                        </select>
-                                                    </td>
-                                                    <td><input class="form-control" type="number" name="condicion_final_flujo" step="0.01" min="0" placeholder="Por ejemplo: 28.4" required> LPM<i><strong>*</strong></i></td>
+                                                    <td><strong>TOLERANCIA</strong></td>
+                                                    <td>± <input class="form-control" type="number" name="tolerancia_05" value="60" readonly>  mV</td>
+                                                    <td>± <input class="form-control" type="number" name="tolerancia_10" value="30" readonly>  mV</td>
+                                                    <td>± <input class="form-control" type="number" name="tolerancia_30" value="150" readonly>  mV</td>
+                                                    <td>± <input class="form-control" type="number" name="tolerancia_50" value="50" readonly>  mV</td>
                                                     </tr>
                                                 </tbody>
 
                                                 <!-- TERCERA FILA -->
                                                 <tbody>
                                                     <tr>
-                                                    <td><strong>RUIDO MÁXIMO</strong></td>
-                                                    <td>< 200 mV</td>
-                                                    <td>(Valor de referencia)</td>
-                                                    <td><input class="form-control" type="number" name="condicion_esperada_ruido" step="0.001" min="0" placeholder="Por ejemplo: 105.5" required> mV</td>
+                                                    <td><strong>COMO SE ENCUENTRA</strong></td>
+                                                    <td><input class="form-control" type="number" name="como_encuentra_05" step="0.01" min="0" placeholder="Por ejemplo: 312" required>  mV</td>
+                                                    <td><input class="form-control" type="number" name="como_encuentra_10" step="0.01" min="0" placeholder="Por ejemplo: 296" required>  mV</td>
+                                                    <td><input class="form-control" type="number" name="como_encuentra_30" step="0.01" min="0" placeholder="Por ejemplo: 1598" required>  mV</td>
+                                                    <td><input class="form-control" type="number" name="como_encuentra_50" step="0.01" min="0" placeholder="Por ejemplo: 407" required>  mV</td>
+                                                    </tr>
+                                                </tbody>
+
+                                                <!-- CUARTA FILA -->
+                                                <tbody>
+                                                    <tr>
+                                                    <td><strong>PASA (S/N)</strong></td>
                                                     <td>
-                                                        <select class="form-control" name="pasa_ruido" required>
-                                                            <option value=""> - Selecciona la opción correcta - </option>
+                                                        <select class="form-control" name="pasa_05" required>
+                                                            <option value=""> - Selecciona - </option>
                                                             <option value="SI">SI</option>
                                                             <option value="NO">NO</option>
-                                                            <option value="N/A">N/A</option>
                                                         </select>
                                                     </td>
-                                                    <td><input class="form-control" type="number" name="condicion_final_ruido" step="0.01" min="0" placeholder="Por ejemplo: 103.5" required> mV</td>
+                                                    <td>
+                                                        <select class="form-control" name="pasa_10" required>
+                                                            <option value=""> - Selecciona - </option>
+                                                            <option value="SI">SI</option>
+                                                            <option value="NO">NO</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" name="pasa_30" required>
+                                                            <option value=""> - Selecciona - </option>
+                                                            <option value="SI">SI</option>
+                                                            <option value="NO">NO</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" name="pasa_50" required>
+                                                            <option value=""> - Selecciona - </option>
+                                                            <option value="SI">SI</option>
+                                                            <option value="NO">NO</option>
+                                                        </select>
+                                                    </td>
+                                                    </tr>
+                                                </tbody>
+
+                                                <!-- QUINTA FILA -->
+                                                <tbody>
+                                                    <tr>
+                                                    <td><strong>CONDICIÓN FINAL</strong></td>
+                                                    <td><input class="form-control" type="number" name="condicion_final_05" step="0.01" min="0" placeholder="Por ejemplo: 300" required>  mV</td>
+                                                    <td><input class="form-control" type="number" name="condicion_final_10" step="0.01" min="0" placeholder="Por ejemplo: 300" required>  mV</td>
+                                                    <td><input class="form-control" type="number" name="condicion_final_30" step="0.01" min="0" placeholder="Por ejemplo: 1618" required>  mV</td>
+                                                    <td><input class="form-control" type="number" name="condicion_final_50" step="0.01" min="0" placeholder="Por ejemplo: 405" required>  mV</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-
-                                            <p><strong>±</strong> Valor inicial; el voltaje aumenta a medida que el diodo láser se desgasta.</p>
-
-                                            <label><i class="fa fa-tachometer"></i>&nbsp;<i><strong>*</strong></i> Las lecturas del medidor de flujo volumétrico y reflejan una compensación correctiva de:</label>
-                                            <input class="form mt-3" type="number" name="flujo_volumétrico" step="0.01" min="0" placeholder="Por ejemplo: 0" required> LPM.
                                             
                                         </div><br>
 
