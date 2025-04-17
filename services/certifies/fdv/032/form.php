@@ -35,7 +35,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                 <form role="form" action="mediciones_electronicas.php" method="POST" enctype="multipart/form-data">
                                     <div>
                                         <label><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;Intervalo máximo de calibración recomendado (meses):</label>
-                                        <input class="form-control" type="number" min="1" name="intervalo_calibracion" id="intervalo_calibracion" placeholder="Por ejemplo: 12">
+                                        <input class="form-control" type="number" min="1" name="intervalo_calibracion" id="intervalo_calibracion" placeholder="Por ejemplo: 12" require>
                                         <br>
 
                                         <label><i class="fa fa-barcode"></i>&nbsp;ID del documento:</label>
