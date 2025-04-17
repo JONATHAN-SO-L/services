@@ -1,25 +1,14 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
-    session_start();
-if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') { ?>
+session_start();
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="../../../assets/css/main.css">
-  <?php include "../../assets/links2.php"; ?> 
-  <?php include '../../assets/navbar.php'; ?>
-</head>
+if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
+    include '../../assets/layout.php';
+    section();
+?>
 
-<body>
-
-<section id="content">	 
-    <header id="content-header">
         <table>  
         <tr>
-        <a href="index.php"><button type="submit" value="Volver" name="" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
+        <a href="index.php"><button type="submit" value="Volver" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
         </tr>
         <tr>
         <button onClick="document.location.reload();" type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Haz clic para reiniciar el formulario" HSPACE="10" VSPACE="10"><i class="fa fa-refresh fa-spin  fa-fw"></i>
@@ -65,13 +54,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             </div>
         </div>
 
-    </header>
-</section>
-
-</body>
-</html>
-
-<?php } else {
+<?php
+end_section();
+} else {
     header('Location: ../../../../index.php');
 }
 ?>

@@ -1,31 +1,13 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
-    session_start();
-if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') { ?>
+session_start();
+
+if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
+  include '../../assets/layout.php';
+  section();
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="../../../assets/css/main.css">
-  <?php include '../../assets/links2.php'; ?> 
-  <?php include '../../assets/navbar.php'; ?>
-</head>
-
-<body>
-      
-<div id="menu-overlay"></div>
-<div id="menu-toggle" class="closed" data-title="Menu">
-    <i class="fa fa-bars"></i>
-    <i class="fa fa-times"></i>
-  </div>
-
-<section id="content">
-  <header id="content-header">
 
     <table>
-    <a href="empresa.php" ><button type="submit" value="Nuevo Certificado" name="" class="btn btn-success" style="text-align:center"><i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Certificado</button></a>
+    <a href="empresa.php"><button type="submit" value="Nuevo Certificado" name="" class="btn btn-success" style="text-align:center"><i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Certificado</button></a>
     <td>
     <tr>
     <button onClick="document.location.reload();" type="submit" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Haz clic para actualizar los datos" HSPACE="10" VSPACE="10"><i class="fa fa-refresh fa-spin fa-fw"></i>
@@ -104,11 +86,8 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
       </div>
     </div>
 
-  </header>
-</section>
-
-</body>
-</html>
-<?php } else {
+<?php
+  end_section();
+} else {
   header('Location: ../../../../index.php');
 }

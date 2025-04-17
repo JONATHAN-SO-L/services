@@ -1,6 +1,7 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
 session_start();
+header('Content-Type: text/html; charset=UTF-8');
+
 if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="devecchi"){ 
 ?>
 <!DOCTYPE html>

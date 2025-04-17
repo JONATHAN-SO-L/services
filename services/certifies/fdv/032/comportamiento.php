@@ -18,7 +18,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             <div class="row" style="width: 770px;">
                 <div class="col-sm-12">
                     <div class="page-header2">
-                        <h1 class="animated lightSpeedIn">Certificado: # | Mediciones Electrónicas</h1>
+                        <h1 class="animated lightSpeedIn">Certificado: # | Comportamiento</h1>
                         <span class="label label-danger"></span> 		 
                         <p class="pull-right text-primary"></p>
                     </div>

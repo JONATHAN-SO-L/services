@@ -1,22 +1,11 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
-    session_start();
-if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') { ?>
+session_start();
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="../../../assets/css/main.css">
-  <?php include "../../assets/links2.php"; ?> 
-  <?php include '../../assets/navbar.php'; ?>
-</head>
+if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
+    include '../../assets/layout.php';
+    section();
+?>
 
-<body>
-
-<section id="content">	 
-    <header id="content-header">
         <table>
         <tr>
         <a href="contador.php"><button type="submit" value="Volver" name="" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
@@ -44,25 +33,30 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                             <div class="panel-body">
                                 <form role="form" action="form.php" method="POST" enctype="multipart/form-data">
                                     <div>
+                                        <div class="col-sm-4">
                                         <label><i class="fa fa-tachometer"></i>&nbsp;Modelo CI:</label>
                                         <input class="form-control" type="text" name="modelo_ci" id="modelo_ci" readonly>
-                                        <br>
+                                        </div>
 
+                                        <div class="col-sm-4">
                                         <label><i class="fa fa-barcode"></i>&nbsp;Número de Serie:</label>
                                         <input class="form-control" type="text" name="numero_serie" id="numero_serie" readonly>
-                                        <br>
+                                        </div>
 
+                                        <div class="col-sm-4">
                                         <label><i class="fa fa-crosshairs"></i>&nbsp;Control No.</label>
-                                        <input class="form-control" type="text" name="control_no" id="control_no" readonly>
-                                        <br>
+                                        <input class="form-control" type="text" name="control_no" id="control_no" readonly> <br>
+                                        </div>
 
+                                        <div class="col-sm-6">
                                         <label><i class="fa fa-user-o"></i>&nbsp;Identificación del Cliente:</label>
                                         <input class="form-control" type="text" name="identificacion_cliente" id="identificacion_cliente" readonly>
-                                        <br>
+                                        </div>
 
+                                        <div class="col-sm-6">
                                         <label><i class="fa fa-user-circle"></i>&nbsp;Técnico:</label>
-                                        <input class="form-control" type="text" name="tecnico" id="tecnico" value="<?php echo $_SESSION['nombre_completo']." ".$_SESSION['apellido']; ?>" readonly>
-                                        <br>
+                                        <input class="form-control" type="text" name="tecnico" id="tecnico" value="<?php echo $_SESSION['nombre_completo']." ".$_SESSION['apellido']; ?>" readonly> <br>
+                                        </div>
 
                                         <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="continuar"></center>
                                     </div>
@@ -73,13 +67,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             </div>
         </div>
 
-    </header>
-</section>
-
-</body>
-</html>
-
-<?php } else {
+<?php
+end_section();
+} else {
     header('Location: ../../../../index.php');
 }
 ?>
