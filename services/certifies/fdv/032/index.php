@@ -32,9 +32,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
       <div class="row">
         <div class="col-sm-10">
           
-          <!----------------------------------------
-          TABLA CON TODOS LOS CERTIFICADOS EXPEDIDOS
-          ----------------------------------------->
+          <!-----------------------------------------------------------------
+          TABLA CON TODOS LOS CERTIFICADOS EXPEDIDOS | LÍMITE DE 30 REGISTROS
+          ------------------------------------------------------------------>
           <div class="table-responsive">
             <table class="table table-hover table-striped table-bordered">
               <thead>
@@ -52,9 +52,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
               </thead>
               <tbody>
                 <td class="text-center">
-                  <a href="#" class="btn btn-sm btn-primary">Ver</a>
-                  <a href="#" class="btn btn-sm btn-warning">Modificar</a>
-                  <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+                  <a href="#" class="btn btn-sm btn-primary" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                  <a href="./mod/modificar.php" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                  <button href="" class="btn btn-sm btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </td>
                 <td class="text-center">25-041701</td>
                 <td class="text-center">17ABR25</td>
