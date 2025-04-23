@@ -9,6 +9,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
     <table>
     <a href="empresa.php"><button type="submit" value="Nuevo Certificado" name="" class="btn btn-success" style="text-align:center"><i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Certificado</button></a>
+    <a href="../../../formats/fdv032/FDV-S-032_SGC.php" target="_blank"><button type="submit" value="Plantilla SGC" class="btn btn-danger" style="text-align:center"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp;&nbsp;Plantilla SGC</button></a>
     <td>
     <tr>
     <button onClick="document.location.reload();" type="submit" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Haz clic para actualizar los datos" HSPACE="10" VSPACE="10"><i class="fa fa-refresh fa-spin fa-fw"></i>
