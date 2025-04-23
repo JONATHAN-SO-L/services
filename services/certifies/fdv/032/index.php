@@ -3,6 +3,7 @@ session_start();
 
 if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
   include '../../assets/layout.php';
+  include '../../../functions/delete/modal_delete.php';
   section();
 ?>
 
@@ -54,7 +55,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                 <td class="text-center">
                   <a href="#" class="btn btn-sm btn-primary" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                   <a href="./mod/modificar.php" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                  <button href="" class="btn btn-sm btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  <button href="" class="btn btn-sm btn-danger" title="Eliminar" data-toggle="modal" data-target="#Delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </td>
                 <td class="text-center">25-041701</td>
                 <td class="text-center">17ABR25</td>
