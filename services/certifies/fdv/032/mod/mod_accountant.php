@@ -32,7 +32,7 @@ section(); ?>
                         <form role="form" action="mod_val_accountant.php" method="POST" enctype="multipart/form-data">
                             <div>
                                 <label><i class="fa fa-tachometer"></i>&nbsp;Modelo del Contador de Partículas:</label>
-                                <select class="form-control" name="contador" required>
+                                <select class="form-control" name="contador">
                                 <option value=""> - Selecciona el modelo requerido - </option>
                                 <option value="Valor por defecto">Valor por defecto</option>
                                 </select>

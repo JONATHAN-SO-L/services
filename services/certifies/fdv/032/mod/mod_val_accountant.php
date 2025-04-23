@@ -58,7 +58,7 @@ section(); ?>
                                     <input class="form-control" type="text" name="tecnico" id="tecnico" value="<?php echo $_SESSION['nombre_completo']." ".$_SESSION['apellido']; ?>" readonly> <br>
                                 </div>
 
-                            <center><input class="btn btn-sm btn-success" type="submit" value="Guardar" name="continuar"></center>
+                            <center><input class="btn btn-sm btn-danger" type="submit" value="Guardar" name="continuar"></center>
                             </div>
                         </form>
                     </div>

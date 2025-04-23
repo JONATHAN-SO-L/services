@@ -13,6 +13,21 @@ section(); ?>
         </td>
         </table>
 
+        <div class="container" style="width: 1030px;">
+            <div class="row" style="width: 770px;">
+                <div class="col-sm-12">
+                    <div class="page-header2">
+                        <h3 class="animated lightSpeedIn">
+                            <p><strong>Documento o Certificado:</strong> <i>25-041701</i></p>
+                            <p><strong>Compañía:</strong> <i>Biosense Webster</i></p>
+                        </h3>
+                        <span class="label label-danger"></span> 		 
+                        <p class="pull-right text-primary"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
             <div class="row">
                 <div class="col-sm-8">
                     <div class="panel panel-danger">
