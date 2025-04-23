@@ -32,7 +32,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     <div class="panel panel-success">
                         <div class="panel-heading text-center"><strong>Para poder crear un nuevo certificado es necesario llenar los todos campos</strong></div>
                             <div class="panel-body">
-                                <form role="form" action="estandard_trazabilidad.php" method="POST" enctype="multipart/form-data">
+                                <form role="form" action="instrumentos.php" method="POST" enctype="multipart/form-data">
                                     <div>
                                         <div class="container">
                                             <table class="table table-responsive table-hover table-bordered table-striped table-primary" style="margin-left: -15px;">
