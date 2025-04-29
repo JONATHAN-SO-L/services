@@ -44,13 +44,16 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->AliasNbPages(); // Numeración de páginas
     $pdf->AddPage(); // Creación de hoja pdf
 
+    /*********
+    PÁGINA UNO
+    *********/
 
     /********************************************************
     Cabecera con información de dirección y logo | Página Uno
     ********************************************************/
-    $pdf->SetXY(5,5);
+    $pdf->SetXY(0,0);
     $pdf->SetFillColor(0,88,147);
-    $pdf->Cell(205,30,'',0,1,'C',true);
+    $pdf->Cell(216,35,'',0,1,'C',true);
 
     $pdf->SetFont("Arial","",10);
     $pdf->SetTextColor(255,255,255);
@@ -64,7 +67,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
 
     /**********************************
-    Cuerpo del formulario | Páguina Uno
+    Cuerpo del formulario | Página Uno
     **********************************/
     $pdf->SetTextColor(0,88,147);
     $pdf->SetFont("Arial","b",24);
@@ -103,9 +106,100 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetFont("Arial","",7);
     $pdf->Cell(50,5,utf8_decode('(A partir de la fecha de calibración comienza el plazo para la fecha del intervalo recomendado).'),0,0,'L');
 
-    // Condiciones
+
+    /************************
+    Condiciones | Página Uno
+    ************************/
+    // Izquierda
     $pdf->SetFont("Arial","b",10);
+    $pdf->SetXY(10,115);
+    $pdf->Cell(15,5,utf8_decode('Condición física al recibir:'),0,0,'L');
+
+    $pdf->SetDrawColor(0,88,147);
+    $pdf->SetXY(12,129);
+    $pdf->Cell(3,3,'',1,1,'C',true);
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(16,128.5);
+    $pdf->Cell(30,5,utf8_decode('Bueno'),0,0,'L');
+
+    // Centro
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetXY(88,115);
+    $pdf->MultiCell(45,5,utf8_decode('Condición de calibración encontrada:'),0,'L',false);
+
+    $pdf->SetDrawColor(0,88,147);
+    $pdf->SetXY(90,129);
+    $pdf->Cell(3,3,'',1,1,'C',true);
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(95,128.5);
+    $pdf->Cell(30,5,utf8_decode('En tolerancia'),0,0,'L');
+
+    //Derecha
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetXY(160,115);
+    $pdf->MultiCell(45,5,utf8_decode('Condición de calibración final:'),0,'L',false);
+
+    $pdf->SetDrawColor(0,88,147);
+    $pdf->SetXY(162,129);
+    $pdf->Cell(3,3,'',1,1,'C',true);
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(166,128.5);
+    $pdf->MultiCell(30,5,utf8_decode('Dentro de las especificaciones'),0,'L',false);
+
+
+    /************************
+    Comentarios | Página Uno
+    ************************/
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetXY(10,145);
+    $pdf->Cell(15,5,utf8_decode('Comentarios:'),0,0,'L');
     
+    // Líneas de comentarios
+    $pdf->Line(205,150,35,150);
+    $pdf->Line(205,155,10,155);
+    $pdf->Line(205,160,10,160);
+
+
+    /*********************
+    Información Página Uno
+    *********************/
+    $pdf->SetXY(10,170);
+    $pdf->SetFont("Arial","",10);
+    $pdf->MultiCell(195,5,utf8_decode('PARÁMETROS DE CALIBRACIÓN: La potencia del láser y ruido máximo se registran solo con fines de referencia. El flujo de aire es un parámetro crítico durante la calibración, ya que establece el volumen de muestra nominal y la velocidad de las partículas, lo cual afecta el dimensionamiento de las mismas. Debido a que las variaciones de flujo después de la calibración afectan el dimensionamiento y el volumen de la muestra de forma inversa, las variaciones de hasta 10% tienen un efecto insignificante en los conteos registrados. Las amplitudes de respuesta de partículas corresponden a los umbrales de detección. Las amplitudes superiores a los umbrales darán como resultado recuentos mayores de lo normal. Las amplitudes por debajo de los umbrales darán lugar a un conteo insuficiente. El resultado asentado en este certificado de calibración solo es aplicable a la unidad referenciada en este documento.'),0,'J',false);
+    $pdf->SetX(10);
+    $pdf->Cell(15,5,utf8_decode('Calibración realizada por:'),0,0,'L');
+
+    /******************************
+    Firmas del reporte | Página Uno
+    ******************************/
+    // Firma Técnico
+    $pdf->Line(23,235,80,235);
+    $pdf->SetXY(44,236);
+    $pdf->Cell(15,5,utf8_decode('Nombre del Técnico Certificado'),0,0,'C');
+
+    // Firma Cliente
+    $pdf->Line(190,235,130,235);
+    $pdf->SetXY(153,236);
+    $pdf->Cell(15,5,utf8_decode('Firma'),0,0,'C');
+
+    /*********
+    PÁGINA DOS
+    *********/
+
+    // Se agrega nueva página
+    $pdf->AddPage();
+
+    // Generar cabecera
+    $pdf->Line(20,22,35,22);
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetXY(50,10);
+    $pdf->MultiCell(32,5,utf8_decode('www.dvi.mx servicio@dvi.mx'),0,'C',false);
+    $pdf->SetX(40);
+    $pdf->MultiCell(50,5,utf8_decode('Tel.(55)5688-3566 / 3977 - Ext. 402 01800 8326 - 345'),0,'C',false);
+
 
     /***********************************************************************************
     Se indica el nombre del arcvhivo y los parámetros de exportación | Fin del documento
