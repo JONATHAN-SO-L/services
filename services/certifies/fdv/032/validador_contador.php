@@ -35,27 +35,27 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                     <div>
                                         <div class="col-sm-4">
                                         <label><i class="fa fa-tachometer"></i>&nbsp;Modelo CI:</label>
-                                        <input class="form-control" type="text" name="modelo_ci" id="modelo_ci" readonly>
+                                        <input class="form-control" type="text" name="modelo_ci" value="CI-750t-01" readonly>
                                         </div>
 
                                         <div class="col-sm-4">
                                         <label><i class="fa fa-barcode"></i>&nbsp;Número de Serie:</label>
-                                        <input class="form-control" type="text" name="numero_serie" id="numero_serie" readonly>
+                                        <input class="form-control" type="text" name="numero_serie" value="132194" readonly>
                                         </div>
 
                                         <div class="col-sm-4">
                                         <label><i class="fa fa-crosshairs"></i>&nbsp;Control No.</label>
-                                        <input class="form-control" type="text" name="control_no" id="control_no" readonly> <br>
+                                        <input class="form-control" type="text" name="control_no" value="CPS-01" readonly> <br>
                                         </div>
 
                                         <div class="col-sm-6">
                                         <label><i class="fa fa-user-o"></i>&nbsp;Identificación del Cliente:</label>
-                                        <input class="form-control" type="text" name="identificacion_cliente" id="identificacion_cliente" readonly>
+                                        <input class="form-control" type="text" name="identificacion_cliente" value="01" readonly>
                                         </div>
 
                                         <div class="col-sm-6">
                                         <label><i class="fa fa-user-circle"></i>&nbsp;Técnico:</label>
-                                        <input class="form-control" type="text" name="tecnico" id="tecnico" value="<?php echo $_SESSION['nombre_completo']." ".$_SESSION['apellido']; ?>" readonly> <br>
+                                        <input class="form-control" type="text" name="tecnico" value="<?php echo $_SESSION['nombre_completo']." ".$_SESSION['apellido']; ?>" readonly> <br>
                                         </div>
 
                                         <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="continuar"></center>

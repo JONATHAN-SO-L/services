@@ -37,7 +37,33 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
                                         <label><i class="fa fa-tachometer"></i>&nbsp;Modelo del Contador de Partículas:</label>
                                         <select class="form-control" name="contador" required>
                                             <option value=""> - Selecciona el modelo requerido - </option>
-                                            <option value="Valor por defecto">Valor por defecto</option>
+                                            <option value="Valor por defecto">CI-750t-01</option>
+                                        </select>
+                                        <br>
+
+                                        <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="guardar_contador"></center>
+                                    </div>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vista al guardar el modelo -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="panel panel-success">
+                        <div class="panel-heading text-center"><strong>Para poder crear un nuevo certificado es necesario llenar los todos campos</strong></div>
+                            <div class="panel-body">
+                                <form role="form" action="validador_contador.php" method="POST" enctype="multipart/form-data">
+                                    <div>
+                                        <label><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;Número de serie del Contador de Partículas:</label>
+                                        <select class="form-control" name="contador" required>
+                                            <option value=""> - Selecciona el número de serie requerido - </option>
+                                            <option value="Valor por defecto">132194</option>
                                         </select>
                                         <br>
 
