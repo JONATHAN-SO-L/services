@@ -21,7 +21,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             <div class="row" style="width: 770px;">
                 <div class="col-sm-12">
                     <div class="page-header2">
-                        <h1 class="animated lightSpeedIn">Nuevo Certificado</h1>
+                        <h1 class="animated lightSpeedIn">Empresa | Certificado: #</h1>
                         <span class="label label-danger"></span> 		 
                         <p class="pull-right text-primary"></p>
                     </div>
@@ -32,20 +32,20 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
-                    <div class="panel panel-success">
-                        <div class="panel-heading text-center"><strong>Para poder crear un nuevo certificado es necesario llenar los todos campos</strong></div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading text-center"><strong>Para poder crear un nuevo certificado es necesario colocar la RAZON SOCIAL de la compañía a buscar</strong></div>
                             <div class="panel-body">
-                                <form role="form" action="contador.php" method="POST" enctype="multipart/form-data">
+                                <form role="form" action="validador_empresa.php" method="POST" enctype="multipart/form-data">
                                     <div>
-                                        <label><i class="fa fa-building-o"></i>&nbsp;Empresa:</label>
-                                        <input class="form-control" type="text" name="empresa" id="empresa" required placeholder="Por ejemplo: VECO">
+                                        <label><i class="fa fa-building" aria-hidden="true"></i>&nbsp;Empresa:</label>
+                                        <input class="form-control" type="text" name="empresa" id="empresa" placeholder="Por ejemplo: VECO">
                                         <br>
 
-                                        <label><i class="fa fa-map-marker"></i>&nbsp;Dirección:</label>
-                                        <input class="form-control" type="text" name="direccion_empresa" id="direccion_empresa" required placeholder="Por ejemplo: 13 Este 116">
+                                        <label><i class="fa fa-map-marker"></i>&nbsp;RFC: <i>(Opcional)</i></label>
+                                        <input class="form-control" type="text" name="direccion_empresa" id="direccion_empresa" placeholder="Por ejemplo: XAXX010101000">
                                         <br>
 
-                                        <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="guadar_empresa"></center>
+                                        <center><input class="btn btn-sm btn-primary" type="submit" value="Buscar" name="buscar_empresa"></center>
                                     </div>
                                 </form>
                             </div>
