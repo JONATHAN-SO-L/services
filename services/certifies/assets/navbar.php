@@ -5,7 +5,7 @@
 <nav id="sidenav">
     <div id="sidenav-header">
       <div id="profile-picture">
-      	<img style="background-color: white;" src="../../../assets/img/logo_dvi.png"/>
+      	<img style="background-color: white;" src="../../../assets/img/dvi_logo1.png"/>
       </div>
       
       <a id="profile-link"><h4>&nbsp;&nbsp;&nbsp;<strong><?php echo $_SESSION['nombre_completo'].' '.$_SESSION['apellido']; ?></strong></h4>
