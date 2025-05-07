@@ -48,16 +48,6 @@ section(); ?>
                                     <input class="form-control" type="text" name="control_no" id="control_no" readonly> <br>
                                 </div>
 
-                                <div class="col-sm-6">
-                                    <label><i class="fa fa-user-o"></i>&nbsp;Identificación del Cliente:</label>
-                                    <input class="form-control" type="text" name="identificacion_cliente" id="identificacion_cliente" readonly>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <label><i class="fa fa-user-circle"></i>&nbsp;Técnico:</label>
-                                    <input class="form-control" type="text" name="tecnico" id="tecnico" value="<?php echo $_SESSION['nombre_completo']." ".$_SESSION['apellido']; ?>" readonly> <br>
-                                </div>
-
                             <center><input class="btn btn-sm btn-danger" type="submit" value="Guardar" name="continuar"></center>
                             </div>
                         </form>
