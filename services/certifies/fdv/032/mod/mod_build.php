@@ -29,17 +29,17 @@ section(); ?>
             <div class="panel panel-warning">
                 <div class="panel-heading text-center"><strong>Aquí puedes modificar la información de la empresa</strong></div>
                     <div class="panel-body">
-                        <form role="form" action="#" method="POST" enctype="multipart/form-data">
+                        <form role="form" action="mod_validador_empresa.php" method="POST" enctype="multipart/form-data">
                             <div>
                                 <label><i class="fa fa-building-o"></i>&nbsp;Empresa:</label>
                                 <input class="form-control" type="text" name="empresa" id="empresa" placeholder="Por ejemplo: VECO">
                                 <br>
 
-                                <label><i class="fa fa-map-marker"></i>&nbsp;Dirección:</label>
-                                <input class="form-control" type="text" name="direccion_empresa" id="direccion_empresa" placeholder="Por ejemplo: 13 Este 116">
+                                <label><i class="fa fa-map-marker"></i>&nbsp;RFC: <i>(Opcional)</i></label>
+                                <input class="form-control" type="text" name="rfc" id="rfc" placeholder="Por ejemplo: XAXX010101000">
                                 <br>
 
-                                <center><input class="btn btn-sm btn-danger" type="submit" value="Modificar" name="guadar_empresa"></center>
+                                <center><input class="btn btn-sm btn-primary" type="submit" value="Buscar" name="guadar_empresa"></center>
                             </div>
                         </form>
                     </div>    
