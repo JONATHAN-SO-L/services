@@ -48,6 +48,7 @@ section(); ?>
                                         <option value="Dañado">Dañado</option>
                                         <option value="Mal empacado">Mal empacado</option>
                                         <option value="Mal manejo">Mal manejo</option>
+                                        <option value="Otros">Otros</option>
                                     </select>
                                 </div>
 
@@ -66,6 +67,7 @@ section(); ?>
                                     <select class="form-control" name="condicion_final">
                                         <option value=""> - Selecciona la condición adecuada - </option>
                                         <option value="Dentro de Especificaciones">Dentro de Especificaciones</option>
+                                        <option value="Fuera de Especificaciones">Fuera de Especificaciones</option>
                                     </select><br>
                                 </div>
 
@@ -86,7 +88,7 @@ section(); ?>
 
                                 <div class="col-sm-4">
                                     <label><i class="fa fa-calendar"></i>&nbsp;Fecha de Calibración:</label>
-                                    <input class="form-control" type="date" name="fecha_calibracion"><br>
+                                    <input class="form-control" type="date" name="fecha_calibracion" value="<?php echo date('Y-m-d'); ?>" readonly><br>
                                 </div>
 
                                 <div class="col-sm-6">
