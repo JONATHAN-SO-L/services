@@ -51,6 +51,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                             <option value="Dañado">Dañado</option>
                                             <option value="Mal empacado">Mal empacado</option>
                                             <option value="Mal manejo">Mal manejo</option>
+                                            <option value="Otros">Otros</option>
                                         </select>
                                         </div>
 
@@ -69,6 +70,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                         <select class="form-control" name="condicion_final" required>
                                         <option value=""> - Selecciona la condición adecuada - </option>
                                             <option value="Dentro de Especificaciones">Dentro de Especificaciones</option>
+                                            <option value="Fuera de Especificaciones">Fuera de Especificaciones</option>
                                         </select><br>
                                         </div>
 
@@ -89,7 +91,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
                                         <div class="col-sm-4">
                                         <label><i class="fa fa-calendar"></i>&nbsp;Fecha de Calibración:</label>
-                                        <input class="form-control" type="date" name="fecha_calibracion" required><br>
+                                        <input class="form-control" type="date" name="fecha_calibracion" value="<?php echo date('Y-m-d'); ?>" readonly required><br>
                                         </div>
                                         
                                         <div class="col-sm-6">
