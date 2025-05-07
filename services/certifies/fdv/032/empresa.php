@@ -42,7 +42,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                         <br>
 
                                         <label><i class="fa fa-map-marker"></i>&nbsp;RFC: <i>(Opcional)</i></label>
-                                        <input class="form-control" type="text" name="direccion_empresa" id="direccion_empresa" placeholder="Por ejemplo: XAXX010101000">
+                                        <input class="form-control" type="text" name="rfc" id="rfc" placeholder="Por ejemplo: XAXX010101000">
                                         <br>
 
                                         <center><input class="btn btn-sm btn-primary" type="submit" value="Buscar" name="buscar_empresa"></center>
