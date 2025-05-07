@@ -52,11 +52,6 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                         </select><br>
                                         </div>
 
-                                        <div class="col-sm-12">
-                                        <label><i class="fa fa-user-o"></i>&nbsp;Identificación del Cliente:</label>
-                                        <input class="form-control" type="text" name="identificacion_cliente" id="identificacion_cliente" value="01" readonly><br>
-                                        </div>
-
                                         <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="continuar"></center>
                                     </div>
                                 </form>
