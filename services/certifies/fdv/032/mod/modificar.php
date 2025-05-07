@@ -10,7 +10,6 @@ section(); ?>
         <tr>
         <a href="../index.php"><button type="submit" value="Volver" name="" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a><br><br>
         </tr>
-        </td>
         </table>
 
         <div class="container" style="width: 1030px;">
@@ -48,9 +47,9 @@ section(); ?>
                                                 <a class="btn btn-sm btn-success" href="mod_instruments.php"><i class="fa fa-bar-chart" aria-hidden="true"></i> Estándar de Trazabilidad</a><br><br>
                                             </div>
 
-                                            <div class="col-sm-8">
+                                            <!--div class="col-sm-8">
                                                 <a class="btn btn-sm btn-danger" href="mod_standar_particles.php"><i class="fa fa-check-square" aria-hidden="true"></i> Partículas Estándar</a>
-                                            </div>
+                                            </div-->
                                         </div>
                                         </center>
                                 </form>
@@ -58,6 +57,18 @@ section(); ?>
                     </div>
                 </div>
             </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file-archive-o" aria-hidden="true"></i> Certificados<span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#"><i class="fa fa-certificate" aria-hidden="true"></i> DMM</a></li>
+                    <li><a href="#"><i class="fa fa-certificate" aria-hidden="true"></i> PHA</a></li>
+                    <li><a href="#"><i class="fa fa-certificate" aria-hidden="true"></i> Medidor de flujo de masa</a></li>
+                    <li><a href="#"><i class="fa fa-certificate" aria-hidden="true"></i> RH/TEMP SENSOR</a></li>
+                    <li><a href="#"><i class="fa fa-certificate" aria-hidden="true"></i> Balómetro</a></li>
+                </ul>
+            </div>
+
         </div>
 
 <?php
