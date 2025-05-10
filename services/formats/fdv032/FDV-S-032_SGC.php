@@ -185,10 +185,10 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetXY(153,236);
     $pdf->Cell(15,5,utf8_decode('Firma'),0,0,'C');
 
+
     /*********
     PÁGINA DOS
     *********/
-
     // Se agrega nueva página
     $pdf->AddPage();
 
@@ -199,6 +199,39 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->MultiCell(32,5,utf8_decode('www.dvi.mx servicio@dvi.mx'),0,'C',false);
     $pdf->SetX(40);
     $pdf->MultiCell(50,5,utf8_decode('Tel.(55)5688-3566 / 3977 - Ext. 402 01800 8326 - 345'),0,'C',false);
+    $pdf->Line(95,22,110,22);
+    
+    $pdf->Image('../../assets/img/dvi.png', 125, 11, 75); // Logo
+
+    $pdf->SetTextColor(0,88,147);
+    $pdf->SetFont("Arial","b",24);
+    $pdf->SetXY(10,37);
+    $pdf->Cell(0,10,utf8_decode('CERTIFICADO DE CALIBRACIÓN'),0,0,'C');
+    $pdf->SetFont("Arial","b",12);
+    $pdf->SetXY(10,45);
+    $pdf->Cell(0,10,utf8_decode('Datos Prueba de Calibración'),0,0,'C');
+
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetXY(30,55);
+    $pdf->Cell(15,10,utf8_decode('Modelo CI- _________________'),0,0,'C');
+    $pdf->SetX(95);
+    $pdf->Cell(15,10,utf8_decode('Contador de partículas, Núm. Serie: ______________________'),0,0,'C');
+    $pdf->SetX(165);
+    $pdf->Cell(15,10,utf8_decode('Fecha de calibración: __________________'),0,0,'C');
+    $pdf->SetXY(60,65);
+    $pdf->Cell(15,10,utf8_decode('Identificación de Cliente: ____________________________________________'),0,0,'C');
+    $pdf->SetX(155);
+    $pdf->Cell(15,10,utf8_decode('Técnico:__________________________________________'),0,0,'C');
+    $pdf->Rect(10,35,195,40); // Rectángulo de 19.5 cm x 4.0 cm
+
+
+
+
+
+
+
+
+
 
 
     /***********************************************************************************
