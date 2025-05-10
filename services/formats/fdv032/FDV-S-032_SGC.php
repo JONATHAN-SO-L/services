@@ -246,13 +246,43 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     // ENCABEZADOS
     $pdf->SetFont("Arial","",9);
     $pdf->SetTextColor(255,255,255);
-    $pdf->SetXY(10,107);
+    $pdf->SetXY(10,110);
     $pdf->Cell(35,5,utf8_decode('PRUEBA'),0,0,'C',true);
     $pdf->Cell(20,5,utf8_decode('ESPERADO'),0,0,'C',true);
     $pdf->Cell(30,5,utf8_decode('TOLERANCIA'),0,0,'C',true);
     $pdf->Cell(45,5,utf8_decode('CONDICIÓN ENCONTRADA'),0,0,'C',true);
     $pdf->Cell(20,5,utf8_decode('PASA'),0,0,'C',true);
     $pdf->Cell(45,5,utf8_decode('CONDICIÓN FINAL'),0,0,'C',true);
+
+    // VOLTAJE LÁSER
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetLineWidth(0);
+    $pdf->SetTextColor(0,88,147);
+    $pdf->SetXY(10,115);
+    $pdf->Cell(35,5,utf8_decode('VOLTAJE DE LÁSER'),1,0,'L');
+    $pdf->Cell(20,5,utf8_decode('Vdc±'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode('(Valor de referencia)'),1,0,'C');
+    $pdf->Cell(45,5,utf8_decode('Vdc'),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(45,5,utf8_decode('Vdc'),1,0,'C');
+
+    // FLUJO DE AIRE
+    $pdf->SetXY(10,120);
+    $pdf->Cell(35,5,utf8_decode('FLUJO DE AIRE'),1,0,'L');
+    $pdf->Cell(20,5,utf8_decode('LPM'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode('± 1.4 LPM'),1,0,'R');
+    $pdf->Cell(45,5,utf8_decode('LPM*'),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(45,5,utf8_decode('LPM*'),1,0,'C');
+
+    // RUIDO MÁXIMO
+    $pdf->SetXY(10,125);
+    $pdf->Cell(35,5,utf8_decode('RUIDO MÁXIMO'),1,0,'L');
+    $pdf->Cell(20,5,utf8_decode('< 200 mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode('(Valor de referencia)'),1,0,'C');
+    $pdf->Cell(45,5,utf8_decode('mV'),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(45,5,utf8_decode('mV'),1,0,'C');
 
 
 
