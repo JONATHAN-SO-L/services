@@ -389,6 +389,25 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetXY(84,248);
     $pdf->Cell(15,5,utf8_decode('PROCEDIMIENTO DE CALIBRACIÓN: 92045102 Procedimiento de calibración estándar, x5x serie portátil.'),0,0,'C');
 
+    /*****************************************************************************************************************************
+    PÁGINA TRES
+    *****************************************************************************************************************************/
+    // Se agrega nueva página
+    $pdf->AddPage();
+
+    /*********************************************************
+    Cabecera con información de dirección y logo | Página Tres
+    *********************************************************/
+    $pdf->Line(20,22,35,22);
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetXY(50,10);
+    $pdf->MultiCell(32,5,utf8_decode('www.dvi.mx servicio@dvi.mx'),0,'C',false);
+    $pdf->SetX(40);
+    $pdf->MultiCell(50,5,utf8_decode('Tel.(55)5688-3566 / 3977 - Ext. 402 01800 8326 - 345'),0,'C',false);
+    $pdf->Line(95,22,110,22);
+    
+    $pdf->Image('../../assets/img/dvi.png', 125, 11, 75); // Logo
+
 
 
 
