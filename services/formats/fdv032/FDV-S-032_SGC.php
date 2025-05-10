@@ -222,7 +222,38 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->Cell(15,10,utf8_decode('Identificación de Cliente: ____________________________________________'),0,0,'C');
     $pdf->SetX(155);
     $pdf->Cell(15,10,utf8_decode('Técnico:__________________________________________'),0,0,'C');
+    $pdf->SetLineWidth(0.5);
     $pdf->Rect(10,35,195,40); // Rectángulo de 19.5 cm x 4.0 cm
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(40,75);
+    $pdf->Cell(15,10,utf8_decode('Presión Barométrica: ________________'),0,0,'C');
+    $pdf->SetX(100);
+    $pdf->Cell(15,10,utf8_decode('Temperatura: ________________'),0,0,'C');
+    $pdf->SetX(160);
+    $pdf->Cell(15,10,utf8_decode('Humedad Relativa: _________________'),0,0,'C');
+    $pdf->SetFont("Arial","",10);
+    $pdf->SetXY(17,85);
+    $pdf->MultiCell(160,5,utf8_decode('Controles ambientales: La temperatura ambiental durante la calibración debe de encontrarse entre 18° - 26.7°C, la humedad relativa no afecta el proceso de calibración.'),0,'J',false);
+
+    /*******************************
+    TABLA DE MEDICIONES ELECTRÓNICAS
+    *******************************/
+    $pdf->SetFont("Arial","b",12);
+    $pdf->SetXY(10,100);
+    $pdf->Cell(0,10,utf8_decode('Mediciones Electrónicas'),0,0,'C');
+
+    // ENCABEZADOS
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(255,255,255);
+    $pdf->SetXY(10,107);
+    $pdf->Cell(35,5,utf8_decode('PRUEBA'),0,0,'C',true);
+    $pdf->Cell(20,5,utf8_decode('ESPERADO'),0,0,'C',true);
+    $pdf->Cell(30,5,utf8_decode('TOLERANCIA'),0,0,'C',true);
+    $pdf->Cell(45,5,utf8_decode('CONDICIÓN ENCONTRADA'),0,0,'C',true);
+    $pdf->Cell(20,5,utf8_decode('PASA'),0,0,'C',true);
+    $pdf->Cell(45,5,utf8_decode('CONDICIÓN FINAL'),0,0,'C',true);
+
 
 
 
