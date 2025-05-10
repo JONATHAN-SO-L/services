@@ -284,6 +284,13 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
     $pdf->Cell(45,5,utf8_decode('mV'),1,0,'C');
 
+    // Información restante
+    $pdf->SetFont("Arial","",7);
+    $pdf->SetXY(10,130);
+    $pdf->MultiCell(70,5,utf8_decode('± Valor inicial; el voltaje aumenta a medida que el diodo láser se desgasta.'),0,'L',false);
+    $pdf->SetXY(123,130);
+    $pdf->Cell(45,5,utf8_decode('* Las lecturas del medidor de flujo volumétrico y reflejan una compensación correctiva de: __________ LPM'),0,0,'C');
+
 
 
 
