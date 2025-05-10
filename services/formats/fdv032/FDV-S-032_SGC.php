@@ -44,9 +44,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->AliasNbPages(); // Numeración de páginas
     $pdf->AddPage(); // Creación de hoja pdf
 
-    /*********
+    /*****************************************************************************************************************************
     PÁGINA UNO
-    *********/
+    *****************************************************************************************************************************/
 
     /********************************************************
     Cabecera con información de dirección y logo | Página Uno
@@ -186,13 +186,15 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->Cell(15,5,utf8_decode('Firma'),0,0,'C');
 
 
-    /*********
+    /*****************************************************************************************************************************
     PÁGINA DOS
-    *********/
+    *****************************************************************************************************************************/
     // Se agrega nueva página
     $pdf->AddPage();
 
-    // Generar cabecera
+    /********************************************************
+    Cabecera con información de dirección y logo | Página Dos
+    ********************************************************/
     $pdf->Line(20,22,35,22);
     $pdf->SetFont("Arial","",8);
     $pdf->SetXY(50,10);
@@ -240,13 +242,13 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     TABLA DE MEDICIONES ELECTRÓNICAS
     *******************************/
     $pdf->SetFont("Arial","b",12);
-    $pdf->SetXY(10,100);
+    $pdf->SetXY(10,95);
     $pdf->Cell(0,10,utf8_decode('Mediciones Electrónicas'),0,0,'C');
 
     // ENCABEZADOS
     $pdf->SetFont("Arial","",9);
     $pdf->SetTextColor(255,255,255);
-    $pdf->SetXY(10,110);
+    $pdf->SetXY(10,105);
     $pdf->Cell(35,5,utf8_decode('PRUEBA'),0,0,'C',true);
     $pdf->Cell(20,5,utf8_decode('ESPERADO'),0,0,'C',true);
     $pdf->Cell(30,5,utf8_decode('TOLERANCIA'),0,0,'C',true);
@@ -258,7 +260,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetFont("Arial","",8);
     $pdf->SetLineWidth(0);
     $pdf->SetTextColor(0,88,147);
-    $pdf->SetXY(10,115);
+    $pdf->SetXY(10,110);
     $pdf->Cell(35,5,utf8_decode('VOLTAJE DE LÁSER'),1,0,'L');
     $pdf->Cell(20,5,utf8_decode('Vdc±'),1,0,'C');
     $pdf->Cell(30,5,utf8_decode('(Valor de referencia)'),1,0,'C');
@@ -267,7 +269,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->Cell(45,5,utf8_decode('Vdc'),1,0,'C');
 
     // FLUJO DE AIRE
-    $pdf->SetXY(10,120);
+    $pdf->SetXY(10,115);
     $pdf->Cell(35,5,utf8_decode('FLUJO DE AIRE'),1,0,'L');
     $pdf->Cell(20,5,utf8_decode('LPM'),1,0,'C');
     $pdf->Cell(30,5,utf8_decode('± 1.4 LPM'),1,0,'R');
@@ -276,7 +278,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->Cell(45,5,utf8_decode('LPM*'),1,0,'C');
 
     // RUIDO MÁXIMO
-    $pdf->SetXY(10,125);
+    $pdf->SetXY(10,120);
     $pdf->Cell(35,5,utf8_decode('RUIDO MÁXIMO'),1,0,'L');
     $pdf->Cell(20,5,utf8_decode('< 200 mV'),1,0,'C');
     $pdf->Cell(30,5,utf8_decode('(Valor de referencia)'),1,0,'C');
@@ -286,10 +288,106 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
     // Información restante
     $pdf->SetFont("Arial","",7);
-    $pdf->SetXY(10,130);
+    $pdf->SetXY(10,125);
     $pdf->MultiCell(70,5,utf8_decode('± Valor inicial; el voltaje aumenta a medida que el diodo láser se desgasta.'),0,'L',false);
-    $pdf->SetXY(123,130);
+    $pdf->SetXY(123,125);
     $pdf->Cell(45,5,utf8_decode('* Las lecturas del medidor de flujo volumétrico y reflejan una compensación correctiva de: __________ LPM'),0,0,'C');
+
+    /**********************
+    TABLA DE COMPORTAMIENTO
+    **********************/
+    $pdf->SetFont("Arial","b",12);
+    $pdf->SetXY(10,130);
+    $pdf->Cell(0,10,utf8_decode('Comportamiento'),0,0,'C');
+
+    // ENCABEZADOS
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(255,255,255);
+    $pdf->SetXY(10,140);
+    $pdf->Cell(75,5,utf8_decode('TAMAÑO DE PARTÍCULA NOMINAL'),0,0,'C',true);
+    $pdf->Cell(30,5,utf8_decode('0.3 µm'),0,0,'C',true);
+    $pdf->Cell(30,5,utf8_decode('0.5 µm'),0,0,'C',true);
+    $pdf->Cell(30,5,utf8_decode('1.0 µm'),0,0,'C',true);
+    $pdf->Cell(30,5,utf8_decode('5.0 µm'),0,0,'C',true);
+
+    // AMPLITUD ESPERADA
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetTextColor(0,88,147);
+    $pdf->SetXY(10,145);
+    $pdf->Cell(75,5,utf8_decode('AMPLITUD ESPERADA (desde la última calibración)'),1,0,'L');
+    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode('V'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
+
+    // TOLERANCIA
+    $pdf->SetXY(10,150);
+    $pdf->Cell(75,5,utf8_decode('TOLERANCIA'),1,0,'L');
+    $pdf->Cell(30,5,utf8_decode('± 60 mV'),1,0,'R');
+    $pdf->Cell(30,5,utf8_decode('± 30 mV'),1,0,'R');
+    $pdf->Cell(30,5,utf8_decode('± 165 mV'),1,0,'R');
+    $pdf->Cell(30,5,utf8_decode('± 50 mV'),1,0,'R');
+
+    // COMO SE ENCUENTRA
+    $pdf->SetXY(10,155);
+    $pdf->Cell(75,5,utf8_decode('COMO SE ENCUENTRA'),1,0,'L');
+    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode('V'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
+
+    // PASA (S/N)
+    $pdf->SetXY(10,160);
+    $pdf->Cell(75,5,utf8_decode('PASA (S/N)'),1,0,'L');
+    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
+
+    // CONDICIÓN FINAL
+    $pdf->SetXY(10,165);
+    $pdf->Cell(75,5,utf8_decode('CONDICIÓN FINAL'),1,0,'L');
+    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode('V'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
+
+    /*********************
+    Información Página Dos
+    *********************/
+    // INCERTIDUMBRE COLECTIVA DE LA MEDICIÓN
+    $pdf->SetFont("Arial","b",9);
+    $pdf->SetXY(45,170);
+    $pdf->Cell(15,5,utf8_decode('INCERTIDUMBRE COLECTIVA DE LA MEDICIÓN:'),0,0,'C');
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(135,170);
+    $pdf->Cell(15,5,utf8_decode('± 1% del flujo, ± 1% de las partículas de 0.3 µm, 0,5 µm, 10 µm y 0,5 µm'),0,0,'C');
+    $pdf->SetXY(15,175);
+    $pdf->MultiCell(185,5,utf8_decode('La incertidumbre colectiva se basa en las contribuciones del Analizador de Alturas de Pulso, el Medidor de Flujo de masa y la opinión del técnico al establecer la mediana de la distribución mostrada, según lo determinado por las pruebas empíricas y el cálculo de incertidumbre de 1 sigma.'),0,'J',false);
+
+    // RELACIÓN DE PRECISIÓN
+    $pdf->SetFont("Arial","b",9);
+    $pdf->SetXY(29,195);
+    $pdf->Cell(15,5,utf8_decode('RELACIÓN DE PRECISIÓN:'),0,0,'C');
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(119,195);
+    $pdf->Cell(15,5,utf8_decode('La incertidumbre colectiva de los estándares de medición es inferior al 25% de la tolerancia enu-'),0,0,'C');
+    $pdf->SetXY(29,200);
+    $pdf->Cell(23,5,utf8_decode('merada (relación de medición 4: 1)'),0,0,'C');
+
+    // TOLERANCIAS DE CALIBRACIÓN
+    $pdf->SetFont("Arial","b",9);
+    $pdf->SetXY(34,210);
+    $pdf->Cell(15,5,utf8_decode('TOLERANCIAS DE CALIBRACIÓN:'),0,0,'C');
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(123,210);
+    $pdf->Cell(15,5,utf8_decode('El tamaño de partícula enumerado es nominal; consulte el registro de equipamiento de'),0,0,'C');
+    $pdf->SetXY(15,215);
+    $pdf->MultiCell(185,5,utf8_decode('prueba para los tamaños reales. Los voltajes de tolerancia listados representan un error de dimensionamiento del 2% y la desviación de partículas del tamaño. Si la respuesta de la partícula está por debajo de la tolerancia para la amplitud esperada, la partícula estará subdimensionada, lo que dará como resultado conteos menores que lo normal. Si la respuesta de la partícula está por encima de la tolerancia esperada, la partícula será más grande de lo que realmente es, lo que resulta en recuentos que son mayores de lo que realmente deberían ser. Los recuentos reales no se pueden extrapolar a partir de los recuentos fuera de tolerancia. Los sensores de temperatura y humedad, si están presentes, son para referencia y no son parte de la calibración.'),0,'J',false);
+
+    // Información complementaria
+    $pdf->SetXY(84,248);
+    $pdf->Cell(15,5,utf8_decode('PROCEDIMIENTO DE CALIBRACIÓN: 92045102 Procedimiento de calibración estándar, x5x serie portátil.'),0,0,'C');
 
 
 
