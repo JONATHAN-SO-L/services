@@ -408,9 +408,235 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     
     $pdf->Image('../../assets/img/dvi.png', 125, 11, 75); // Logo
 
+    // Estándard de Trazabilidad
+    // Figura para el sello
+    $pdf->SetDrawColor(0,88,147);
+    //         X  Y   l  A     l: largo, A: Ancho
+    $pdf->Rect(13,35,195,145); // Rectángulo de 7.5 cm x 4.5 cm
 
 
+    $pdf->SetFont("Arial","b",24);
+    $pdf->SetXY(10,37);
+    $pdf->Cell(0,10,utf8_decode('CERTIFICADO DE CALIBRACIÓN'),0,0,'C');
+    $pdf->SetFont("Arial","b",11);
+    $pdf->SetXY(10,45);
+    $pdf->Cell(0,10,utf8_decode('Estándard de Trazabilidad'),0,0,'C');
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetXY(95,50);
+    $pdf->Cell(15,10,utf8_decode('Fecha del documento: _______________________________________________'),0,0,'C');
 
+    // DECLARACIÓN DE TRAZABILIDAD | LADO IZQUIERDO
+    $pdf->SetXY(50,58);
+    $pdf->SetFont("Arial","b",9);
+    $pdf->Cell(15,10,utf8_decode('DECLARACIÓN DE TRAZABILIDAD'),0,0,'C');
+
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetXY(20,65);
+    $pdf->MultiCell(80,5,utf8_decode('Este instrumento ha sido calibrado de acuerdo con ISO 10012-1 y ANSI Z540-1. La calibración cumple con los estándares internos que cumplen o superan los requisitos de ISO 21501-4.'),0,'J',false);
+    $pdf->SetXY(20,85);
+    $pdf->MultiCell(80,5,utf8_decode('La temperatura y la humedad relativa no se controlan durante la calibración debido al amplio rango de operación del instrumento. (Temperatura: 30ºF a 122ºF; Humedad: 0-100%, sin condensación)'),0,'J',false);
+    $pdf->SetXY(20,105);
+    $pdf->MultiCell(80,5,utf8_decode('Todo el equipo de prueba utilizado en la calibración de los productos de Climet Instruments se calibra a intervalos recomendados por el fabricante mediante un servicio de calibración externo aprobado. Los certificados de calibración para cada pieza del equipo de prueba se encuentran archivados en De Vecchi Ingenieros; se proporcionarán copias si se solicita.'),0,'J',false);
+    $pdf->SetXY(20,140);
+    $pdf->MultiCell(80,5,utf8_decode('Rastreabilidad de calibración a estándares de medición (NIST). La respuesta de partículas se establece desafiando al sensor con esferas de látex monodispersas de tamaño estándar. Estas esferas se dimensionan según los métodos trazables, por número de lote, al NIST.'),0,'J',false);
+    $pdf->SetXY(20,165);
+    $pdf->MultiCell(80,5,utf8_decode('Los instrumentos y los estándares de referencia que se enumeran a continuación se usaron para calibrar el instrumento certificado por este documento.'),0,'J',false);
+    
+
+    // MÉTODO DE CALIBRACIÓN | LADO DERECHO
+    $pdf->SetXY(145,58);
+    $pdf->SetFont("Arial","b",9);
+    $pdf->Cell(15,10,utf8_decode('MÉTODO DE CALIBRACIÓN'),0,0,'C');
+
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetXY(110,65);
+    $pdf->MultiCell(87,5,utf8_decode('Los contadores de partículas Climet se calibran usando uno o más tamaños de esferas de látex de poliestireno, que sirven como estándar para comparar y ajustar la respuesta del amplificador a los umbrales de detección a tamaños de partículas conocidos. Las partículas se introducen al sensor en una muestra de aerosol con una concentración moderada. El voltímetro digital se usa para hacer mediciones de referencia. El flujo se mide utilizando un medidor de flujo de masa apropiado para la velocidad de flujo.'),0,'J',false);
+    $pdf->SetXY(110,110);
+    $pdf->MultiCell(87,5,utf8_decode('Un Analizador de Altura de Pulso interno o externo (PHA) mide la respuesta del sensor a las partículas de desafío. El PHA muestra un histograma de la distribución de partículas que se usa para determinar la mediana de la distribución de pulsos.'),0,'J',false);
+    $pdf->SetXY(110,135);
+    $pdf->MultiCell(87,5,utf8_decode('La medición de la distribución se utiliza para ajustar los valoresdel amplificador, según sea necesario, para que coincida con el umbral o el umbral se ajusta a la distribución de la mediana.'),0,'J',false);
+    $pdf->SetXY(110,155);
+    $pdf->MultiCell(87,5,utf8_decode('La precisión del recuento se verifica durante la calibración inicial de fábrica mediante la prueba de eficiencia de conteo. La prueba de eficiencia del conteo se realiza por comparación de conteo utilizando el sistema CNC / DMA, una referencia principal, como referencia de conteo del 100%.'),0,'J',false);
+
+    /**********************************
+    TABLA DEL ESTÁNDARD DE TRAZABILIDAD
+    **********************************/
+    // ENCABEZADOS
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(255,255,255);
+    $pdf->SetXY(13,180);
+    $pdf->Cell(40,5,utf8_decode('INSTRUMENTO'),0,0,'C',true);
+    $pdf->Cell(20,5,utf8_decode('ACTIVO'),0,0,'C',true);
+    $pdf->Cell(20,5,utf8_decode('MODELO'),0,0,'C',true);
+    $pdf->Cell(35,5,utf8_decode('NO. DE SERIE'),0,0,'C',true);
+    $pdf->Cell(30,5,utf8_decode('CONTROL No.'),0,0,'C',true);
+    $pdf->Cell(25,5,utf8_decode('FECHA CAL'),0,0,'C',true);
+    $pdf->Cell(25,5,utf8_decode('PROX. CAL.'),0,0,'C',true);
+
+    // DMM
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetTextColor(0,88,147);
+    $pdf->SetXY(13,185);
+    $pdf->Cell(40,5,utf8_decode('DMM'),1,0,'L');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(35,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+
+    // PHA
+    $pdf->SetXY(13,190);
+    $pdf->Cell(40,5,utf8_decode('PHA'),1,0,'L');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(35,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+
+    // Medidor de flujo de masa
+    $pdf->SetXY(13,195);
+    $pdf->Cell(40,5,utf8_decode('Medidor de flujo de masa'),1,0,'L');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(35,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+
+    // RH/TEMP SENSOR
+    $pdf->SetXY(13,200);
+    $pdf->Cell(40,5,utf8_decode('RH/TEMP SENSOR'),1,0,'L');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(35,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+
+    // Balómetro
+    $pdf->SetXY(13,205);
+    $pdf->Cell(40,5,utf8_decode('Balómetro'),1,0,'L');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(35,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+
+    /***************************
+    TABLA DE PARTÍCULAS ESTÁNDAR
+    ***************************/
+    $pdf->SetXY(10,208);
+    $pdf->SetFont("Arial","b",11);
+    $pdf->Cell(0,10,utf8_decode('PARTÍCULAS ESTÁNDAR'),0,0,'C');
+
+    /******
+    TABLA 1
+    ******/
+    // ENCABEZADOS
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(255,255,255);
+    $pdf->SetXY(13,215);
+    $pdf->MultiCell(17,5,utf8_decode('MEDIDA NOMINAL'),0,'C',true);
+    $pdf->SetXY(30,215);
+    $pdf->MultiCell(23,5,utf8_decode('TAMAÑO REAL'),0,'C',true);
+    $pdf->SetXY(53,215);
+    $pdf->MultiCell(25,5,utf8_decode('DESVIACIÓN DE TAMAÑO'),0,'C',true);
+    $pdf->SetXY(78,215);
+    $pdf->MultiCell(16,5,utf8_decode('No. LOTE'),0,'C',true);
+    $pdf->SetXY(94,215);
+    $pdf->MultiCell(17,5,utf8_decode('EXP. FECHA'),0,'C',true);
+
+    // 0.3 µm
+    $pdf->SetTextColor(0,88,147);
+    $pdf->SetXY(13,225);
+    $pdf->Cell(17,5,utf8_decode('0.3 µm'),1,0,'C');
+    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+
+    // 0.4 µm
+    $pdf->SetXY(13,230);
+    $pdf->Cell(17,5,utf8_decode('0.4 µm'),1,0,'C');
+    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+
+    // 0.5 µm
+    $pdf->SetXY(13,235);
+    $pdf->Cell(17,5,utf8_decode('0.5 µm'),1,0,'C');
+    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+
+    // 0.6 µm
+    $pdf->SetXY(13,240);
+    $pdf->Cell(17,5,utf8_decode('0.6 µm'),1,0,'C');
+    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+
+
+    /******
+    TABLA 2
+    ******/
+    // ENCABEZADOS
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(255,255,255);
+    $pdf->SetXY(111,215);
+    $pdf->MultiCell(17,5,utf8_decode('MEDIDA NOMINAL'),0,'C',true);
+    $pdf->SetXY(128,215);
+    $pdf->MultiCell(23,5,utf8_decode('TAMAÑO REAL'),0,'C',true);
+    $pdf->SetXY(151,215);
+    $pdf->MultiCell(25,5,utf8_decode('DESVIACIÓN DE TAMAÑO'),0,'C',true);
+    $pdf->SetXY(176,215);
+    $pdf->MultiCell(16,5,utf8_decode('No. LOTE'),0,'C',true);
+    $pdf->SetXY(192,215);
+    $pdf->MultiCell(17,5,utf8_decode('EXP. FECHA'),0,'C',true);
+
+    // 0.8 µm
+    $pdf->SetTextColor(0,88,147);
+    $pdf->SetXY(111,225);
+    $pdf->Cell(17,5,utf8_decode('0.8 µm'),1,0,'C');
+    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+
+    // 1.0 µm
+    $pdf->SetXY(111,230);
+    $pdf->Cell(17,5,utf8_decode('1.0 µm'),1,0,'C');
+    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+
+    // 3.0 µm
+    $pdf->SetXY(111,235);
+    $pdf->Cell(17,5,utf8_decode('3.0 µm'),1,0,'C');
+    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+
+    // 5.0 µm
+    $pdf->SetXY(111,240);
+    $pdf->Cell(17,5,utf8_decode('5.0 µm'),1,0,'C');
+    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+
+    // Información complementaria
+     $pdf->SetFont("Arial","",7);
+    $pdf->SetXY(102,246);
+    $pdf->Cell(17,5,utf8_decode('(Los estándares de partículas utilizados en esta calibración son fabricados por Duke Scientific. Solo los tamaños enumerados con el Número de lote se usaron en la calibración).'),0,0,'C');
 
 
 
