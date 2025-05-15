@@ -408,7 +408,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     
     $pdf->Image('../../assets/img/dvi.png', 125, 11, 75); // Logo
 
-    // Estándard de Trazabilidad
+    /************************
+    ESTÁNDARD DE TRAZABILIDAD
+    ************************/
     // Figura para el sello
     $pdf->SetDrawColor(0,88,147);
     //         X  Y   l  A     l: largo, A: Ancho
@@ -637,6 +639,25 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
      $pdf->SetFont("Arial","",7);
     $pdf->SetXY(102,246);
     $pdf->Cell(17,5,utf8_decode('(Los estándares de partículas utilizados en esta calibración son fabricados por Duke Scientific. Solo los tamaños enumerados con el Número de lote se usaron en la calibración).'),0,0,'C');
+
+    /*****************************************************************************************************************************
+    PÁGINA CUATRO
+    *****************************************************************************************************************************/
+    // Se agrega nueva página
+    $pdf->AddPage();
+
+    /***********************************************************
+    Cabecera con información de dirección y logo | Página Cuatro
+    ***********************************************************/
+    $pdf->Line(20,22,35,22);
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetXY(50,10);
+    $pdf->MultiCell(32,5,utf8_decode('www.dvi.mx servicio@dvi.mx'),0,'C',false);
+    $pdf->SetX(40);
+    $pdf->MultiCell(50,5,utf8_decode('Tel.(55)5688-3566 / 3977 - Ext. 402 01800 8326 - 345'),0,'C',false);
+    $pdf->Line(95,22,110,22);
+    
+    $pdf->Image('../../assets/img/dvi.png', 125, 11, 75); // Logo
 
 
 
