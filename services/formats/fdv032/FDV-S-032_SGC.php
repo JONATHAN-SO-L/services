@@ -24,11 +24,6 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             $this->Cell (10,5,utf8_decode('De Vecchi Ingenieros'),0,1,'L');
 
             // Centro
-            $this->SetXY(70,255);
-            $this->Cell (10,5,utf8_decode('ID del documento:'),0,1,'L');
-            $this->SetDrawColor(0,88,147);
-            $this->SetLineWidth(0.2);
-            $this->Line(100,259,145,259);
             $this->SetXY(70,260);
             $this->Cell (10,5,utf8_decode('Certificado de Calibración, Página de '.$this->PageNo().' de {nb}'),0,1,'L');
 
@@ -78,10 +73,19 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetFont("Arial","",8);
     $pdf->Cell(0,5,utf8_decode('(Esta prohibida la reproducción, modificación parcial o total de este documento, sin la aprobación por escrito de De Vecchi Ingenieros.)'),0,0,'C');
 
+    // ID del Documento
+    $pdf->SetFont("Arial","",10);
+    $pdf->SetXY(15,57);
+    $pdf->Cell (10,5,utf8_decode('ID del documento:'),0,1,'L');
+    $pdf->SetDrawColor(0,88,147);
+    $pdf->SetLineWidth(0.2);
+    //          X Y   l  Y   l: largo
+    $pdf->Line(45,61,80,61); // Coordenadas (Inicio largo de línea, inclinación inicial de línea, fin largo de línea, inclinación final de línea)
+
     // Figura para el sello
     $pdf->SetDrawColor(0,88,147);
-    //         X  Y  l  A   l: largo, A: Ancho
-    $pdf->Rect(10,57,75,45); // Rectángulo de 7.5 cm x 4.5 cm
+    //          X  Y l A   l: largo, A: Ancho
+    $pdf->Rect(30,65,40,30); // Rectángulo de 4 cm x 3 cm
 
     $pdf->SetXY(100,57);
     $pdf->SetFont("Arial","b",10);
@@ -736,7 +740,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetXY(100,245);
     $pdf->Cell(15,10,utf8_decode('(Este prohibida la reproducirá parcial o total, sin la aprobación por escrito de De Vecchi Ingenieros.)'),0,0,'C');
 
-    
+
     /***********************************************************************************
     Se indica el nombre del arcvhivo y los parámetros de exportación | Fin del documento
     ***********************************************************************************/
