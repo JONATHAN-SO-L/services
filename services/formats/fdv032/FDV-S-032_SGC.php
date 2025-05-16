@@ -736,13 +736,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetXY(100,245);
     $pdf->Cell(15,10,utf8_decode('(Este prohibida la reproducirá parcial o total, sin la aprobación por escrito de De Vecchi Ingenieros.)'),0,0,'C');
 
-
-
-
-
-
-
-
+    
     /***********************************************************************************
     Se indica el nombre del arcvhivo y los parámetros de exportación | Fin del documento
     ***********************************************************************************/
