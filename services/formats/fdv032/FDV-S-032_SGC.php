@@ -659,6 +659,83 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     
     $pdf->Image('../../assets/img/dvi.png', 125, 11, 75); // Logo
 
+    /*******************************************
+    INFORMACIÓN COMPLEMENTARIA DE LA HOJA CUATRO
+    *******************************************/
+    //Comprender los datos de calibración y prueba
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetXY(10,35);
+    $pdf->Cell(0,10,utf8_decode('Comprender los datos de calibración y prueba'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(20,42);
+    $pdf->MultiCell(180,5,utf8_decode('Los contadores de partículas son instrumentos únicos que están calibrados de forma diferente a otros equipos de medición. Hay pruebas especiales realizadas durante la fabricación que aseguran la precisión del instrumento. Estas pruebas están definidas en ISO 21501-4. Para las calibraciones de intervalo (posteriores a la fabricación), De Vecchi Ingenieros ofrece una calibración estándar y, a una tasa más exigente, la calibración conforme a ISO 21501-4 que incluye la prueba adicional de resolución y conteo de eficiencia. A continuación hay una explicación de la metodología de calibración y las pruebas adicionales.'),0,'J',false);
+
+    // COLUMNA IZQUIERDA
+    // Flujo de aire
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetXY(24,73);
+    $pdf->Cell(15,10,utf8_decode('Flujo de aire'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(20,80);
+    $pdf->MultiCell(90,5,utf8_decode('El flujo de aire se mide usando un medidor de flujo de masa. El flujo de aire determina el volumen muestreado y la velocidad de la partícula a medida que pasa a través del rayo láser. La señal producida por una partícula que pasa a través del rayo láser se integra, por lo que cuanto menor sea el flujo, mayor será la señal de pulso producida. Esto hace que el flujo sea un parámetro crítico durante la calibración, ya que afecta la amplitud de la señal, pero no tanto durante el muestreo, ya que compensa con eficacia los conteos perdidos debido a la disminución del volumen. La tolerancia es del 5%, según ISO 21501-4.'),0,'J',false);
+
+    // Análisis de tamaño
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetXY(29,133);
+    $pdf->Cell(15,10,utf8_decode('Análisis de tamaño'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(20,140);
+    $pdf->MultiCell(90,5,utf8_decode('El análisis de tamaño se realiza con un circuito interno de análisis de pulso de altura (PHA) o externamente con un PHA. Las partículas de forma y tamaño idénticos producen una distribución. La calibración consiste en determinar la mediana de la distribución utilizando una pantalla de histograma PHA, y hacer coincidir el umbral de detección para un tamaño de partícula dado con la distribución mediana.'),0,'J',false);
+
+    // Tolerancias de respuesta de partículas
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetXY(45.5,175);
+    $pdf->Cell(15,10,utf8_decode('Tolerancias de respuesta de partículas'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(20,183);
+    $pdf->MultiCell(90,5,utf8_decode('La tolerancia en ¨Condición Encontrada¨ para la respuesta de partículas es basado en un 10% de error de conteo en respuesta a las partículas de pruebas. El error de recuento es menor en el aire ambiente.'),0,'J',false);
+
+    // Contar la precisión
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetXY(29,202);
+    $pdf->Cell(15,10,utf8_decode('Contar la precisión'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(20,210);
+    $pdf->MultiCell(90,5,utf8_decode('La precisión de conteo de un contador de partículas se conoce como eficiencia de conteo. ISO 21501-4 define dos pruebas: 50% y 100%. La prueba del 50% demuestra la honestidad de la sensibilidad especificada (la partícula más pequeña detectada) del instrumento.'),0,'J',false);
+
+    // COLUMNA DERECHA
+    $pdf->SetXY(113,80);
+    $pdf->MultiCell(90,5,utf8_decode('La tolerancia ISO es ± 20 puntos porcentuales; nuestra tolerancia de fabricación es de ± 10 puntos porcentuales. La prueba al 100% verifica la alineación de la columna de aire y el rayo láser. Una mala alineación da como resultado un conteo por debajo o posiblemente por encima del conteo. La tolerancia es de ± 10%. Climet utiliza un Contador de Núcleo de Condensación (CNC) y un Analizador de Movilidad Diferencial (DMA), que son estándares primarios, para establecer la eficiencia del recuento durante la fabricación. Las alineaciones del sensor de Climet están bloqueadas mecánicamente para evitar el desajuste de estas alineaciones. La eficiencia del conteo se realiza después de que el sensor ha sido calibrado.'),0,'J',false);
+
+    // Prueba de resolución
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetXY(125,145);
+    $pdf->Cell(15,10,utf8_decode('Prueba de resolución'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(114,153);
+    $pdf->MultiCell(90,5,utf8_decode('La resolución se basa en la curva de respuesta establecida por dos tamaños de partículas durante la calibración. El cálculo se basa en IEST-RP-CC014: Calibración y Caracterización de Contadores de Partículas Ópticos en el Aire. La resolución afecta la precisión del tamaño.'),0,'J',false);
+
+    // Controles de mantenimiento preventivo
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetXY(140,177);
+    $pdf->Cell(15,10,utf8_decode('Controles de mantenimiento preventivo'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetXY(114,185);
+    $pdf->MultiCell(90,5,utf8_decode('La salida del láser está regulada, por lo que incluso cuando el diodo láser se desgasta, la intensidad de la luz es constante. En algún momento después de un aumento del 20% en la corriente del láser, la luz del láser se saldrá de regulación. La corriente del variador láser se registra en el certificado de calibración, por lo que se puede monitorear para mantenimiento preventivo.'),0,'J',false);
+    $pdf->SetXY(114,220);
+    $pdf->MultiCell(90,5,utf8_decode('El ruido máximo se controla como un indicador de contaminación del sensor. Si bien el ruido no tiene un efecto inmediato en los conteos, es un importante indicador de mantenimiento preventivo, ya que puede ocasionar errores de calibración y un eventual hallazgo fuera de tolerancia.'),0,'J',false);
+
+    $pdf->SetFont("Arial","",7);
+    $pdf->SetXY(100,245);
+    $pdf->Cell(15,10,utf8_decode('(Este prohibida la reproducirá parcial o total, sin la aprobación por escrito de De Vecchi Ingenieros.)'),0,0,'C');
+
 
 
 
