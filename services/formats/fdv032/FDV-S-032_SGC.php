@@ -74,13 +74,13 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->Cell(0,5,utf8_decode('(Esta prohibida la reproducción, modificación parcial o total de este documento, sin la aprobación por escrito de De Vecchi Ingenieros.)'),0,0,'C');
 
     // ID del Documento
-    $pdf->SetFont("Arial","",10);
+    $pdf->SetFont("Arial","b",10);
     $pdf->SetXY(15,57);
     $pdf->Cell (10,5,utf8_decode('ID del documento:'),0,1,'L');
     $pdf->SetDrawColor(0,88,147);
     $pdf->SetLineWidth(0.2);
     //          X Y   l  Y   l: largo
-    $pdf->Line(45,61,80,61); // Coordenadas (Inicio largo de línea, inclinación inicial de línea, fin largo de línea, inclinación final de línea)
+    $pdf->Line(48,61,85,61); // Coordenadas (Inicio largo de línea, inclinación inicial de línea, fin largo de línea, inclinación final de línea)
 
     // Figura para el sello
     $pdf->SetDrawColor(0,88,147);
