@@ -146,26 +146,6 @@
                   <input type="password" class="form-control" name="contrasena_login" placeholder="Escribe tu contraseña" required=""/>
               </div>
               
-              <!--p>¿Cómo iniciaras sesión?</p>
-
-              <div class="radio">
-                <label>
-                    <input type="radio" name="optionsRadios" value="user" checked>
-                    Usuario Cliente
-                </label>
-             </div>
-			 <div class="radio">
-                <label>
-                    <input type="radio" name="optionsRadios" value="devecchi">
-                     Usuario De Vecchi
-                </label>
-             </div>
-             <div class="radio">
-                <label>
-                    <input type="radio" name="optionsRadios" value="admin">
-                     Administrador
-                </label>
-             </div-->
               <div class="modal-footer">
                 <button type="submit" class="btn btn-primary btn-sm">Iniciar sesión</button>
                 <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
