@@ -34,8 +34,9 @@ CREATE TABLE `usuario_sis` (
   `fecha_hora_registro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `modifica_data` text DEFAULT NULL,
   `fecha_hora_modificacion` text DEFAULT NULL,
-  PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `UNIQUE` (`usuario`) USING HASH
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +45,7 @@ CREATE TABLE `usuario_sis` (
 
 LOCK TABLES `usuario_sis` WRITE;
 /*!40000 ALTER TABLE `usuario_sis` DISABLE KEYS */;
+INSERT INTO `usuario_sis` VALUES (2,'Jonathan Sanchez','JONATHAN','c0cca19a86290cc0336fd60ec5da2ba8','j.sanchez@veco.mx','VECO','T','Jonathan Sanchez','2025-05-22 22:49:22',NULL,NULL);
 /*!40000 ALTER TABLE `usuario_sis` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-22 16:42:22
+-- Dump completed on 2025-05-23  8:54:17
