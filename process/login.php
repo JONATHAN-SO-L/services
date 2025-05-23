@@ -3,6 +3,23 @@ session_start();
 
 require './services/functions/conex.php';
 
+/*************************************
+Alerta de error en el inicio de sesión
+*************************************/
+function mensaje_error(){
+    session_unset();
+    session_destroy();
+    echo '
+        <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="text-center"><strong>OCURRIÓ UN ERROR</strong></h4>
+        <p class="text-center">
+        Nombre de usuario o contraseña incorrectos
+        </p>
+        </div>
+        ';
+}
+
 /**************************
 Recepción de datos y parseo
 **************************/
@@ -27,6 +44,7 @@ if ($val_user -> rowCount() > 0) {
     foreach ($validate as $value) {
         $id_usuario = $value->id_usuario;
         $nombre_completo = $value->nombre_completo;
+        $clave = $value->clave;
         $usuario = $value->usuario;
         $email = $value->email;
         $clave = $value->clave;
@@ -34,15 +52,7 @@ if ($val_user -> rowCount() > 0) {
         $tipo_usuario = $value->tipo_usuario;
     }
 } else {
-    echo '
-        <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="text-center">OCURRIÓ UN ERROR</h4>
-        <p class="text-center">
-        Nombre de usuario o contraseña incorrectos
-        </p>
-        </div>
-        ';
+    mensaje_error();
 }
 
 /*************************************
@@ -52,17 +62,21 @@ switch ($tipo_usuario) {
     case 'A': // Administrador
     $_SESSION['usuario'] = $usuario;
     $_SESSION['nombre_completo'] = $nombre_completo;
+    $_SESSION['nombre'] = $nombre_completo;
+    $_SESSION['clave'] = $clave;
     $_SESSION['email'] = $email;
     $_SESSION['razon_social'] = $razon_social;
     $_SESSION['tipo_usuario'] = $tipo_usuario;
+    $_SESSION['tipo'] = 'admin';
 
-    header('Location: ./seccion.php');
+    header('Location: ./inicio.php');
 
     break;
 
     case 'G': // Gerente o Jefe
     $_SESSION['usuario'] = $usuario;
     $_SESSION['nombre_completo'] = $nombre_completo;
+    $_SESSION['nombre'] = $nombre_completo;
     $_SESSION['email'] = $email;
     $_SESSION['razon_social'] = $razon_social;
     $_SESSION['tipo_usuario'] = $tipo_usuario;
@@ -78,28 +92,19 @@ switch ($tipo_usuario) {
 
     if ($s_user -> rowCount() > 0) {
         foreach ($found_user as $value) {
+            $_SESSION['clave'] = $value->clave;
             $_SESSION['tipo'] = 'admin';
+            header('Location: ./inicio.php');
         }
     } else {
-        echo '
-        <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="text-center">OCURRIÓ UN ERROR</h4>
-        <p class="text-center">
-        Nombre de usuario o contraseña incorrectos
-        </p>
-        </div>
-        ';
+        mensaje_error();
     }
-
-    header('Location: ./inicio.php');
 
     break;
 
     case 'T': // Técnico de Servicios
     $_SESSION['usuario'] = $usuario;
     $_SESSION['nombre_completo'] = $nombre_completo;
-    $_SESSION['nombre'] = $nombre_completo;
     $_SESSION['email'] = $email;
     $_SESSION['clave'] = $clave;
     $_SESSION['razon_social'] = $razon_social;
@@ -116,33 +121,21 @@ switch ($tipo_usuario) {
 
     if ($s_user -> rowCount() > 0) {
         foreach ($found_user as $value) {
+            $_SESSION['nombre'] = $value->nombre;
+            $_SESSION['apellido'] = $value->apellido;
             $_SESSION['tipo'] = 'devecchi';
+            header('Location: ./seccion.php');
         }
     } else {
-        echo '
-        <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="text-center">OCURRIÓ UN ERROR</h4>
-        <p class="text-center">
-        Nombre de usuario o contraseña incorrectos
-        </p>
-        </div>
-        ';
+        mensaje_error();
     }
-
-    header('Location: ./seccion.php');
 
     break;
 
     case 'C': // Cliente
     $_SESSION['usuario'] = $usuario;
     $_SESSION['nombre_completo'] = $nombre_completo;
-    $_SESSION['email'] = $email;
-    $_SESSION['razon_social'] = $razon_social;
-    $_SESSION['tipo_usuario'] = $tipo_usuario;
-
-    $_SESSION['usuario'] = $usuario;
-    $_SESSION['nombre_completo'] = $nombre_completo;
+    $_SESSION['nombre'] = $nombre_completo;
     $_SESSION['email'] = $email;
     $_SESSION['razon_social'] = $razon_social;
     $_SESSION['tipo_usuario'] = $tipo_usuario;
@@ -158,28 +151,19 @@ switch ($tipo_usuario) {
 
     if ($s_user -> rowCount() > 0) {
         foreach ($found_user as $value) {
+            $_SESSION['clave'] = $value->clave;
             $_SESSION['tipo'] = 'user';
+            header('Location: ./inicio_user.php');
         }
     } else {
-        echo '
-        <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="text-center">OCURRIÓ UN ERROR</h4>
-        <p class="text-center">
-        Nombre de usuario o contraseña incorrectos
-        </p>
-        </div>
-        ';
+        mensaje_error();
     }
-
-    header('Location: ./inicio_user.php');
 
     break;
     
     default:
-    echo '<script>alert("Ocurrión en error al recuperar información del usuario en sistema, por favor inténtalo de nuevo o comunícate con Soporte Técnico a través del Soporte Devinsa")</script>';
+    echo '<script>console.log("Ocurrión en error al recuperar información del usuario en sistema, por favor inténtalo de nuevo o comunícate con Soporte Técnico a través del Soporte Devinsa")</script>';
     header('Location: ../index.php');
-    die();
     break;
 }
 
