@@ -57,6 +57,6 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 <?php
 end_section();
 } else {
-    header('Location: ../../../../index.php');
+    die(header('Location: ../../../../index.php'));
 }
 ?>
