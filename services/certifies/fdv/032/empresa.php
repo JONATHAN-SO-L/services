@@ -33,7 +33,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             <div class="row">
                 <div class="col-sm-8">
                     <div class="panel panel-primary">
-                        <div class="panel-heading text-center"><strong>Para poder crear un nuevo certificado es necesario colocar la RAZON SOCIAL de la compañía a buscar</strong></div>
+                        <div class="panel-heading text-center"><strong>Por favor, coloca la RAZON SOCIAL o el RFC para una búsqueda correcta</strong></div>
                             <div class="panel-body">
                                 <form role="form" action="validador_empresa.php" method="POST" enctype="multipart/form-data">
                                     <div>
