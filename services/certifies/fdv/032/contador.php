@@ -90,14 +90,14 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
                                 <div class="panel panel-success">
                                     <div class="panel-heading text-center"><strong>Para poder crear un nuevo certificado es necesario llenar los todos campos</strong></div>
                                         <div class="panel-body">
-                                        <form role="form" action="validador_contador.php" method="POST" enctype="multipart/form-data">
+                                        <?php echo '<form role="form" action="validador_contador.php?'.$id_documento.'" method="POST" enctype="multipart/form-data">'; ?>
                                             <div>
                                                 <label><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;Número de serie del Contador de Partículas:</label>
                                                 <select class="form-control" name="contador" required>
                                                 <option value=""> - Selecciona el número de serie requerido - </option>
                                                 <?php
                                                     $s_serie = $con->prepare("SELECT modelo_ci, numero_serie, estado FROM $accountant WHERE estado = 'Calibrado' AND modelo_ci = :modelo_ci");
-                                                    $s_serie->bindValue(':modelo_ci', $modelo_ci);
+                                                    $s_serie->bindValue(':modelo_ci', $modelo_ci    );
                                                     $s_serie->setFetchMode(PDO::FETCH_OBJ);
                                                     $s_serie->execute();
                                                     $f_serie = $s_serie->fetchAll();
