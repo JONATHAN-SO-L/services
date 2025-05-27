@@ -107,7 +107,8 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         }
 
     } else {
-        echo '<script>console.log("No se ha accionado el botón de búsqueda")</script>';
+        echo '<script>alert("No se detectó el iniciador de la petición, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
+        echo '<meta http-equiv="refresh" content="0; url=index.php">';
     }
 
 ?>
