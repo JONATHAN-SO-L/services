@@ -4,6 +4,8 @@ session_start();
 if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
     include '../../assets/layout.php';
     section();
+
+    $id_documento = $_SERVER['QUERY_STRING'];
 ?>
 
         <table>
@@ -29,7 +31,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             <div class="row">
                 <div class="col-sm-8">
                     <div class="panel panel-primary">
-                        <div class="panel-heading text-center"><strong>Valida que la ionformación del contador sea la correcta</strong></div>
+                        <div class="panel-heading text-center"><strong>Valida que la información del contador sea la correcta</strong></div>
                             <div class="panel-body">
                                 <form role="form" action="form.php" method="POST" enctype="multipart/form-data">
                                     <div>
