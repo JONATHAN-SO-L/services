@@ -8,7 +8,7 @@
       	<img src="../img/owl.png"/>
       </div>
       
-      <a id="profile-link"><h4>&nbsp;&nbsp;&nbsp;<strong><?php echo $_SESSION['nombre_completo']; ?></strong></h4>
+      <a id="profile-link"><h4>&nbsp;&nbsp;&nbsp;<strong><?php echo $_SESSION['nombre_completo'];?></strong></h4>
     </div>
     <div id="account-actions">
     <a href="../index.php" ><button class="btn btn-success" title="Regresar al incio"><i class="fa fa-home"></i></button></a>
