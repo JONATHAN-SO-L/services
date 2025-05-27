@@ -4,6 +4,112 @@ session_start();
 if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
     include '../../assets/layout.php';
     section();
+
+    function mensaje_error() {
+        echo '
+            <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="text-center"><strong>OCURRIÓ UN ERROR</strong></h4>
+            <p class="text-center">
+            <u>No se logró recibir información</u> de la <strong>Razón Social</strong> o <strong>RFC</strong>, por favor, inténtalo de nuevo o contácta al Soporte Técnico.
+            </p>
+            </div>
+            ';
+    }
+
+    function mensaje_ayuda(){
+        echo '
+            <div class="alert alert-success alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="text-center"><strong>EMPRESA ENCONTRADA</strong></h4>
+            <p class="text-center">
+            Se encontró una empresa que coincide, por favor, valida que sea correcta la información.
+            </p>
+            </div>
+            ';
+    }
+
+    if (isset($_POST['buscar_empresa'])) {
+        /*********************
+        Búsqueda de la empresa
+        *********************/
+        // Obtención de valores
+        $razon_social = $_POST['empresa'];
+        $rfc = $_POST['rfc'];
+
+        // Búsqueda de la empresa en la tabla empresas
+        require '../../../functions/conex.php';
+        $company = 'empresas'; // Tabla empresas
+        $build = 'edificio'; // Tabla edificio
+
+        if ($razon_social != '' && $rfc != '') { // Se reciben ambos campos
+            $s_company = $con -> prepare("SELECT id, rfc, razon_social FROM $company WHERE razon_social = :razon_social AND rfc = :rfc");
+            $s_company->bindValue(':razon_social', $razon_social);
+            $s_company->bindValue(':rfc', $rfc);
+            $s_company->setFetchMode(PDO::FETCH_OBJ);
+            $s_company->execute();
+
+            $f_company = $s_company->fetchAll();
+
+            if ($s_company -> rowCount() > 0) {
+                foreach ($f_company as $empresa) {
+                    $id_empresa = $empresa -> id;
+                    $rfc_val = $empresa -> rfc;
+                    $compania_val = $empresa -> razon_social;
+
+                    mensaje_ayuda();
+                    }
+            } else {
+                mensaje_error();
+            }
+
+        } elseif ($razon_social != '') { // No se recibe RFC
+            $s_company = $con -> prepare("SELECT * FROM $company WHERE razon_social = :razon_social");
+            $s_company->bindValue(':razon_social', $razon_social);
+            $s_company->setFetchMode(PDO::FETCH_OBJ);
+            $s_company->execute();
+
+            $f_company = $s_company->fetchAll();
+
+            if ($s_company -> rowCount() > 0) {
+                foreach ($f_company as $item) {
+                    $id_empresa = $item -> id;
+                    $rfc_val = $item -> rfc;
+                    $compania_val = $item -> razon_social;
+
+                    mensaje_ayuda();
+                }
+            } else {
+                mensaje_error();
+            }
+
+        } elseif ($rfc != '') { // No se recibe Razón Social
+            $s_company = $con -> prepare("SELECT * FROM $company WHERE rfc = :rfc");
+            $s_company->bindValue(':rfc', $rfc);
+            $s_company->setFetchMode(PDO::FETCH_OBJ);
+            $s_company->execute();
+
+            $f_company = $s_company->fetchAll();
+
+            if ($s_company -> rowCount() > 0) {
+                foreach ($f_company as $item) {
+                    $id_empresa = $item -> id;
+                    $rfc_val = $item -> rfc;
+                    $compania_val = $item -> razon_social;
+
+                    mensaje_ayuda();
+                }
+            } else {
+                mensaje_error();
+            }
+        } else {
+            mensaje_error();
+        }
+
+    } else {
+        echo '<script>console.log("No se ha accionado el botón de búsqueda")</script>';
+    }
+
 ?>
 
 <table>
@@ -29,26 +135,42 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             <div class="row">
                 <div class="col-sm-8">
                     <div class="panel panel-primary">
-                        <div class="panel-heading text-center"><strong>Valida que la ionformación del contador sea la correcta</strong></div>
+                        <div class="panel-heading text-center"><strong>Valida que la información del contador sea la correcta</strong></div>
                             <div class="panel-body">
-                                <form role="form" action="contador.php" method="POST" enctype="multipart/form-data">
+                                <form role="form" action="../../../functions/add/company.php" method="POST" enctype="multipart/form-data">
                                     <div>
                                         <div class="col-sm-12">
                                         <label><i class="fa fa-building" aria-hidden="true"></i>&nbsp;Razón Social:</label>
-                                        <input class="form-control" type="text" name="razon_social" id="razon_social" value="VECO" readonly><br>
+                                        <input class="form-control" type="text" name="razon_social" id="razon_social" value="<?php echo $compania_val; ?>" readonly><br>
                                         </div>
 
                                         <div class="col-sm-6">
                                         <label><i class="fa fa-id-badge" aria-hidden="true"></i>&nbsp;RFC:</label>
-                                        <input class="form-control" type="text" name="rfc" id="rfc" value="VEC831119793" readonly>
+                                        <input class="form-control" type="text" name="rfc" id="rfc" value="<?php echo $rfc_val; ?>" readonly>
                                         </div>
 
                                         <div class="col-sm-6">
                                         <label><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;Sede:</label>
                                         <select class="form-control" name="sede" required>
                                             <option value=""> - Selecciona la sede - </option>
-                                            <option value="Oficinas CDMX">Oficinas CDMX</option>
-                                            <option value="Planta Morelos">Planta Morelos</option>
+                                            <?php
+                                            $s_build = $con -> prepare("SELECT id_edificio, empresa_id, descripcion FROM $build WHERE empresa_id = :id_empresa");
+                                            $s_build->bindValue(':id_empresa', $id_empresa);
+                                            $s_build->setFetchMode(PDO::FETCH_OBJ);
+                                            $s_build->execute();
+
+                                            $f_build = $s_build->fetchAll();
+
+                                            if ($s_build -> rowCount() > 0) {
+                                                foreach ($f_build as $edificio) {
+                                                    $id_edificio = $edificio -> id_edificio;
+                                                    $empresa_id = $edificio -> empresa_id;
+                                                    $descripcion_edificio = $edificio -> descripcion;
+
+                                                    echo '<option value="'.$id_edificio.'">'.$descripcion_edificio.'</option>';
+                                                }
+                                            }
+                                            ?>
                                         </select><br>
                                         </div>
 
