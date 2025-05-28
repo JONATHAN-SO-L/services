@@ -74,8 +74,8 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
                 $save_model = $con->prepare("UPDATE $certified
                                                     SET modelo_contador= ?,
                                                     modelo_ci = ?
-                                                    WHERE id_documento = $id_documento");
-                $val_save_model = $save_model->execute([$modelo_ci, $modelo_ci]);
+                                                    WHERE id_documento = ?");
+                $val_save_model = $save_model->execute([$modelo_ci, $modelo_ci, $id_documento]);
 
                 if ($val_save_model) {
                     mensaje_ayuda();
@@ -93,11 +93,11 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
                                         <?php echo '<form role="form" action="validador_contador.php?'.$id_documento.'" method="POST" enctype="multipart/form-data">'; ?>
                                             <div>
                                                 <label><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;Número de serie del Contador de Partículas:</label>
-                                                <select class="form-control" name="contador" required>
+                                                <select class="form-control" name="serie_contador" required>
                                                 <option value=""> - Selecciona el número de serie requerido - </option>
                                                 <?php
                                                     $s_serie = $con->prepare("SELECT modelo_ci, numero_serie, estado FROM $accountant WHERE estado = 'Calibrado' AND modelo_ci = :modelo_ci");
-                                                    $s_serie->bindValue(':modelo_ci', $modelo_ci    );
+                                                    $s_serie->bindValue(':modelo_ci', $modelo_ci);
                                                     $s_serie->setFetchMode(PDO::FETCH_OBJ);
                                                     $s_serie->execute();
                                                     $f_serie = $s_serie->fetchAll();
