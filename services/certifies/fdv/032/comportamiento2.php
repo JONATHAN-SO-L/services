@@ -4,6 +4,8 @@ session_start();
 if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
     include '../../assets/layout.php';
     section();
+
+    $id_documento = $_SERVER['QUERY_STRING'];
 ?>
 
         <table>
@@ -18,7 +20,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             <div class="row" style="width: 770px;">
                 <div class="col-sm-12">
                     <div class="page-header2">
-                        <h1 class="animated lightSpeedIn">Certificado: # | Comportamiento</h1>
+                        <h1 class="animated lightSpeedIn">Certificado: <strong><u><?php echo $id_documento; ?></u></strong> | Comportamiento</h1>
                         <span class="label label-danger"></span> 		 
                         <p class="pull-right text-primary"></p>
                     </div>
@@ -32,7 +34,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     <div class="panel panel-success">
                         <div class="panel-heading text-center"><strong>Para poder crear un nuevo certificado es necesario llenar los todos campos</strong></div>
                             <div class="panel-body">
-                                <form role="form" action="instrumentos.php" method="POST" enctype="multipart/form-data">
+                                <?php echo '<form role="form" action="../../../functions/add/behaviour.php?'.$id_documento.'" method="POST" enctype="multipart/form-data">'; ?>
                                     <div>
                                         <div class="container">
                                             <table class="table table-responsive table-hover table-bordered table-striped table-primary" style="margin-left: -15px;">
@@ -128,7 +130,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                             
                                         </div><br>
 
-                                        <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="guardar"></center>
+                                        <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="guardar_comportamiento"></center>
                                     </div>
                                 </form>
                             </div>
