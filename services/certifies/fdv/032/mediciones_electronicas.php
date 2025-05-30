@@ -4,6 +4,8 @@ session_start();
 if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
     include '../../assets/layout.php';
     section();
+
+    $id_documento = $_SERVER['QUERY_STRING'];
 ?>
 
         <table>
@@ -18,7 +20,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             <div class="row" style="width: 770px;">
                 <div class="col-sm-12">
                     <div class="page-header2">
-                        <h1 class="animated lightSpeedIn">Certificado: # | Mediciones Electrónicas</h1>
+                        <h1 class="animated lightSpeedIn">Certificado: <strong><u><?php echo $id_documento; ?></u></strong> | Mediciones Electrónicas</h1>
                         <span class="label label-danger"></span> 		 
                         <p class="pull-right text-primary"></p>
                     </div>
@@ -32,7 +34,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     <div class="panel panel-success">
                         <div class="panel-heading text-center"><strong>Para poder crear un nuevo certificado es necesario llenar los todos campos</strong></div>
                             <div class="panel-body">
-                                <form role="form" action="comportamiento.php" method="POST" enctype="multipart/form-data">
+                                <?php echo '<form role="form" action="../../../functions/add/electronic_measure.php?'.$id_documento.'" method="POST" enctype="multipart/form-data">'; ?>
                                     <div>
                                         <div class="container">
                                             <table class="table table-responsive table-hover table-bordered table-striped table-primary" style="margin-left: -15px;">
@@ -108,11 +110,11 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                             <p><strong>±</strong> Valor inicial; el voltaje aumenta a medida que el diodo láser se desgasta.</p>
 
                                             <label><i class="fa fa-tachometer"></i>&nbsp;<i><strong>*</strong></i> Las lecturas del medidor de flujo volumétrico y reflejan una compensación correctiva de:</label>
-                                            <input class="form mt-3" type="number" name="flujo_volumétrico" step="0.01" min="0" placeholder="Por ejemplo: 0" required> LPM.
+                                            <input class="form mt-3" type="number" name="flujo_volumetrico" step="0.01" min="0" placeholder="Por ejemplo: 0" required> LPM.
                                             
                                         </div><br>
 
-                                        <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="guardar"></center>
+                                        <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="guardar_mediciones"></center>
                                     </div>
                                 </form>
                             </div>
