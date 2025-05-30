@@ -4,6 +4,42 @@ session_start();
 if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
     include '../../assets/layout.php';
     section();
+
+    $id_documento = $_SERVER['QUERY_STRING'];
+
+    function mensaje_error() {
+        echo '
+            <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="text-center"><strong>OCURRIÓ UN ERROR</strong></h4>
+            <p class="text-center">
+            <u>No se logró recibir información del registro, por favor, inténtalo de nuevo o contácta al Soporte Técnico.
+            </p>
+            </div>
+            ';
+    }
+
+    // Se recupera información deL contador registrado en el certificado
+    require '../../../functions/conex_serv.php';
+    $certified = 'fdv_s_032';
+
+    $s_accountant = $con->prepare("SELECT modelo_ci, numero_serie, identificacion_cliente
+                                   FROM $certified
+                                   WHERE id_documento = :id_documento");
+    $s_accountant->bindValue(':id_documento', $id_documento);
+    $s_accountant->setFetchMode(PDO::FETCH_OBJ);
+    $s_accountant->execute();
+    $f_accountant = $s_accountant->fetchAll();
+
+    if ($s_accountant -> rowCount() > 0) {
+        foreach ($f_accountant as $contador) {
+            $modelo_ci = $contador -> modelo_ci;
+            $numero_serie = $contador -> numero_serie;
+            $identificacion_cliente = $contador -> identificacion_cliente;
+        }
+    } else {
+        mensaje_error();
+    }
 ?>
 
         <table>
@@ -18,7 +54,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             <div class="row" style="width: 770px;">
                 <div class="col-sm-12">
                     <div class="page-header2">
-                        <h1 class="animated lightSpeedIn">Certificado: #</h1>
+                        <h1 class="animated lightSpeedIn">Certificado: <strong><u><?php echo $id_documento; ?></u></strong></h1>
                         <span class="label label-danger"></span> 		 
                         <p class="pull-right text-primary"></p>
                     </div>
@@ -32,14 +68,14 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     <div class="panel panel-success">
                         <div class="panel-heading text-center"><strong>Para poder crear un nuevo certificado es necesario llenar los todos campos</strong></div>
                             <div class="panel-body">
-                                <form role="form" action="mediciones_electronicas.php" method="POST" enctype="multipart/form-data">
+                                <?php echo '<form role="form" action="../../../functions/add/form.php?'.$id_documento.'" method="POST" enctype="multipart/form-data">'; ?>
                                     <div>
                                         <label><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;Intervalo máximo de calibración recomendado (meses):</label>
                                         <input class="form-control" type="number" min="1" name="intervalo_calibracion" id="intervalo_calibracion" placeholder="Por ejemplo: 12" required>
                                         <br>
 
                                         <label><i class="fa fa-barcode"></i>&nbsp;ID del documento:</label>
-                                        <input class="form-control" type="text" name="id_documento" id="id_documento" value="001" readonly>
+                                        <input class="form-control" type="text" name="id_documento" id="id_documento" value="<?php echo $id_documento; ?>" readonly>
                                         <br>
 
                                         <div class="col-sm-4">
@@ -79,14 +115,18 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
                                         <hr>
 
+                                        <!----------------------------------
+                                        INFORMACIÓN EN TABLA DE CERTIFICADOS
+                                        ----------------------------------->
+
                                         <div class="col-sm-4">
                                         <label><i class="fa fa-tachometer"></i>&nbsp;Modelo CI:</label>
-                                        <input class="form-control" type="text" name="modelo_ci" id="modelo_ci" value="001" readonly>
+                                        <input class="form-control" type="text" name="modelo_ci" id="modelo_ci" value="<?php echo $modelo_ci; ?>" readonly>
                                         </div>
 
                                         <div class="col-sm-4">
                                         <label><i class="fa fa-barcode"></i>&nbsp;Número de Serie:</label>
-                                        <input class="form-control" type="text" name="numero_serie" id="numero_serie" readonly>
+                                        <input class="form-control" type="text" name="numero_serie" id="numero_serie" value="<?php echo $numero_serie; ?>" readonly>
                                         </div>
 
                                         <div class="col-sm-4">
@@ -96,7 +136,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                         
                                         <div class="col-sm-6">
                                         <label><i class="fa fa-user-o"></i>&nbsp;Identificación del Cliente:</label>
-                                        <input class="form-control" type="text" name="identificacion_cliente" id="identificacion_cliente" readonly><hr>
+                                        <input class="form-control" type="text" name="identificacion_cliente" id="identificacion_cliente" value="<?php echo $identificacion_cliente; ?>" readonly><hr>
                                         </div>
 
                                         <div class="col-sm-6">
@@ -116,10 +156,10 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
                                         <div class="col-sm-4">
                                         <label><i class="fa fa-thermometer-full"></i>&nbsp;Humedad Relativa:</label>
-                                        <input class="form-control" type="number" min="0" step="0.01" name="humedad relativa" id="humedad relativa" required placeholder="Por ejemplo: 34.7% HR"><hr><br>
+                                        <input class="form-control" type="number" min="0" step="0.01" name="humedad_relativa" id="humedad_relativa" required placeholder="Por ejemplo: 34.7% HR"><hr><br>
                                         </div>
 
-                                        <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="guardar"></center>
+                                        <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="guardar_formulario"></center>
                                     </div>
                                 </form>
                             </div>
