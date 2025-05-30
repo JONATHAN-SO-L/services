@@ -1,34 +1,29 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
+-- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2025 a las 23:33:07
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: veco_servicios
+-- ------------------------------------------------------
+-- Server version	5.5.5-10.4.32-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Base de datos: `veco_servicios`
+-- Table structure for table `contadores`
 --
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `contadores`
---
-
+DROP TABLE IF EXISTS `contadores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `contadores` (
-  `id_contador` int(10) UNSIGNED NOT NULL,
+  `id_contador` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `descripcion_nombre` text NOT NULL,
   `modelo_ci` text NOT NULL,
   `numero_serie` text NOT NULL,
@@ -44,17 +39,21 @@ CREATE TABLE `contadores` (
   `registra_data` text NOT NULL,
   `fecha_hora_registro` text NOT NULL,
   `modifica_data` text DEFAULT NULL,
-  `fecha_hora_modificacion` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
+  `fecha_hora_modificacion` text DEFAULT NULL,
+  PRIMARY KEY (`id_contador`),
+  UNIQUE KEY `UNI` (`numero_serie`) USING HASH
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `fdv_s_032`
+-- Table structure for table `fdv_s_032`
 --
 
+DROP TABLE IF EXISTS `fdv_s_032`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `fdv_s_032` (
-  `id_folio` int(10) UNSIGNED NOT NULL,
+  `id_folio` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `empresa` text NOT NULL,
   `direccion` text NOT NULL,
   `modelo_contador` text DEFAULT NULL,
@@ -119,6 +118,7 @@ CREATE TABLE `fdv_s_032` (
   `condicion_final_10_100` text DEFAULT NULL,
   `amplitud_esperada_30_100` text DEFAULT NULL,
   `tolerancia_30_100` text DEFAULT NULL,
+  `como_encuentra_30_100` text DEFAULT NULL,
   `pasa_30_100` text DEFAULT NULL,
   `condicion_final_30_100` text DEFAULT NULL,
   `amplitud_esperada_50_100` text DEFAULT NULL,
@@ -192,17 +192,20 @@ CREATE TABLE `fdv_s_032` (
   `tecnico` text DEFAULT NULL,
   `fecha_hora_registro` text DEFAULT NULL,
   `modifica_data` text DEFAULT NULL,
-  `fecha_hora_modificacion` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
+  `fecha_hora_modificacion` text DEFAULT NULL,
+  PRIMARY KEY (`id_folio`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `formatos`
+-- Table structure for table `formatos`
 --
 
+DROP TABLE IF EXISTS `formatos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `formatos` (
-  `id_movimiento` int(10) UNSIGNED NOT NULL,
+  `id_movimiento` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `formato` text NOT NULL,
   `nombre_formato` text NOT NULL,
   `revision_formato` text NOT NULL,
@@ -210,17 +213,20 @@ CREATE TABLE `formatos` (
   `registra_data` text NOT NULL,
   `fecha_hora_registro` text NOT NULL,
   `modifica_data` text DEFAULT NULL,
-  `fecha_hora_modificacion` text DEFAULT NULL
+  `fecha_hora_modificacion` text DEFAULT NULL,
+  PRIMARY KEY (`id_movimiento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `instrumentos`
+-- Table structure for table `instrumentos`
 --
 
+DROP TABLE IF EXISTS `instrumentos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `instrumentos` (
-  `id_instrumento` int(10) UNSIGNED NOT NULL,
+  `id_instrumento` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `activo` text NOT NULL,
   `modelo` text NOT NULL,
   `numero_serie` text NOT NULL,
@@ -232,17 +238,20 @@ CREATE TABLE `instrumentos` (
   `fecha_hora_registro` text NOT NULL,
   `estado` text NOT NULL,
   `modifica_data` text DEFAULT NULL,
-  `fecha_hora_modificacion` text DEFAULT NULL
+  `fecha_hora_modificacion` text DEFAULT NULL,
+  PRIMARY KEY (`id_instrumento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `particulas`
+-- Table structure for table `particulas`
 --
 
+DROP TABLE IF EXISTS `particulas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `particulas` (
-  `id_particula` int(10) UNSIGNED NOT NULL,
+  `id_particula` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tamano_real_03` text NOT NULL,
   `desviacion_tamano_03` text NOT NULL,
   `no_lote_03` text NOT NULL,
@@ -279,78 +288,22 @@ CREATE TABLE `particulas` (
   `fecha_hora_registro` text NOT NULL,
   `estado` text NOT NULL,
   `modifica_data` text DEFAULT NULL,
-  `fecha_hora_modificacion` text DEFAULT NULL
+  `fecha_hora_modificacion` text DEFAULT NULL,
+  PRIMARY KEY (`id_particula`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Índices para tablas volcadas
+-- Dumping routines for database 'veco_servicios'
 --
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Indices de la tabla `contadores`
---
-ALTER TABLE `contadores`
-  ADD PRIMARY KEY (`id_contador`);
-
---
--- Indices de la tabla `fdv_s_032`
---
-ALTER TABLE `fdv_s_032`
-  ADD PRIMARY KEY (`id_folio`);
-
---
--- Indices de la tabla `formatos`
---
-ALTER TABLE `formatos`
-  ADD PRIMARY KEY (`id_movimiento`);
-
---
--- Indices de la tabla `instrumentos`
---
-ALTER TABLE `instrumentos`
-  ADD PRIMARY KEY (`id_instrumento`);
-
---
--- Indices de la tabla `particulas`
---
-ALTER TABLE `particulas`
-  ADD PRIMARY KEY (`id_particula`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `contadores`
---
-ALTER TABLE `contadores`
-  MODIFY `id_contador` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `fdv_s_032`
---
-ALTER TABLE `fdv_s_032`
-  MODIFY `id_folio` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `formatos`
---
-ALTER TABLE `formatos`
-  MODIFY `id_movimiento` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `instrumentos`
---
-ALTER TABLE `instrumentos`
-  MODIFY `id_instrumento` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `particulas`
---
-ALTER TABLE `particulas`
-  MODIFY `id_particula` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-05-30 16:51:48
