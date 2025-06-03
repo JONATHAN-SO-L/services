@@ -1,81 +1,170 @@
 <?php
 session_start();
-include '../../../assets/layout2.php';
 
-if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
-section(); ?>
+if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'admin') {
+    include '../../../assets/layout2.php';
+    section();
 
-<table>
-    <tr>
-        <a href="modificar.php"><button type="submit" value="Volver" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
-    </tr>
-</table>
+    $id_documento = $_SERVER['QUERY_STRING'];
 
-<div class="container" style="width: 1030px;">
-    <div class="row" style="width: 770px;">
-        <div class="col-sm-12">
-            <div class="page-header2">
-                <h1 class="animated lightSpeedIn">Certificado: #</h1>
-                <span class="label label-warning"></span> 		 
-                <p class="pull-right text-primary"></p>
+    function mensaje_ayuda(){
+        echo '
+            <div class="alert alert-success alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="text-center"><strong>CONTADOR ENCONTRADO</strong></h4>
+            <p class="text-center">
+            Se encontró un modelo de contador de partículas que coincide, por favor, selecciona el número de serie adecuado.
+            </p>
             </div>
-        </div>
-    </div>
-</div>
+            ';
+    }
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-8">
-            <div class="panel panel-warning">
-                <div class="panel-heading text-center"><strong>Selecciona el nuevo contador a utilizar</strong></div>
-                    <div class="panel-body">
-                        <form role="form" action="mod_val_accountant.php" method="POST" enctype="multipart/form-data">
-                            <div>
-                                <label><i class="fa fa-tachometer"></i>&nbsp;Modelo del Contador de Partículas:</label>
-                                <select class="form-control" name="contador" required>
-                                <option value=""> - Selecciona el modelo requerido - </option>
-                                <option value="Valor por defecto">Valor por defecto</option>
-                                </select>
-                                <br>
+    function mensaje_error() {
+        echo '
+            <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="text-center"><strong>OCURRIÓ UN ERROR</strong></h4>
+            <p class="text-center">
+            <u>No se logró recibir información</u> de los <strong>Contadorres de Partículas</strong> en sistema, por favor, inténtalo de nuevo o contácta al Soporte Técnico.
+            </p>
+            </div>
+            ';
+    }
+?>
+        <table>
+        <tr>
+        <a href="<?php echo 'modificar.php?'.$id_documento; ?>"><button type="submit" value="Volver" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
+        </tr>
+        </td>
+        </table>
 
-                                <center><input class="btn btn-sm btn-danger" type="submit" value="Siguiente" name="guardar_contador"></center>
-                            </div>
-                        </form>
+        <div class="container" style="width: 1030px;">
+            <div class="row" style="width: 770px;">
+                <div class="col-sm-12">
+                    <div class="page-header2">
+                        <h1>Certificado: <strong><u><?php echo $id_documento; ?></u></strong></h1>
+                        <span class="label label-danger"></span> 		 
+                        <p class="pull-right text-primary"></p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<!-- Vista al guardar el modelo -->
+        <?php
+        // Validación de información registrada
+        require '../../../../functions/conex_serv.php';
 
-<div class="container">
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="panel panel-warning">
-                        <div class="panel-heading text-center"><strong>Selecciona correctamente el número de serie del contador</strong></div>
-                            <div class="panel-body">
-                                <form role="form" action="mod_val_accountant.php" method="POST" enctype="multipart/form-data">
-                                    <div>
-                                        <label><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;Número de serie del Contador de Partículas:</label>
-                                        <select class="form-control" name="contador" required>
-                                            <option value=""> - Selecciona el número de serie requerido - </option>
-                                            <option value="Valor por defecto">132194</option>
-                                        </select>
-                                        <br>
+        $accountant = 'contadores'; // Tabla de contadores
+        $certified = 'fdv_s_032'; // Tabla de certificados
 
-                                        <center><input class="btn btn-sm btn-danger" type="submit" value="Siguiente" name="guardar_contador"></center>
+        $s_accountant = $con->prepare("SELECT modelo_ci, numero_serie, estado FROM $accountant WHERE estado = 'Calibrado'");
+        $s_accountant->setFetchMode(PDO::FETCH_OBJ);
+        $s_accountant->execute();
+        $f_accountant = $s_accountant->fetchAll();
+
+        if ($s_accountant -> rowCount() > 0) {
+            foreach ($f_accountant as $contador) {
+                $modelo_ci = $contador -> modelo_ci;
+                $numero_serie = $contador -> numero_serie;
+            }
+
+            if (isset($_POST['modificar_contador'])) {
+                $modelo_ci = $_POST['contador'];
+
+                // Se almacena el modelo del contador en la DDBB
+                $save_model = $con->prepare("UPDATE $certified
+                                                    SET modelo_contador= ?,
+                                                    modelo_ci = ?
+                                                    WHERE id_documento = ?");
+                $val_save_model = $save_model->execute([$modelo_ci, $modelo_ci, $id_documento]);
+
+                if ($val_save_model) {
+                    mensaje_ayuda();
+                } else {
+                    mensaje_error();
+                }
+
+                if ($numero_serie != '') { ?>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading text-center"><strong>Selecciona el nuevo contador a utilizar</strong></div>
+                                        <div class="panel-body">
+                                        <?php echo '<form role="form" action="mod_val_accountant.php?'.$id_documento.'" method="POST" enctype="multipart/form-data">'; ?>
+                                            <div>
+                                                <label><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;Número de serie del Contador de Partículas:</label>
+                                                <select class="form-control" name="serie_contador" required>
+                                                <option value=""> - Selecciona el número de serie requerido - </option>
+                                                <?php
+                                                    $s_serie = $con->prepare("SELECT modelo_ci, numero_serie, estado FROM $accountant WHERE estado = 'Calibrado' AND modelo_ci = :modelo_ci");
+                                                    $s_serie->bindValue(':modelo_ci', $modelo_ci);
+                                                    $s_serie->setFetchMode(PDO::FETCH_OBJ);
+                                                    $s_serie->execute();
+                                                    $f_serie = $s_serie->fetchAll();
+
+                                                    foreach ($f_serie as $serie) {
+                                                        $numero_serie = $serie -> numero_serie;
+                                                        echo '<option value="'.$numero_serie.'">'.$numero_serie.'</option>';
+                                                    }
+                                                ?>
+                                                </select>
+                                                <br>
+
+                                                <center><input class="btn btn-sm btn-danger" type="submit" value="Siguiente" name="modificar_serie"></center>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
+                                </div>
                             </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                <?php } else {
+                    echo '<h2><center>No se encontraron registros en el sistema</center></h2>';
+                    mensaje_error();
+                }
+            } else {
+                if ($modelo_ci != '') { ?>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading text-center"><strong>Selecciona el nuevo contador a utilizars</strong></div>
+                                        <div class="panel-body">
+                                        <form role="form" action="" method="POST" enctype="multipart/form-data">
+                                            <div>
+                                                <label><i class="fa fa-tachometer"></i>&nbsp;Modelo del Contador de Partículas:</label>
+                                                <select class="form-control" name="contador" required>
+                                                <option value=""> - Selecciona el modelo requerido - </option>
+                                                <?php
+                                                    foreach ($f_accountant as $modelo) {
+                                                        $modelo_ci = $modelo -> modelo_ci;
+                                                        echo '<option value="'.$modelo_ci.'">'.$modelo_ci.'</option>';
+                                                    }
+                                                ?>
+                                                </select>
+                                                <br>
 
-<?php end_section();
-}else{
-    header('Location: ../../../../../index.php');
+                                                <center><input class="btn btn-sm btn-danger" type="submit" value="Siguiente" name="modificar_contador"></center>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } else {
+                    echo '<h2><center>No se encontraron registros en el sistema</center></h2>';
+                    mensaje_error();
+                }
+            }
+        } else {
+            echo '<h2><center>No se encontraron registros en el sistema</center></h2>';
+            mensaje_error();
+        }
+
+end_section();
+} else {
+    header('Location: ../../../../index.php');
 }
 ?>
