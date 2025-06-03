@@ -70,6 +70,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
             }
 
             if (isset($_POST['guardar_contador'])) {
+                $modelo_ci = $_POST['contador'];
                 // Se almacena el modelo del contador en la DDBB
                 $save_model = $con->prepare("UPDATE $certified
                                                     SET modelo_contador= ?,
