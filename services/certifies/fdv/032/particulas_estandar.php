@@ -4,6 +4,8 @@ session_start();
 if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
     include '../../assets/layout.php';
     section();
+
+    $id_documento = $_SERVER['QUERY_STRING'];
 ?>
 
         <table>
@@ -18,7 +20,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             <div class="row" style="width: 770px;">
                 <div class="col-sm-12">
                     <div class="page-header2">
-                        <h1 class="animated lightSpeedIn">Certificado: # | Partículas Estándar</h1>
+                        <h1 class="animated lightSpeedIn">Certificado: <strong><u><?php echo $id_documento; ?></u></strong> | Partículas Estándar</h1>
                         <span class="label label-danger"></span> 		 
                         <p class="pull-right text-primary"></p>
                     </div>
