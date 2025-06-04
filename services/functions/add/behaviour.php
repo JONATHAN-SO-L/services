@@ -5,18 +5,6 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     
     $id_documento = $_SERVER['QUERY_STRING'];
 
-    function mensaje_error() {
-        echo '
-            <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <h4 class="text-center"><strong>OCURRIÓ UN ERROR</strong></h4>
-            <p class="text-center">
-            <u>No se logró recibir información del registro, por favor, inténtalo de nuevo o contácta al Soporte Técnico.
-            </p>
-            </div>
-            ';
-    }
-
     if (isset($_POST['guardar_comportamiento'])) {
         require '../conex_serv.php';
         $certified = 'fdv_S_032';
@@ -33,7 +21,8 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                 $fa_esperado = $flujo_aire -> fa_esperado;
             }
         } else {
-            mensaje_error();
+            echo '<script>alert("Ocurrión un error al iuntentar recuperar la información de las mediciones electrónicas, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
+            echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/mediciones_electronicas.php?'.$id_documento.'">';
         }
 
         switch ($fa_esperado) {
@@ -83,8 +72,27 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                                             $id_documento]);
 
                 if ($val_save_fa_menor) {
-                    echo '<script>alert("Registro exitoso, continúa con el llenado de información")</script>';
-                    echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/instrumentos.php?'.$id_documento.'">';
+                    // Información para auditlog
+                    include '../../assets/timezone.php';
+                    $fecha_hora_carga = date("d/m/Y H:i:s");
+                    $tecnico = $_SESSION['nombre_completo'];
+
+                    // Registro en log
+                    $log = 'auditlog';
+                    $movimiento = utf8_decode('El usuario '.$tecnico.' guardó valores del comportamiento del certificado '.$id_documento.' el '.$fecha_hora_carga.'');
+                    $url = $_SERVER['PHP_SELF'].'?'.$id_documento;
+                    $database = 'SIS';
+                    $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
+                                                            VALUES (?, ?, ?, ?, ?)");
+                    $val_save_move = $save_move->execute([$movimiento, $url, $database, $tecnico, $fecha_hora_carga]);
+
+                    if ($val_save_move) {
+                        echo '<script>alert("Registro exitoso, continúa con el llenado de información")</script>';
+                        echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/instrumentos.php?'.$id_documento.'">';
+                    } else {
+                        echo '<script>alert("Ocurrió un problema al intentar guardar la información, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
+                        echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/contador.php?'.$id_documento.'">';
+                    }
                 } else {
                     echo '<script>alert("Ocurrió un problema al intentar guardar la información, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
                     echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/comportamiento.php?'.$id_documento.'">';
@@ -137,8 +145,27 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                                             $id_documento]);
 
                 if ($val_save_fa_mayor) {
-                    echo '<script>alert("Registro exitoso, continúa con el llenado de información")</script>';
-                    echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/instrumentos.php?'.$id_documento.'">';
+                    // Información para auditlog
+                    include '../../assets/timezone.php';
+                    $fecha_hora_carga = date("d/m/Y H:i:s");
+                    $tecnico = $_SESSION['nombre_completo'];
+
+                    // Registro en log
+                    $log = 'auditlog';
+                    $movimiento = utf8_decode('El usuario '.$tecnico.' guardó valores del comportamiento del certificado '.$id_documento.' el '.$fecha_hora_carga.'');
+                    $url = $_SERVER['PHP_SELF'].'?'.$id_documento;
+                    $database = 'SIS';
+                    $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
+                                                            VALUES (?, ?, ?, ?, ?)");
+                    $val_save_move = $save_move->execute([$movimiento, $url, $database, $tecnico, $fecha_hora_carga]);
+
+                    if ($val_save_move) {
+                        echo '<script>alert("Registro exitoso, continúa con el llenado de información")</script>';
+                        echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/instrumentos.php?'.$id_documento.'">';
+                    } else {
+                        echo '<script>alert("Ocurrió un problema al intentar guardar la información, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
+                        echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/contador.php?'.$id_documento.'">';
+                    }
                 } else {
                     echo '<script>alert("Ocurrió un problema al intentar guardar la información, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
                     echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/comportamiento2.php?'.$id_documento.'">';
