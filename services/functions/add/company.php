@@ -107,8 +107,23 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         $val_save_data = $save_data->execute([$razon_social, $direccion_entrega, $id_documento, $tecnico, $fecha_hora_registro]);
 
         if ($val_save_data) {
-            echo '<script>alert("Registro exitoso, continúa con el llenado de información")</script>';
-            echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/contador.php?'.$id_documento.'">';
+            // Registro en log
+            $log = 'auditlog';
+            $movimiento = utf8_decode('El usuario '.$tecnico.' registró el certificado '.$id_documento.' el '.$fecha_hora_registro.'');
+            $url = $_SERVER['PHP_SELF'].'?'.$id_documento;
+            $database = 'SIS';
+            $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
+                                                  VALUES (?, ?, ?, ?, ?)");
+            $val_save_move = $save_move->execute([$movimiento, $url, $database, $tecnico, $fecha_hora_registro]);
+
+            if ($val_save_move) {
+                echo '<script>alert("Registro exitoso, continúa con el llenado de información")</script>';
+                echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/contador.php?'.$id_documento.'">';
+            } else {
+                echo '<script>alert("Ocurrió un problema al intentar guardar la información, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
+                echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/empresa.php">';
+            }
+
         } else {
             echo '<script>alert("Ocurrió un problema al intentar guardar la información, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
             echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/empresa.php">';
