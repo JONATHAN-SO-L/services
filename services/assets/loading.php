@@ -1,0 +1,1 @@
+<img src="../../assets/img/loading_dvi.gif" alt="Cargando" weight="30%" height="30%">
