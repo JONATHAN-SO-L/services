@@ -14,21 +14,23 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         $numero_serie = $_POST['numero_serie'];
         $control_no = $_POST['control_no'];
 
+        //Información para auditlog
+        $tecnico_mod = $_SESSION['nombre_completo'];
+        include '../../assets/timezone.php';
+        $fecha_hora_carga = date("d/m/Y H:i:s");
+
         $save_accountant = $con->prepare("UPDATE $certified
                                                 SET modelo_contador = ?,
                                                     modelo_ci = ?,
                                                     numero_serie = ?,
-                                                    identificacion_cliente = ?
+                                                    identificacion_cliente = ?,
+                                                    modifica_data = ?,
+                                                    fecha_hora_modificacion = ?
                                                 WHERE id_documento = ?");
 
-        $val_save_accountant = $save_accountant->execute([$modelo_ci, $modelo_ci, $numero_serie, $control_no, $id_documento]);
+        $val_save_accountant = $save_accountant->execute([$modelo_ci, $modelo_ci, $numero_serie, $control_no, $tecnico_mod, $fecha_hora_carga, $id_documento]);
 
         if ($val_save_accountant) {
-            //Información para auditlog
-            $tecnico_mod = $_SESSION['nombre_completo'];
-            include '../../assets/timezone.php';
-            $fecha_hora_carga = date("d/m/Y H:i:s");
-
             // Registro en log
             $log = 'auditlog';
             $movimiento = utf8_decode('El usuario '.$tecnico_mod.' modificó el registro '.$id_documento.' actualizandolo con el contador '.$modelo_ci.' con el número de serie '.$numero_serie.' el '.$fecha_hora_carga.'');
