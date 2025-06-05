@@ -133,7 +133,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     echo '
                       <tbody>
                         <td class="text-center">
-                          <a href="#" class="btn btn-sm btn-primary" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                          <a href="../../../formats/fdv032/FDV-S-032_SGC.php?'.$id_documento.'"" target="_blank" class="btn btn-sm btn-primary" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                           <a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                           <button href="" class="btn btn-sm btn-danger" title="Eliminar" data-toggle="modal" data-target="#Delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </td>
@@ -204,7 +204,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     echo '
                       <tbody>
                         <td class="text-center">
-                          <a href="#" class="btn btn-sm btn-primary" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                          <a href="../../../formats/fdv032/FDV-S-032_SGC.php?'.$id_documento.'"" target="_blank" class="btn btn-sm btn-primary" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                           <a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                           <button href="" class="btn btn-sm btn-danger" title="Eliminar" data-toggle="modal" data-target="#Delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </td>
