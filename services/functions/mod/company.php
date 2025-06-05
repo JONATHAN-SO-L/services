@@ -6,6 +6,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $id_documento = $_SERVER['QUERY_STRING'];
 
     if (isset($_POST['modificar_empresa'])) {
+        include '../../assets/loading.php';
         require '../conex.php';
         $company = 'empresas';
         $build = 'edificio';
