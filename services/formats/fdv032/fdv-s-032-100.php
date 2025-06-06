@@ -5,6 +5,169 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     // Se requiere la librería FPDF para el diseño del formato FDV-S-032
     require '../../../lib/fpdf/fpdf.php';
 
+    $id_documento = $_SERVER['QUERY_STRING'];
+
+    require '../../functions/conex_serv.php';
+    $certified = 'fdv_s_032';
+
+    $recover_data = $con->prepare("SELECT * FROM $certified WHERE id_documento = :id_documento");
+    $recover_data->bindValue(':id_documento', $id_documento);
+    $recover_data->setFetchMode(PDO::FETCH_OBJ);
+    $recover_data->execute();
+
+    $show_data_recover = $recover_data->fetchAll();
+
+    if ($recover_data -> rowCount() > 0) {
+        foreach ($show_data_recover as $certificado) {
+            $empresa = $certificado -> empresa;
+            $direccion = $certificado -> direccion;
+            $modelo_contador = $certificado -> modelo_contador;
+
+            $intervalo_calibracion = $certificado -> intervalo_calibracion;
+            $condicion_recepcion = $certificado -> condicion_recepcion;
+            $condicion_calibracion = $certificado -> condicion_calibracion;
+            $condicion_calibracion_final = $certificado -> condicion_calibracion_final;
+            $comentarios = $certificado -> comentarios;
+
+            $modelo_ci = $certificado -> modelo_ci;
+            $numero_serie = $certificado -> numero_serie;
+            $fecha_calibracion = $certificado -> fecha_calibracion;
+            $identificacion_cliente = $certificado -> identificacion_cliente;
+            
+            $presion_barometrica = $certificado -> presion_barometrica;
+            $temperatura = $certificado -> temperatura;
+            $humedad_relativa = $certificado -> humedad_relativa;
+
+            $vl_esperado = $certificado -> vl_esperado;
+            $vl_tolerancia = $certificado -> vl_tolerancia;
+            $vl_condicion_encontrada = $certificado -> vl_condicion_encontrada;
+            $vl_pasa = $certificado -> vl_pasa;
+            $vl_condicion_final = $certificado -> vl_condicion_final;
+            
+            $fa_esperado = $certificado -> fa_esperado;
+            $fa_tolerancia = $certificado -> fa_tolerancia;
+            $fa_condicion_encontrada = $certificado -> fa_condicion_encontrada;
+            $fa_pasa = $certificado -> fa_pasa;
+            $fa_condicion_final = $certificado -> fa_condicion_final;
+
+            $rm_esperado = $certificado -> rm_esperado;
+            $rm_tolerancia = $certificado -> rm_tolerancia;
+            $rm_condicion_encontrada = $certificado -> rm_condicion_encontrada;
+            $rm_pasa = $certificado -> rm_pasa;
+            $rm_condicion_final = $certificado -> rm_condicion_final;
+
+            $flujo_volumetrico = $certificado -> flujo_volumetrico;
+
+            // Información para certificado iguales o superiores a 100 LPM
+            $amplitud_esperada_05_100 = $certificado -> amplitud_esperada_05_100;
+            $tolerancia_05_100 = $certificado -> tolerancia_05_100;
+            $como_encuentra_05_100 = $certificado -> como_encuentra_05_100;
+            $pasa_05_100 = $certificado -> pasa_05_100;
+            $condicion_final_05_100 = $certificado -> condicion_final_05_100;
+
+            $amplitud_esperada_10_100 = $certificado -> amplitud_esperada_10_100;
+            $tolerancia_10_100 = $certificado -> tolerancia_10_100;
+            $como_encuentra_10_100 = $certificado -> como_encuentra_10_100;
+            $pasa_10_100 = $certificado -> pasa_10_100;
+            $condicion_final_10_100 = $certificado -> condicion_final_10_100;
+
+            $amplitud_esperada_30_100 = $certificado -> amplitud_esperada_30_100;
+            $tolerancia_30_100 = $certificado -> tolerancia_30_100;
+            $como_encuentra_30_100 = $certificado -> como_encuentra_30_100;
+            $pasa_pasa_30_100 = $certificado -> pasa_30_100;
+            $condicion_final_30_100 = $certificado -> condicion_final_30_100;
+
+            $amplitud_esperada_50_100 = $certificado -> amplitud_esperada_50_100;
+            $tolerancia_50_100 = $certificado -> tolerancia_50_100;
+            $como_encuentra_50_100 = $certificado -> como_encuentra_50_100;
+            $pasa_50_100 = $certificado -> pasa_50_100;
+            $condicion_final_50_100 = $certificado -> condicion_final_50_100;
+
+            $fecha_documento = $certificado -> fecha_documento;
+
+            $dmm_activo = $certificado -> dmm_activo;
+            $dmm_modelo = $certificado -> dmm_modelo;
+            $dmm_numero_serie = $certificado -> dmm_numero_serie;
+            $dmm_numero_control = $certificado -> dmm_numero_control;
+            $dmm_fecha_calibracion = $certificado -> dmm_fecha_calibracion;
+            $dmm_proxima_calibracion = $certificado -> dmm_proxima_calibracion;
+
+            $pha_activo = $certificado -> pha_activo;
+            $pha_modelo = $certificado -> pha_modelo;
+            $pha_numero_serie = $certificado -> pha_numero_serie;
+            $pha_numero_control = $certificado -> pha_numero_control;
+            $pha_fecha_calibracion = $certificado -> pha_fecha_calibracion;
+            $pha_proxima_calibracion = $certificado -> pha_proxima_calibracion;
+
+            $mfm_activo = $certificado -> mfm_activo;
+            $mfm_modelo = $certificado -> mfm_modelo;
+            $mfm_numero_serie = $certificado -> mfm_numero_serie;
+            $mfm_numero_control = $certificado -> mfm_numero_control;
+            $mfm_fecha_calibracion = $certificado -> mfm_fecha_calibracion;
+            $mfm_proxima_calibracion = $certificado -> mfm_proxima_calibracion;
+
+            $rh_activo = $certificado -> rh_activo;
+            $rh_modelo = $certificado -> rh_modelo;
+            $rh_numero_serie = $certificado -> rh_numero_serie;
+            $rh_numero_control = $certificado -> rh_numero_control;
+            $rh_fecha_calibracion = $certificado -> rh_fecha_calibracion;
+            $rh_proxima_calibracion = $certificado -> rh_proxima_calibracion;
+            
+            $balometro_activo = $certificado -> balometro_activo;
+            $balometro_modelo = $certificado -> balometro_modelo;
+            $balometro_numero_serie = $certificado -> balometro_numero_serie;
+            $balometro_numero_control = $certificado -> balometro_numero_control;
+            $balometro_fecha_calibracion = $certificado -> balometro_fecha_calibracion;
+            $balometro_proxima_calibracion = $certificado -> balometro_proxima_calibracion;
+
+            $tamano_real_03 = $certificado -> tamano_real_03;
+            $desviacion_tamano_03 = $certificado -> desviacion_tamano_03;
+            $no_lote_03 = $certificado -> no_lote_03;
+            $exp_fecha_03 = $certificado -> exp_fecha_03;
+
+            $tamano_real_04 = $certificado -> tamano_real_04;
+            $desviacion_tamano_04 = $certificado -> desviacion_tamano_04;
+            $no_lote_04 = $certificado -> no_lote_04;
+            $exp_fecha_04 = $certificado -> exp_fecha_04;
+            
+            $tamano_real_05 = $certificado -> tamano_real_05;
+            $desviacion_tamano_05 = $certificado -> desviacion_tamano_05;
+            $no_lote_05 = $certificado -> no_lote_05;
+            $exp_fecha_05 = $certificado -> exp_fecha_05;
+
+            $tamano_real_06 = $certificado -> tamano_real_06;
+            $desviacion_tamano_06 = $certificado -> desviacion_tamano_06;
+            $no_lote_06 = $certificado -> no_lote_06;
+            $exp_fecha_06 = $certificado -> exp_fecha_06;
+
+            $tamano_real_08 = $certificado -> tamano_real_08;
+            $desviacion_tamano_08 = $certificado -> desviacion_tamano_08;
+            $no_lote_08 = $certificado -> no_lote_08;
+            $exp_fecha_08 = $certificado -> exp_fecha_08;
+
+            $tamano_real_10 = $certificado -> tamano_real_10;
+            $desviacion_tamano_10 = $certificado -> desviacion_tamano_10;
+            $no_lote_10 = $certificado -> no_lote_10;
+            $exp_fecha_10 = $certificado -> exp_fecha_10;
+
+            $tamano_real_30 = $certificado -> tamano_real_30;
+            $desviacion_tamano_30 = $certificado -> desviacion_tamano_30;
+            $no_lote_30 = $certificado -> no_lote_30;
+            $exp_fecha_30 = $certificado -> exp_fecha_30;
+
+            $tamano_real_50 = $certificado -> tamano_real_50;
+            $desviacion_tamano_50 = $certificado -> desviacion_tamano_50;
+            $no_lote_50 = $certificado -> no_lote_50;
+            $exp_fecha_50 = $certificado -> exp_fecha_50;
+
+            $tecnico = $certificado -> tecnico;
+        }
+
+    } else {
+        echo '<script>alert("Ocurrión un error al intentar recuperar la información, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
+        echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/index.php">';
+    }
+
     // Clase herdada para la definición de funciones que se replicarán en todas las hojas
     class PDF extends FPDF {
         function Footer() {
