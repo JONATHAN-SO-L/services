@@ -40,7 +40,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
       <i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp;&nbsp;Plantillas SGC <span class="caret"></span></button>
       <ul class="dropdown-menu" role="menu">
         <li><a href="../../../formats/fdv032/FDV-S-032_SGC.php" target="_blank">FDV-S-032 (Menor a 100 LPM)</a></li>
-        <li><a href="../../../formats/fdv032/FDV-S-032_SGC.php" target="_blank">FDV-S-032 (100 LPM)</a></li>
+        <li><a href="../../../formats/fdv032/FDV-S-032_SGC-100.php" target="_blank">FDV-S-032 (100 LPM)</a></li>
       </ul>
     </div>
 
