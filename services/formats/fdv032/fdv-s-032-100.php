@@ -74,7 +74,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             $amplitud_esperada_30_100 = $certificado -> amplitud_esperada_30_100;
             $tolerancia_30_100 = $certificado -> tolerancia_30_100;
             $como_encuentra_30_100 = $certificado -> como_encuentra_30_100;
-            $pasa_pasa_30_100 = $certificado -> pasa_30_100;
+            $pasa_30_100 = $certificado -> pasa_30_100;
             $condicion_final_30_100 = $certificado -> condicion_final_30_100;
 
             $amplitud_esperada_50_100 = $certificado -> amplitud_esperada_50_100;
@@ -245,6 +245,13 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     //          X Y   l  Y   l: largo
     $pdf->Line(48,61,85,61); // Coordenadas (Inicio largo de línea, inclinación inicial de línea, fin largo de línea, inclinación final de línea)
 
+    $pdf->SetFont("Arial","",10);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(55,56.5);
+    $pdf->Cell (5,5,utf8_decode($id_documento),0,1,'C');
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetTextColor(0,88,147);
+
     // Figura para el sello
     $pdf->SetDrawColor(0,88,147);
     //          X  Y l A   l: largo, A: Ancho
@@ -254,11 +261,26 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetFont("Arial","b",10);
     $pdf->Cell(50,5,'PREPARADO POR:',0,0,'L');
 
+    $pdf->SetFont("Arial","",10);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(160,57);
+    $pdf->Cell (5,5,utf8_decode($tecnico),0,1,'C');
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetTextColor(0,88,147);
+
     // Información de la empresa
     $pdf->SetXY(100,65);
     $pdf->Cell(50,5,utf8_decode('COMPAÑÍA:'),0,0,'L');
     $pdf->Line(208,70,125,70);
     $pdf->Line(208,76,125,76);
+
+    $pdf->SetFont("Arial","",10);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(124,65);
+    $empresa = ucwords($empresa);
+    $pdf->MultiCell(80,5,utf8_decode($empresa),0,'L',false);
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetTextColor(0,88,147);
 
     // Dirección de la empresa
     $pdf->SetXY(100,80);
@@ -266,9 +288,24 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->Line(208,85,125,85);
     $pdf->Line(208,91,125,91);
 
+    $pdf->SetFont("Arial","",10);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(125,80.5);
+    $pdf->MultiCell(80,5,utf8_decode($direccion),0,'L',false);
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetTextColor(0,88,147);
+
     $pdf->SetXY(100,95);
     $pdf->SetFont("Arial","",9);
     $pdf->Cell(50,5,utf8_decode('Intervalo máximo de calibración recomendado: __________ meses.'),0,0,'L');
+
+    $pdf->SetFont("Arial","",10);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(174,94.5);
+    $pdf->Cell (5,5,utf8_decode($intervalo_calibracion),0,1,'C');
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetTextColor(0,88,147);
+
     $pdf->SetXY(100,100);
     $pdf->SetFont("Arial","",7);
     $pdf->Cell(50,5,utf8_decode('(A partir de la fecha de calibración comienza el plazo para la fecha del intervalo recomendado).'),0,0,'L');
@@ -288,7 +325,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
     $pdf->SetFont("Arial","",9);
     $pdf->SetXY(16,128.5);
-    $pdf->Cell(30,5,utf8_decode('Bueno'),0,0,'L');
+    $pdf->Cell(30,5,utf8_decode($condicion_recepcion),0,0,'L');
 
     // Centro
     $pdf->SetFont("Arial","b",10);
@@ -301,7 +338,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
     $pdf->SetFont("Arial","",9);
     $pdf->SetXY(95,128.5);
-    $pdf->Cell(30,5,utf8_decode('En tolerancia'),0,0,'L');
+    $pdf->Cell(30,5,utf8_decode($condicion_calibracion),0,0,'L');
 
     //Derecha
     $pdf->SetFont("Arial","b",10);
@@ -314,7 +351,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
     $pdf->SetFont("Arial","",9);
     $pdf->SetXY(166,128.5);
-    $pdf->MultiCell(30,5,utf8_decode('Dentro de las especificaciones'),0,'L',false);
+    $pdf->MultiCell(30,5,utf8_decode($condicion_calibracion_final),0,'L',false);
 
 
     /************************
@@ -328,6 +365,15 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->Line(205,150,35,150);
     $pdf->Line(205,155,10,155);
     $pdf->Line(205,160,10,160);
+
+    $pdf->SetFont("Arial","",10);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(35,145);
+    $comentarios = ucfirst($comentarios);
+    $comentarios = substr($comentarios, 0, 300);
+    $pdf->MultiCell(170,5,utf8_decode($comentarios),0,'L',false);
+    $pdf->SetFont("Arial","b",10);
+    $pdf->SetTextColor(0,88,147);   
 
 
     /*********************
@@ -346,6 +392,12 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->Line(23,235,80,235);
     $pdf->SetXY(44,236);
     $pdf->Cell(15,5,utf8_decode('Nombre del Técnico Certificado'),0,0,'C');
+
+    $pdf->SetFont("Arial","",10);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(50,230);
+    $pdf->Cell (5,5,utf8_decode($tecnico),0,1,'C');
+    $pdf->SetTextColor(0,88,147);
 
     // Firma Cliente
     $pdf->Line(190,235,130,235);
@@ -383,24 +435,87 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetFont("Arial","",8);
     $pdf->SetXY(30,55);
     $pdf->Cell(15,10,utf8_decode('Modelo CI- _________________'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(40,55);
+    $pdf->Cell (5,5,utf8_decode($modelo_contador),0,0,'C');
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetTextColor(0,88,147);
+
     $pdf->SetX(95);
     $pdf->Cell(15,10,utf8_decode('Contador de partículas, Núm. Serie: ______________________'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(115,55);
+    $pdf->Cell (5,5,utf8_decode($numero_serie),0,0,'C');
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetTextColor(0,88,147);   
+
     $pdf->SetX(165);
     $pdf->Cell(15,10,utf8_decode('Fecha de calibración: __________________'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(180,55);
+    $pdf->Cell (5,5,utf8_decode($fecha_calibracion),0,0,'C');
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetTextColor(0,88,147);
+
     $pdf->SetXY(60,65);
     $pdf->Cell(15,10,utf8_decode('Identificación de Cliente: ____________________________________________'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(60,65);
+    $pdf->Cell (5,5,utf8_decode($identificacion_cliente),0,0,'C');
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetTextColor(0,88,147);
+
     $pdf->SetX(155);
     $pdf->Cell(15,10,utf8_decode('Técnico:__________________________________________'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(165,65);
+    $pdf->Cell (5,5,utf8_decode($tecnico),0,0,'C');
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetTextColor(0,88,147);
+
     $pdf->SetLineWidth(0.5);
     $pdf->Rect(10,35,195,40); // Rectángulo de 19.5 cm x 4.0 cm
 
     $pdf->SetFont("Arial","",9);
     $pdf->SetXY(40,75);
     $pdf->Cell(15,10,utf8_decode('Presión Barométrica: ________________'),0,0,'C');
+
+    $pdf->SetFont("Arial","",10);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(55,75);
+    $pdf->Cell (5,5,utf8_decode($presion_barometrica.' KPa'),0,0,'C');
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(0,88,147);
+
     $pdf->SetX(100);
     $pdf->Cell(15,10,utf8_decode('Temperatura: ________________'),0,0,'C');
+
+    $pdf->SetFont("Arial","",10);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(115,75);
+    $pdf->Cell (5,5,utf8_decode($temperatura.' °C'),0,0,'C');
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(0,88,147);
+
     $pdf->SetX(160);
     $pdf->Cell(15,10,utf8_decode('Humedad Relativa: _________________'),0,0,'C');
+
+    $pdf->SetFont("Arial","",10);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(175,75);
+    $pdf->Cell (5,5,utf8_decode($humedad_relativa.' % HR'),0,0,'C');
+    $pdf->SetTextColor(0,88,147);
+
     $pdf->SetFont("Arial","",10);
     $pdf->SetXY(17,85);
     $pdf->MultiCell(160,5,utf8_decode('Controles ambientales: La temperatura ambiental durante la calibración debe de encontrarse entre 18° - 26.7°C, la humedad relativa no afecta el proceso de calibración.'),0,'J',false);
@@ -429,36 +544,49 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetTextColor(0,88,147);
     $pdf->SetXY(10,110);
     $pdf->Cell(35,5,utf8_decode('VOLTAJE DE LÁSER'),1,0,'L');
-    $pdf->Cell(20,5,utf8_decode('Vdc±'),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(20,5,utf8_decode($vl_esperado.' Vdc±'),1,0,'C');
     $pdf->Cell(30,5,utf8_decode('(Valor de referencia)'),1,0,'C');
-    $pdf->Cell(45,5,utf8_decode('Vdc'),1,0,'C');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(45,5,utf8_decode('Vdc'),1,0,'C');
+    $pdf->Cell(45,5,utf8_decode($vl_condicion_encontrada.' Vdc'),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode($vl_pasa),1,0,'C');
+    $pdf->Cell(45,5,utf8_decode($vl_condicion_final.' Vdc'),1,0,'C');
 
     // FLUJO DE AIRE
     $pdf->SetXY(10,115);
+    $pdf->SetTextColor(0,88,147);
     $pdf->Cell(35,5,utf8_decode('FLUJO DE AIRE'),1,0,'L');
-    $pdf->Cell(20,5,utf8_decode('LPM'),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(20,5,utf8_decode($fa_esperado.' LPM'),1,0,'C');
     $pdf->Cell(30,5,utf8_decode('± 1.4 LPM'),1,0,'R');
-    $pdf->Cell(45,5,utf8_decode('LPM*'),1,0,'C');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(45,5,utf8_decode('LPM*'),1,0,'C');
+    $pdf->Cell(45,5,utf8_decode($fa_condicion_encontrada.' LPM*'),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode($fa_pasa),1,0,'C');
+    $pdf->Cell(45,5,utf8_decode($fa_condicion_final.' LPM*'),1,0,'C');
 
     // RUIDO MÁXIMO
     $pdf->SetXY(10,120);
+    $pdf->SetTextColor(0,88,147);
     $pdf->Cell(35,5,utf8_decode('RUIDO MÁXIMO'),1,0,'L');
+    $pdf->SetTextColor(0,0,0);
     $pdf->Cell(20,5,utf8_decode('< 200 mV'),1,0,'C');
     $pdf->Cell(30,5,utf8_decode('(Valor de referencia)'),1,0,'C');
-    $pdf->Cell(45,5,utf8_decode('mV'),1,0,'C');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(45,5,utf8_decode('mV'),1,0,'C');
+    $pdf->Cell(45,5,utf8_decode($rm_condicion_encontrada.' mV'),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode($rm_pasa),1,0,'C');
+    $pdf->Cell(45,5,utf8_decode($rm_condicion_final.' mV'),1,0,'C');
 
     // Información restante
     $pdf->SetFont("Arial","",7);
+    $pdf->SetTextColor(0,88,147);
     $pdf->SetXY(10,125);
     $pdf->MultiCell(70,5,utf8_decode('± Valor inicial; el voltaje aumenta a medida que el diodo láser se desgasta.'),0,'L',false);
     $pdf->SetXY(123,125);
     $pdf->Cell(45,5,utf8_decode('* Las lecturas del medidor de flujo volumétrico y reflejan una compensación correctiva de: __________ LPM'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(189,125);
+    $pdf->Cell (5,5,utf8_decode($flujo_volumetrico),0,0,'C');
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetTextColor(0,88,147);
 
     /**********************
     TABLA DE COMPORTAMIENTO
@@ -482,13 +610,15 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetTextColor(0,88,147);
     $pdf->SetXY(10,145);
     $pdf->Cell(75,5,utf8_decode('AMPLITUD ESPERADA (desde la última calibración)'),1,0,'L');
-    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode('V'),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(30,5,utf8_decode($amplitud_esperada_05_100.' mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($amplitud_esperada_10_100.' mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($amplitud_esperada_30_100.' V'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($amplitud_esperada_50_100.' mV'),1,0,'C');
 
     // TOLERANCIA
     $pdf->SetXY(10,150);
+    $pdf->SetTextColor(0,88,147);
     $pdf->Cell(75,5,utf8_decode('TOLERANCIA'),1,0,'L');
     $pdf->Cell(30,5,utf8_decode('± 60 mV'),1,0,'R');
     $pdf->Cell(30,5,utf8_decode('± 30 mV'),1,0,'R');
@@ -498,32 +628,38 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     // COMO SE ENCUENTRA
     $pdf->SetXY(10,155);
     $pdf->Cell(75,5,utf8_decode('COMO SE ENCUENTRA'),1,0,'L');
-    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode('V'),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(30,5,utf8_decode($como_encuentra_05_100.' mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($como_encuentra_10_100.' mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($como_encuentra_30_100.' V'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($como_encuentra_50_100.' mV'),1,0,'C');
 
     // PASA (S/N)
     $pdf->SetXY(10,160);
+    $pdf->SetTextColor(0,88,147);
     $pdf->Cell(75,5,utf8_decode('PASA (S/N)'),1,0,'L');
-    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(30,5,utf8_decode($pasa_05_100),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($pasa_10_100),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($pasa_30_100),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($pasa_50_100),1,0,'C');
 
     // CONDICIÓN FINAL
     $pdf->SetXY(10,165);
+    $pdf->SetTextColor(0,88,147);
     $pdf->Cell(75,5,utf8_decode('CONDICIÓN FINAL'),1,0,'L');
-    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode('V'),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode('mV'),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(30,5,utf8_decode($condicion_final_05_100.' mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($condicion_final_10_100.' mV'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($condicion_final_30_100.' V'),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($condicion_final_50_100.' mV'),1,0,'C');
 
     /*********************
     Información Página Dos
     *********************/
     // INCERTIDUMBRE COLECTIVA DE LA MEDICIÓN
     $pdf->SetFont("Arial","b",9);
+    $pdf->SetTextColor(0,88,147);
     $pdf->SetXY(45,170);
     $pdf->Cell(15,5,utf8_decode('INCERTIDUMBRE COLECTIVA DE LA MEDICIÓN:'),0,0,'C');
     $pdf->SetFont("Arial","",9);
@@ -594,6 +730,13 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetXY(95,50);
     $pdf->Cell(15,10,utf8_decode('Fecha del documento: _______________________________________________'),0,0,'C');
 
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(110,52);
+    $pdf->Cell (5,5,utf8_decode($fecha_documento),0,0,'C');
+    $pdf->SetTextColor(0,88,147);
+
+
     // DECLARACIÓN DE TRAZABILIDAD | LADO IZQUIERDO
     $pdf->SetXY(50,58);
     $pdf->SetFont("Arial","b",9);
@@ -647,57 +790,67 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetTextColor(0,88,147);
     $pdf->SetXY(13,185);
     $pdf->Cell(40,5,utf8_decode('DMM'),1,0,'L');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(35,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(20,5,utf8_decode($dmm_activo),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode($dmm_modelo),1,0,'C');
+    $pdf->Cell(35,5,utf8_decode($dmm_numero_serie),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($dmm_numero_control),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode($dmm_fecha_calibracion),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode($dmm_proxima_calibracion),1,0,'C');
 
     // PHA
     $pdf->SetXY(13,190);
+    $pdf->SetTextColor(0,88,147);
     $pdf->Cell(40,5,utf8_decode('PHA'),1,0,'L');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(35,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(20,5,utf8_decode($pha_activo),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode($pha_modelo),1,0,'C');
+    $pdf->Cell(35,5,utf8_decode($pha_numero_serie),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($pha_numero_control),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode($pha_fecha_calibracion),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode($pha_proxima_calibracion),1,0,'C');
 
     // Medidor de flujo de masa
     $pdf->SetXY(13,195);
+     $pdf->SetTextColor(0,88,147);
     $pdf->Cell(40,5,utf8_decode('Medidor de flujo de masa'),1,0,'L');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(35,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(20,5,utf8_decode($mfm_activo),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode($mfm_modelo),1,0,'C');
+    $pdf->Cell(35,5,utf8_decode($mfm_numero_serie),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($mfm_numero_control),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode($mfm_fecha_calibracion),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode($mfm_proxima_calibracion),1,0,'C');
 
     // RH/TEMP SENSOR
     $pdf->SetXY(13,200);
+     $pdf->SetTextColor(0,88,147);
     $pdf->Cell(40,5,utf8_decode('RH/TEMP SENSOR'),1,0,'L');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(35,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(20,5,utf8_decode($rh_activo),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode($rh_modelo),1,0,'C');
+    $pdf->Cell(35,5,utf8_decode($rh_numero_serie),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($rh_numero_control),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode($rh_fecha_calibracion),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode($rh_proxima_calibracion),1,0,'C');
 
     // Balómetro
     $pdf->SetXY(13,205);
+     $pdf->SetTextColor(0,88,147);
     $pdf->Cell(40,5,utf8_decode('Balómetro'),1,0,'L');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(20,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(35,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(30,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(20,5,utf8_decode($balometro_activo),1,0,'C');
+    $pdf->Cell(20,5,utf8_decode($balometro_modelo),1,0,'C');
+    $pdf->Cell(35,5,utf8_decode($balometro_numero_serie),1,0,'C');
+    $pdf->Cell(30,5,utf8_decode($balometro_numero_control),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode($balometro_fecha_calibracion),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode($balometro_proxima_calibracion),1,0,'C');
 
     /***************************
     TABLA DE PARTÍCULAS ESTÁNDAR
     ***************************/
     $pdf->SetXY(10,208);
+    $pdf->SetTextColor(0,88,147);
     $pdf->SetFont("Arial","b",11);
     $pdf->Cell(0,10,utf8_decode('PARTÍCULAS ESTÁNDAR'),0,0,'C');
 
