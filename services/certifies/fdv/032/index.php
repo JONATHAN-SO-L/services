@@ -32,6 +32,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 ?>
 
     <table>
+      <a href="../../../index.php"><button type="submit" value="Volver" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
     <a href="empresa.php"><button type="submit" value="Nuevo Certificado" name="" class="btn btn-success" style="text-align:center"><i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Certificado</button></a>
 
     <div class="btn-group">
@@ -127,14 +128,25 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     $modelo_contador = $registro -> modelo_contador;
                     $numero_serie = $registro -> numero_serie;
                     $fecha_calibracion = $registro -> fecha_calibracion;
+                    $fa_esperado = $registro -> fa_esperado;
                     $tecnico_certificado = $registro -> tecnico;
                     $fecha_hora_cierre = $registro -> fecha_hora_cierre;
 
                     echo '
                       <tbody>
-                        <td class="text-center">
-                          <a href="../../../formats/fdv032/FDV-S-032_SGC.php?'.$id_documento.'"" target="_blank" class="btn btn-sm btn-primary" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-                          <a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                        <td class="text-center">';
+
+                        switch ($fa_esperado) {
+                          case $fa_esperado < 100:
+                            echo '<a href="../../../formats/fdv032/fdv-s-032.php?'.$id_documento.'"" target="_blank" class="btn btn-sm btn-primary" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+                          break;
+
+                          case $fa_esperado >= 100:
+                            echo '<a href="../../../formats/fdv032/fdv-s-032-100.php?'.$id_documento.'"" target="_blank" class="btn btn-sm btn-primary" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+                          break;
+                        }
+                          
+                    echo'<a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                           <button href="" class="btn btn-sm btn-danger" title="Eliminar" data-toggle="modal" data-target="#Delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </td>
                         <td class="text-center">'.$id_documento.'</td>
@@ -198,14 +210,29 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     $modelo_contador = $registro -> modelo_contador;
                     $numero_serie = $registro -> numero_serie;
                     $fecha_calibracion = $registro -> fecha_calibracion;
+                    $fa_esperado = $registro -> fa_esperado;
                     $tecnico_certificado = $registro -> tecnico;
                     $fecha_hora_cierre = $registro -> fecha_hora_cierre;
 
                     echo '
                       <tbody>
-                        <td class="text-center">
-                          <a href="../../../formats/fdv032/FDV-S-032_SGC.php?'.$id_documento.'"" target="_blank" class="btn btn-sm btn-primary" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-                          <a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+                        <td class="text-center">';
+
+                        switch ($fa_esperado) {
+                          case $fa_esperado < 100:
+                            echo '<a href="../../../formats/fdv032/fdv-s-032.php?'.$id_documento.'"" target="_blank" class="btn btn-sm btn-primary" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+                          break;
+
+                          case $fa_esperado >= 100:
+                            echo '<a href="../../../formats/fdv032/fdv-s-032-100.php?'.$id_documento.'"" target="_blank" class="btn btn-sm btn-primary" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+                          break;
+
+                          case $fa_esperado == NULL:
+                           echo '<a href="#"" target="_blank" class="btn btn-sm btn-primary disabled" title="Ver PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
+                          break;
+                        }
+
+                    echo'      <a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                           <button href="" class="btn btn-sm btn-danger" title="Eliminar" data-toggle="modal" data-target="#Delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </td>
                         <td class="text-center">'.$id_documento.'</td>
