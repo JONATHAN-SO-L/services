@@ -28,6 +28,14 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="dev
 <section id="content">	 
   <header id="content-header">
 
+		<div class="col-sm-2">
+			<table>
+				<tr>
+					<a href="../seccion.php"><button type="submit" value="Volver" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
+				</tr>
+			</table>
+		</div>
+
 		<div class="container" style="width:1180px;">
           <div class="row">
             <div class="col-sm-12">
@@ -41,7 +49,9 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="dev
           </div>
         </div>
 
+
 <section class="content">
+
 <table>
 	<a class="button" href="./certifies/fdv/032/index.php" style="width: 234px;margin-left: 40px;">
 	<center>FDV-S-032</center>
