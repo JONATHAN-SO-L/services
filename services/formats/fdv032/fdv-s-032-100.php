@@ -4,6 +4,7 @@ session_start();
 if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
     // Se requiere la librería FPDF para el diseño del formato FDV-S-032
     require '../../../lib/fpdf/fpdf.php';
+    require '../../certifies/assets/lib/phpqrcode/qrlib.php';
 
     $id_documento = $_SERVER['QUERY_STRING'];
 
@@ -252,10 +253,23 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetFont("Arial","b",10);
     $pdf->SetTextColor(0,88,147);
 
-    // Figura para el sello
+    // QR del documento
     $pdf->SetDrawColor(0,88,147);
-    //          X  Y l A   l: largo, A: Ancho
-    $pdf->Rect(30,65,40,30); // Rectángulo de 4 cm x 3 cm
+    $dir = '../qr_codes/';
+
+    if(!file_exists($dir))
+    mkdir($dir);
+
+    $filename = $dir.$id_documento.'.png';
+    $size = 5;
+    $level = 'S';
+    $framesize = 1;
+    $website = 'https://dvi.mx';
+    $contenido = 'CERTIFICADO: '.$id_documento.', MODELO: '.$modelo_contador.', No. DE SERIE: '.$numero_serie.', FECHA DE CALIBRACIÓN: '.$fecha_calibracion.', TÉCNICO: '.$tecnico.''.$website;
+
+    QRCode::png($contenido, $filename, $level, $size, $framesize);
+
+    $pdf->Image($filename, 33, 68, 30);
 
     $pdf->SetXY(100,57);
     $pdf->SetFont("Arial","b",10);
