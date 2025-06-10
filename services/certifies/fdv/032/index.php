@@ -146,8 +146,13 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                           break;
                         }
                           
-                    echo'<a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                          <button href="" class="btn btn-sm btn-danger" title="Eliminar" data-toggle="modal" data-target="#Delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        if ($fecha_hora_cierre != NULL || $fecha_hora_cierre != '') {
+                          echo '<!--a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a-->';
+                        } else {
+                          echo '<a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>';
+                        }
+                    
+                    echo '<!--button href="" class="btn btn-sm btn-danger" title="Eliminar" id="eliminar_registro" data-toggle="modal" data-target="#Delete"><i class="fa fa-trash" aria-hidden="true"></i></button-->
                         </td>
                         <td class="text-center">'.$id_documento.'</td>
                         <td class="text-center">'.$fecha_documento.'</td>
@@ -232,8 +237,13 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                           break;
                         }
 
-                    echo'      <a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                          <button href="" class="btn btn-sm btn-danger" title="Eliminar" data-toggle="modal" data-target="#Delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        if ($fecha_hora_cierre != NULL || $fecha_hora_cierre != '') {
+                          echo '<!--a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a-->';
+                        } else {
+                          echo '<a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>';
+                        }
+
+                    echo '<!--button href="" class="btn btn-sm btn-danger" title="Eliminar" id="eliminar_registro" data-toggle="modal" data-target="#Delete"><i class="fa fa-trash" aria-hidden="true"></i></button-->
                         </td>
                         <td class="text-center">'.$id_documento.'</td>
                         <td class="text-center">'.$fecha_documento.'</td>
