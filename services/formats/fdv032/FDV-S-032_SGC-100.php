@@ -4,6 +4,7 @@ session_start();
 if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
     // Se requiere la librería FPDF para el diseño del formato FDV-S-032
     require '../../../lib/fpdf/fpdf.php';
+    require '../../certifies/assets/lib/phpqrcode/qrlib.php';
 
     // Clase herdada para la definición de funciones que se replicarán en todas las hojas
     class PDF extends FPDF {
@@ -82,10 +83,23 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     //          X Y   l  Y   l: largo
     $pdf->Line(48,61,85,61); // Coordenadas (Inicio largo de línea, inclinación inicial de línea, fin largo de línea, inclinación final de línea)
 
-    // Figura para el sello
+    // QR del documento
     $pdf->SetDrawColor(0,88,147);
-    //          X  Y l A   l: largo, A: Ancho
-    $pdf->Rect(30,65,40,30); // Rectángulo de 4 cm x 3 cm
+    $dir = '../qr_codes/';
+
+    if(!file_exists($dir))
+    mkdir($dir);
+
+    $filename = $dir.'FDV-S-032-100_SGC.png';
+    $size = 5;
+    $level = 'S';
+    $framesize = 1;
+    $website = 'https://dvi.mx';
+    $contenido = $website;
+
+    QRCode::png($contenido, $filename, $level, $size, $framesize);
+
+    $pdf->Image($filename, 33, 68, 30);
 
     $pdf->SetXY(100,57);
     $pdf->SetFont("Arial","b",10);
