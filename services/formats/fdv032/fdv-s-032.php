@@ -265,7 +265,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $level = 'S';
     $framesize = 1;
     $website = 'https://dvi.mx';
-    $contenido = 'CERTIFICADO: '.$id_documento.', MODELO: '.$modelo_contador.', No. DE SERIE: '.$numero_serie.', FECHA DE CALIBRACIÓN: '.$fecha_calibracion.', TÉCNICO: '.$tecnico.''.$website;
+    $contenido = 'CERTIFICADO: '.$id_documento.', MODELO: '.$modelo_contador.', No. DE SERIE: '.$numero_serie.', FECHA DE CALIBRACIÓN: '.$fecha_calibracion.', TÉCNICO: '.$tecnico.' '.$website;
 
     QRCode::png($contenido, $filename, $level, $size, $framesize);
 
