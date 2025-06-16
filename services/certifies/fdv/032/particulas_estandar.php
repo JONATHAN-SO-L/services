@@ -34,7 +34,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     <div class="panel panel-success">
                         <div class="panel-heading text-center"><strong>Para poder crear un nuevo certificado es necesario llenar los todos campos</strong></div>
                             <div class="panel-body">
-                                <form role="form" action="index.php" method="POST" enctype="multipart/form-data">
+                                <?php echo '<form role="form" action="../../../functions/add/standar_particles.php?'.$id_documento.'" method="POST" enctype="multipart/form-data">'; ?>
                                     <div>
                                         <div class="container">
                                             <table class="table table-responsive table-hover table-bordered table-striped table-primary" style="margin-left: -15px;">
@@ -57,16 +57,56 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                                 <tbody>
                                                     <tr>
                                                     <td><strong>0.3 µm</strong></td>
-                                                    <td><input class="form-control" type="number" name="tamano_real_03" step="0.01" min="0" placeholder="0.303"></td>
-                                                    <td><input class="form-control" type="number" name="desviacion_tamano_03" step="0.01" min="0" placeholder="0.006">±</td>
-                                                    <td><input class="form-control" type="number" name="no_lote_03" step="0.01" min="0" placeholder="248877"></td>
-                                                    <td><input class="form-control" type="text" name="exp_fecha_03" placeholder="ENE 25"></td>
+                                                    <td><!--input class="form-control" type="number" name="tamano_real_03" step="0.01" min="0" placeholder="0.303"-->
+                                                        <select class="form-control" name="tamano_real_03" required>
+                                                            <option value=""></option>
+                                                            <option value="0.303">0.303</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="desviacion_tamano_03" step="0.01" min="0" placeholder="0.006"-->
+                                                        <select class="form-control" name="desviacion_tamano_03" required>
+                                                            <option value=""></option>
+                                                            <option value="0.006">0.006</option>
+                                                        </select>±
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="no_lote_03" step="0.01" min="0" placeholder="248877"-->
+                                                        <select class="form-control" name="no_lote_03" required>
+                                                            <option value=""></option>
+                                                            <option value="248877">248877</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="text" name="exp_fecha_03" placeholder="ENE 25"-->
+                                                        <select class="form-control" name="exp_fecha_03" required>
+                                                            <option value=""></option>
+                                                            <option value="ENE 25">ENE 25</option>
+                                                        </select>
+                                                    </td>
 
                                                     <td><strong>0.8 µm</strong></td>
-                                                    <td><input class="form-control" type="number" name="tamano_real_08" step="0.01" min="0" placeholder="N/A"></td>
-                                                    <td><input class="form-control" type="number" name="desviacion_tamano_08" step="0.01" min="0" placeholder="N/A">±</td>
-                                                    <td><input class="form-control" type="number" name="no_lote_08" step="0.01" min="0" placeholder="N/A"></td>
-                                                    <td><input class="form-control" type="text" name="exp_fecha_08" placeholder="N/A"></td>
+                                                    <td><!--input class="form-control" type="number" name="tamano_real_08" step="0.01" min="0" placeholder="N/A"-->
+                                                        <select class="form-control" name="tamano_real_08" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="desviacion_tamano_08" step="0.01" min="0" placeholder="N/A"-->
+                                                        <select class="form-control" name="desviacion_tamano_08" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>±
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="no_lote_08" step="0.01" min="0" placeholder="N/A"-->
+                                                        <select class="form-control" name="no_lote_08" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="text" name="exp_fecha_08" placeholder="N/A"-->
+                                                        <select class="form-control" name="exp_fecha_08" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>
+                                                    </td>
                                                     </tr>
                                                 </tbody>
 
@@ -74,16 +114,56 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                                 <tbody>
                                                     <tr>
                                                     <td><strong>0.4 µm</strong></td>
-                                                    <td><input class="form-control" type="number" name="tamano_real_04" step="0.01" min="0" placeholder="N/A"></td>
-                                                    <td><input class="form-control" type="number" name="desviacion_tamano_04" step="0.01" min="0" placeholder="N/A">±</td>
-                                                    <td><input class="form-control" type="number" name="no_lote_04" step="0.01" min="0" placeholder="N/A"></td>
-                                                    <td><input class="form-control" type="text" name="exp_fecha_04" placeholder="N/A"></td>
+                                                    <td><!--input class="form-control" type="number" name="tamano_real_04" step="0.01" min="0" placeholder="N/A"-->
+                                                        <select class="form-control" name="tamano_real_04" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="desviacion_tamano_04" step="0.01" min="0" placeholder="N/A"-->
+                                                        <select class="form-control" name="desviacion_tamano_04" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>±
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="no_lote_04" step="0.01" min="0" placeholder="N/A"-->
+                                                        <select class="form-control" name="no_lote_04" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="text" name="exp_fecha_04" placeholder="N/A"-->
+                                                        <select class="form-control" name="exp_fecha_04" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>
+                                                    </td>
 
                                                     <td><strong>1.0 µm</strong></td>
-                                                    <td><input class="form-control" type="number" name="tamano_real_08" step="0.01" min="0" placeholder="0.994"></td>
-                                                    <td><input class="form-control" type="number" name="desviacion_tamano_08" step="0.01" min="0" placeholder="0.015">±</td>
-                                                    <td><input class="form-control" type="number" name="no_lote_08" step="0.01" min="0" placeholder="247589"></td>
-                                                    <td><input class="form-control" type="text" name="exp_fecha_08" placeholder="DIC 24"></td>
+                                                    <td><!--input class="form-control" type="number" name="tamano_real_10" step="0.01" min="0" placeholder="0.994"-->
+                                                        <select class="form-control" name="tamano_real_10" required>
+                                                            <option value=""></option>
+                                                            <option value="0.994">0.994</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="desviacion_tamano_10" step="0.01" min="0" placeholder="0.015"-->
+                                                        <select class="form-control" name="desviacion_tamano_10" required>
+                                                            <option value=""></option>
+                                                            <option value="0.015">0.015</option>
+                                                        </select>±
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="no_lote_10" step="0.01" min="0" placeholder="247589"-->
+                                                        <select class="form-control" name="no_lote_10" required>
+                                                            <option value=""></option>
+                                                            <option value="247589">247589</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="text" name="exp_fecha_10" placeholder="DIC 24"-->
+                                                        <select class="form-control" name="exp_fecha_10" required>
+                                                            <option value=""></option>
+                                                            <option value="DIC 24">DIC 24</option>
+                                                        </select>
+                                                    </td>
                                                     </tr>
                                                 </tbody>
 
@@ -91,16 +171,56 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                                 <tbody>
                                                     <tr>
                                                     <td><strong>0.5 µm</strong></td>
-                                                    <td><input class="form-control" type="number" name="tamano_real_05" step="0.01" min="0" placeholder="0.510"></td>
-                                                    <td><input class="form-control" type="number" name="desviacion_tamano_05" step="0.01" min="0" placeholder="0.010">±</td>
-                                                    <td><input class="form-control" type="number" name="no_lote_05" step="0.01" min="0" placeholder="250693"></td>
-                                                    <td><input class="form-control" type="text" name="exp_fecha_05" placeholder="FEB 25"></td>
+                                                    <td><!--input class="form-control" type="number" name="tamano_real_05" step="0.01" min="0" placeholder="0.510"-->
+                                                        <select class="form-control" name="tamano_real_05" required>
+                                                            <option value=""></option>
+                                                            <option value="247589">247589</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="desviacion_tamano_05" step="0.01" min="0" placeholder="0.010"-->
+                                                        <select class="form-control" name="desviacion_tamano_05" required>
+                                                            <option value=""></option>
+                                                            <option value="0.010">0.010</option>
+                                                        </select>±
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="no_lote_05" step="0.01" min="0" placeholder="250693"-->
+                                                        <select class="form-control" name="no_lote_05" required>
+                                                            <option value=""></option>
+                                                            <option value="250693">250693</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="text" name="exp_fecha_05" placeholder="FEB 25"-->
+                                                        <select class="form-control" name="exp_fecha_05" required>
+                                                            <option value=""></option>
+                                                            <option value="FEB 25">FEB 25</option>
+                                                        </select>
+                                                    </td>
 
                                                     <td><strong>3.0 µm</strong></td>
-                                                    <td><input class="form-control" type="number" name="tamano_real_30" step="0.01" min="0" placeholder="N/A"></td>
-                                                    <td><input class="form-control" type="number" name="desviacion_tamano_30" step="0.01" min="0" placeholder="N/A">±</td>
-                                                    <td><input class="form-control" type="number" name="no_lote_30" step="0.01" min="0" placeholder="N/A"></td>
-                                                    <td><input class="form-control" type="text" name="exp_fecha_30" placeholder="N/A"></td>
+                                                    <td><!--input class="form-control" type="number" name="tamano_real_30" step="0.01" min="0" placeholder="N/A"-->
+                                                        <select class="form-control" name="tamano_real_30" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="desviacion_tamano_30" step="0.01" min="0" placeholder="N/A"-->
+                                                        <select class="form-control" name="desviacion_tamano_30" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>±
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="no_lote_30" step="0.01" min="0" placeholder="N/A"-->
+                                                        <select class="form-control" name="no_lote_30" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="text" name="exp_fecha_30" placeholder="N/A"-->
+                                                        <select class="form-control" name="exp_fecha_30" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>
+                                                    </td>
                                                     </tr>
                                                 </tbody>
 
@@ -108,23 +228,63 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                                 <tbody>
                                                     <tr>
                                                     <td><strong>0.6 µm</strong></td>
-                                                    <td><input class="form-control" type="number" name="tamano_real_06" step="0.01" min="0" placeholder="N/A"></td>
-                                                    <td><input class="form-control" type="number" name="desviacion_tamano_06" step="0.01" min="0" placeholder="N/A">±</td>
-                                                    <td><input class="form-control" type="number" name="no_lote_06" step="0.01" min="0" placeholder="N/A"></td>
-                                                    <td><input class="form-control" type="text" name="exp_fecha_06" placeholder="N/A"></td>
+                                                    <td><!--input class="form-control" type="number" name="tamano_real_06" step="0.01" min="0" placeholder="N/A"-->
+                                                        <select class="form-control" name="tamano_real_06" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="desviacion_tamano_06" step="0.01" min="0" placeholder="N/A"-->
+                                                        <select class="form-control" name="desviacion_tamano_06" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>±
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="no_lote_06" step="0.01" min="0" placeholder="N/A"-->
+                                                        <select class="form-control" name="no_lote_06" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="text" name="exp_fecha_06" placeholder="N/A"-->
+                                                        <select class="form-control" name="exp_fecha_06" required>
+                                                            <option value=""></option>
+                                                            <option value="N/A">N/A</option>
+                                                        </select>
+                                                    </td>
 
                                                     <td><strong>5.0 µm</strong></td>
-                                                    <td><input class="form-control" type="number" name="tamano_real_50" step="0.01" min="0" placeholder="5.014"></td>
-                                                    <td><input class="form-control" type="number" name="desviacion_tamano_50" step="0.01" min="0" placeholder="0.047">±</td>
-                                                    <td><input class="form-control" type="number" name="no_lote_50" step="0.01" min="0" placeholder="259013"></td>
-                                                    <td><input class="form-control" type="text" name="exp_fecha_50" placeholder="SEP 25"></td>
+                                                    <td><!--input class="form-control" type="number" name="tamano_real_50" step="0.01" min="0" placeholder="5.014"-->
+                                                        <select class="form-control" name="tamano_real_50" required>
+                                                            <option value=""></option>
+                                                            <option value="5.014">5.014</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="desviacion_tamano_50" step="0.01" min="0" placeholder="0.047"-->
+                                                        <select class="form-control" name="desviacion_tamano_50" required>
+                                                            <option value=""></option>
+                                                            <option value="0.047">0.047</option>
+                                                        </select>±
+                                                    </td>
+                                                    <td><!--input class="form-control" type="number" name="no_lote_50" step="0.01" min="0" placeholder="259013"-->
+                                                        <select class="form-control" name="no_lote_50" required>
+                                                            <option value=""></option>
+                                                            <option value="259013">259013</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><!--input class="form-control" type="text" name="exp_fecha_50" placeholder="SEP 25"-->
+                                                        <select class="form-control" name="exp_fecha_50" required>
+                                                            <option value=""></option>
+                                                            <option value="SEP 25">SEP 25</option>
+                                                        </select>
+                                                    </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                             
                                         </div><br>
 
-                                        <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="guardar"></center>
+                                        <center><input class="btn btn-sm btn-success" type="submit" value="Siguiente" name="guardar_particulas"></center>
                                     </div>
                                 </form>
                             </div>
