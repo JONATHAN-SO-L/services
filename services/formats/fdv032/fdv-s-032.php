@@ -888,34 +888,41 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetTextColor(0,88,147);
     $pdf->SetXY(13,225);
     $pdf->Cell(17,5,utf8_decode('0.3 µm'),1,0,'C');
-    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(23,5,utf8_decode($tamano_real_03),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode('± '.$desviacion_tamano_03),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode($no_lote_03),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode($exp_fecha_03),1,0,'C');
 
     // 0.4 µm
     $pdf->SetXY(13,230);
+    $pdf->SetTextColor(0,88,147);
     $pdf->Cell(17,5,utf8_decode('0.4 µm'),1,0,'C');
-    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(23,5,utf8_decode($tamano_real_04),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode('± '.$desviacion_tamano_04),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode($no_lote_04),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode($exp_fecha_04),1,0,'C');
 
     // 0.5 µm
     $pdf->SetXY(13,235);
+    $pdf->SetTextColor(0,88,147);
     $pdf->Cell(17,5,utf8_decode('0.5 µm'),1,0,'C');
-    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(23,5,utf8_decode($tamano_real_05),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode('± '.$desviacion_tamano_05),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode($no_lote_05),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode($exp_fecha_05),1,0,'C');
 
     // 0.6 µm
     $pdf->SetXY(13,240);
+    $pdf->SetTextColor(0,88,147);
     $pdf->Cell(17,5,utf8_decode('0.6 µm'),1,0,'C');
-    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(23,5,utf8_decode($tamano_real_06),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode('± '.$desviacion_tamano_06),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode($no_lote_06),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode($exp_fecha_06),1,0,'C');
 
 
     /******
@@ -939,37 +946,45 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetTextColor(0,88,147);
     $pdf->SetXY(111,225);
     $pdf->Cell(17,5,utf8_decode('0.8 µm'),1,0,'C');
-    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(23,5,utf8_decode($tamano_real_08),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode('± '.$desviacion_tamano_08),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode($no_lote_08),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode($exp_fecha_08),1,0,'C');
 
     // 1.0 µm
     $pdf->SetXY(111,230);
+    $pdf->SetTextColor(0,88,147);
     $pdf->Cell(17,5,utf8_decode('1.0 µm'),1,0,'C');
-    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(23,5,utf8_decode($tamano_real_10),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode('± '.$desviacion_tamano_10),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode($no_lote_10),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode($exp_fecha_10),1,0,'C');
 
     // 3.0 µm
     $pdf->SetXY(111,235);
+    $pdf->SetTextColor(0,88,147);
     $pdf->Cell(17,5,utf8_decode('3.0 µm'),1,0,'C');
-    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(23,5,utf8_decode($tamano_real_30),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode('± '.$desviacion_tamano_30),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode($no_lote_30),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode($exp_fecha_30),1,0,'C');
 
     // 5.0 µm
     $pdf->SetXY(111,240);
+    $pdf->SetTextColor(0,88,147);
     $pdf->Cell(17,5,utf8_decode('5.0 µm'),1,0,'C');
-    $pdf->Cell(23,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(25,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(16,5,utf8_decode(''),1,0,'C');
-    $pdf->Cell(17,5,utf8_decode(''),1,0,'C');
+    $pdf->SetTextColor(0,0,0);
+    $pdf->Cell(23,5,utf8_decode($tamano_real_50),1,0,'C');
+    $pdf->Cell(25,5,utf8_decode('± '.$desviacion_tamano_50),1,0,'C');
+    $pdf->Cell(16,5,utf8_decode($no_lote_50),1,0,'C');
+    $pdf->Cell(17,5,utf8_decode($exp_fecha_50),1,0,'C');
 
     // Información complementaria
      $pdf->SetFont("Arial","",7);
+     $pdf->SetTextColor(0,88,147);
     $pdf->SetXY(102,246);
     $pdf->Cell(17,5,utf8_decode('(Los estándares de partículas utilizados en esta calibración son fabricados por Duke Scientific. Solo los tamaños enumerados con el Número de lote se usaron en la calibración).'),0,0,'C');
 
