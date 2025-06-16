@@ -36,26 +36,50 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $certified = 'fdv_s_032';
     $instruments = 'instrumentos';
 
-    // Se busca primero los activos guardados en la tabla de certificados
-    $s_actives = $con->prepare("SELECT dmm_activo, pha_activo, mfm_activo, rh_activo, balometro_activo FROM $certified WHERE id_documento = :id_documento");
-    $s_actives->bindValue(':id_documento', $id_documento);
-    $s_actives->setFetchMode(PDO::FETCH_OBJ);
-    $s_actives->execute();
-    $f_actives = $s_actives->fetchAll();
-    
-    if ($s_actives -> rowCount() > 0) {
-        foreach ($f_actives as $activos) {
-            $dmm_activo = $activos -> dmm_activo;
-            $pha_activo = $activos -> pha_activo;
-            $mfm_activo = $activos -> mfm_activo;
-            $rh_activo = $activos -> rh_activo;
-            $balometro_activo = $activos -> balometro_activo;
+if (isset($_POST['modificar_instrumentos'])) {
+        // Recepción de datos
+        $dmm = $_POST['dmm'];
+        $pha = $_POST['pha'];
+        $mfm = $_POST['mfm'];
+        $rh_temp = $_POST['rh_temp'];
+        $balometro = $_POST['balometro'];
+
+        // Se almacena el número de serie del contador en la DDBB
+        $save_serie = $con->prepare("UPDATE $certified
+                                            SET dmm_activo = ?,
+                                                pha_activo = ?,
+                                                mfm_activo = ?,
+                                                rh_activo = ?,
+                                                balometro_activo = ?
+                                            WHERE id_documento = ?");
+        $val_save_serie = $save_serie->execute([$dmm, $pha, $mfm, $rh_temp, $balometro, $id_documento]);
+
+        if ($val_save_serie) {
+            // Se busca primero los activos guardados en la tabla de certificados
+            $s_actives = $con->prepare("SELECT dmm_activo, pha_activo, mfm_activo, rh_activo, balometro_activo FROM $certified WHERE id_documento = :id_documento");
+            $s_actives->bindValue(':id_documento', $id_documento);
+            $s_actives->setFetchMode(PDO::FETCH_OBJ);
+            $s_actives->execute();
+            $f_actives = $s_actives->fetchAll();
+            
+            if ($s_actives -> rowCount() > 0) {
+                foreach ($f_actives as $activos) {
+                    $dmm_activo = $activos -> dmm_activo;
+                    $pha_activo = $activos -> pha_activo;
+                    $mfm_activo = $activos -> mfm_activo;
+                    $rh_activo = $activos -> rh_activo;
+                    $balometro_activo = $activos -> balometro_activo;
+                }
+                mensaje_ayuda();
+            } else {
+                mensaje_error();
+            }
+        } else {
+            mensaje_error();
         }
-        mensaje_ayuda();
     } else {
         mensaje_error();
     }
-
 ?>
 
 <table>
