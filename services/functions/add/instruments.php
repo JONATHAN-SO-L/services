@@ -27,6 +27,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         $val_save_instruments = $save_instruments->execute([$dmm, $pha, $mfm, $rh_temp, $balometro, $id_documento]);
 
         if ($val_save_instruments) {
+            require '../drop_con.php';
             echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/estandard_trazabilidad.php?'.$id_documento.'">';
         } else {
             echo '<script>alert("Ocurrión un error al intentar guardar la información, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';

@@ -61,6 +61,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     $val_save_move = $save_move->execute([$movimiento, $url, $database, $tecnico, $fecha_hora_carga]);
 
                     if ($val_save_move) {
+                        require '../drop_con.php';
                         echo '<script>alert("Registro exitoso, continúa con el llenado de información")</script>';
                         echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/comportamiento.php?'.$id_documento.'">';
                     } else {
@@ -85,6 +86,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     $val_save_move = $save_move->execute([$movimiento, $url, $database, $tecnico, $fecha_hora_carga]);
 
                     if ($val_save_move) {
+                        require '../drop_con.php';
                         echo '<script>alert("Registro exitoso, continúa con el llenado de información")</script>';
                         echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/comportamiento2.php?'.$id_documento.'">';
                     } else {
