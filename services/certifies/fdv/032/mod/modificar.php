@@ -95,9 +95,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                                 ';
                                                 ?>
 
-                                            <!--div class="col-sm-8">
+                                            <div class="col-sm-8">
                                                 <a class="btn btn-sm btn-danger" href="mod_standar_particles.php"><i class="fa fa-check-square" aria-hidden="true"></i> Partículas Estándar</a>
-                                            </div-->
+                                            </div>
                                         </div>
                                         </center>
                                 </form>
