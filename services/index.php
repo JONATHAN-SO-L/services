@@ -2,7 +2,9 @@
 session_start();
 header('Content-Type: text/html; charset=UTF-8');
 
-if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="devecchi"){ 
+if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="devecchi" || $_SESSION['tipo']=="admin"){ 
+	include './assets/navbar.php';
+	include './assets/links.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,7 +13,6 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="dev
 	<title>Servicios</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="./assets/css/main.css">
-	<?php include "./assets/links.php"; ?> 
 </head>
 
 <body>
@@ -22,7 +23,6 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="dev
     <i class="fa fa-times"></i>
   </div>
 <header id="main-header">
-<?php include './assets/navbar.php'; ?>
 </header>
 
 <section id="content">	 
@@ -31,7 +31,13 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="dev
 		<div class="col-sm-2">
 			<table>
 				<tr>
-					<a href="../seccion.php"><button type="submit" value="Volver" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
+					<?php
+					if ($_SESSION['tipo']=="devecchi") {
+						echo '<a href="../seccion.php"><button type="submit" value="Volver" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>';
+					} else {
+						echo '<a href="../seccion_admin.php"><button type="submit" value="Volver" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>';
+					}
+					?>
 				</tr>
 			</table>
 		</div>
