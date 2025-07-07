@@ -43,9 +43,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         $build = 'edificio'; // Tabla edificio
 
         if ($razon_social != '' && $rfc != '') { // Se reciben ambos campos
-            $s_company = $con -> prepare("SELECT id, rfc, razon_social FROM $company WHERE razon_social = :razon_social AND rfc = :rfc");
-            $s_company->bindValue(':razon_social', $razon_social);
-            $s_company->bindValue(':rfc', $rfc);
+            $s_company = $con -> prepare("SELECT id, rfc, razon_social FROM $company WHERE razon_social LIKE '%$razon_social%' AND rfc LIKE '%$rfc%'");
             $s_company->setFetchMode(PDO::FETCH_OBJ);
             $s_company->execute();
 
@@ -64,8 +62,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             }
 
         } elseif ($razon_social != '') { // No se recibe RFC
-            $s_company = $con -> prepare("SELECT * FROM $company WHERE razon_social = :razon_social");
-            $s_company->bindValue(':razon_social', $razon_social);
+            $s_company = $con -> prepare("SELECT * FROM $company WHERE razon_social LIKE '%$razon_social%'");
             $s_company->setFetchMode(PDO::FETCH_OBJ);
             $s_company->execute();
 
@@ -84,8 +81,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             }
 
         } elseif ($rfc != '') { // No se recibe Razón Social
-            $s_company = $con -> prepare("SELECT * FROM $company WHERE rfc = :rfc");
-            $s_company->bindValue(':rfc', $rfc);
+            $s_company = $con -> prepare("SELECT * FROM $company WHERE rfc LIKE '%$rfc%'");
             $s_company->setFetchMode(PDO::FETCH_OBJ);
             $s_company->execute();
 
