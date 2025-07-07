@@ -141,7 +141,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
                                         <div class="col-sm-6">
                                         <label><i class="fa fa-user-circle"></i>&nbsp;Técnico Certificado:</label>
-                                        <input class="form-control" type="text" name="tecnico" id="tecnico" readonly value="<?php echo $_SESSION['nombre_completo']." ".$_SESSION['apellido']; ?>"><hr>
+                                        <input class="form-control" type="text" name="tecnico" id="tecnico" readonly value="<?php echo $_SESSION['nombre_completo']; ?>"><hr>
                                         </div>
 
                                         <div class="col-sm-4">
