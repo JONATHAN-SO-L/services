@@ -115,10 +115,10 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                     <tbody>
                                     <tr>
                                     <td><strong>TOLERANCIA</strong></td>
-                                    <td>± <input class="form-control" type="number" name="tolerancia_03" readonly value="<?php echo $tolerancia_03; ?>">  mV</td>
-                                    <td>± <input class="form-control" type="number" name="tolerancia_05" readonly value="<?php echo $tolerancia_05; ?>">  mV</td>
-                                    <td>± <input class="form-control" type="number" name="tolerancia_10" readonly value="<?php echo $tolerancia_10; ?>">  mV</td>
-                                    <td>± <input class="form-control" type="number" name="tolerancia_50" readonly value="<?php echo $tolerancia_50; ?>">  mV</td>
+                                    <td>± <input class="form-control" type="number" name="tolerancia_03" readonly value="60">  mV</td>
+                                    <td>± <input class="form-control" type="number" name="tolerancia_05" readonly value="30">  mV</td>
+                                    <td>± <input class="form-control" type="number" name="tolerancia_10" readonly value="165">  mV</td>
+                                    <td>± <input class="form-control" type="number" name="tolerancia_50" readonly value="50">  mV</td>
                                     </tr>
                                     </tbody>
 
