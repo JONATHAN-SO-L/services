@@ -1,7 +1,7 @@
-<title>SIS</title>
-
+<!--------------------------------------------------------------------------
+MENÚ DE NAVEGACIÓN DE DENTRO DE LA SECCIÓN DE LOS CERTIFICADOS DEL FDV-S-032
+--------------------------------------------------------------------------->
 <header id="main-header">
-
 <nav id="sidenav">
     <div id="sidenav-header">
       <div id="profile-picture">
@@ -18,6 +18,7 @@
       <?php
       switch ($_SESSION['tipo']) {
         case 'devecchi': ?>
+        <title>SIS</title>
             <li>
             <a href="../../../../inicio_dvi_user.php">
             <i class="fa fa-grav"></i>
@@ -45,7 +46,8 @@
             </li>
         <?php break;
 
-        default: ?>
+        case 'admin': ?>
+        <title>SIS - Administrador</title>
             <li>
             <a href="../../../../inicio.php">
             <i class="fa fa-grav"></i>
@@ -65,7 +67,7 @@
             </a>
             </li>
 
-            <li>
+            <!--li>
             <a href="../../../../ubicacion.php">
             <i class="fa fa-map-marker"></i>
             Ubicación
@@ -76,8 +78,28 @@
             <i class="fa fa-rss-square"></i>
             Área
             </a>
+            </li-->
+
+            <li>
+            <a href="../../../admin/accountant/">
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              Contadores
+            </a>
             </li>
             <li>
+              <a href="../../../admin/instruments/">
+                <i class="fa fa-tasks" aria-hidden="true"></i>
+                Instrumentos
+              </a>
+            </li>
+            <li>
+              <a href="../../../admin/particles/">
+                <i class="fa fa-filter" aria-hidden="true"></i>
+                Partículas
+              </a>
+            </li>
+
+            <!--li>
             <a href="../../../../equipo.php">
             <i class="fa fa-cubes"></i>
             Equipo
@@ -88,14 +110,14 @@
             <i class="fa fa-cogs"></i>
             Config
             </a>
-            </li>
+            </li-->
             <li>
             <a href="../../../../seccion_admin.php">
             <i class="fa fa-wrench"></i>
             Servicio
             </a>
             </li>	
-            <li>
+            <!--li>
             <a href="../../../../tabla_servicios.php">
             <i class="fa fa-pencil-square-o"></i>
             Editar Servicio
@@ -112,7 +134,7 @@
             <i class="fa fa-line-chart"></i>
             Grafica
             </a>
-            </li>
+            </li-->
             <li>
             <a href="../../../../tabla_usuarios.php">
             <i class="fa fa-user"></i>
