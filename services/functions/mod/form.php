@@ -5,6 +5,50 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
     $id_documento = $_SERVER['QUERY_STRING'];
 
+    include '../../assets/admin/links.php';
+
+    function mensaje_ayuda(){
+    echo '
+    <div class="alert alert-success alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <h4 class="text-center"><strong>MODIFICACIÓN EXITOSA</strong></h4>
+    <p class="text-center">
+    Se modificó correctamente el formulario en el sistema.
+    </p>
+    </div>
+    ';
+    }
+
+    function mensaje_error() {
+        echo '
+            <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="text-center"><strong>OCURRIÓ UN ERROR</strong></h4>
+            <p class="text-center">
+            <u>No se logró recibir información correctamente, por favor, inténtalo de nuevo o contácta al Soporte Técnico.
+            </p>
+            </div>
+            ';
+    }
+
+    function redirect_failed($id_documento) {
+        echo '
+            <div class="container" style="margin-left: 40%">
+                <img src="../../assets/img/loading_dvi.gif" height="40%" weight="40%">
+                <br>
+                <a href="../../certifies/fdv/032/mod/mod_form.php?'.$id_documento.'" class="btn btn-sm btn-danger" style="margin-left: 15%">Regresar</a>
+            </div>';
+    }
+
+    function redirect_success($id_documento) {
+        echo '
+            <div class="container" style="margin-left: 40%">
+                <img src="../../assets/img/loading_dvi.gif" height="40%" weight="40%">
+                <br>
+                <a href="../../certifies/fdv/032/mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-success" style="margin-left: 15%">Continuar</a>
+            </div>';
+    }
+
     if (isset($_POST['modificar_form'])) {
         require '../conex_serv.php';
         $certified = 'fdv_s_032';
@@ -15,6 +59,10 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         $condicion_calibracion = $_POST['condicion_calibracion'];
         $condicion_final = $_POST['condicion_final'];
         $comentarios = $_POST['comentarios'];
+
+        require '../../assets/timezone.php';
+        $fecha_calibracion = date('d/m/Y');
+        $fecha_calibracion = strftime('%d%b%y');
         
         $presion_barometrica = $_POST['presion_barometrica'];
         $temperatura = $_POST['temperatura'];
@@ -28,14 +76,14 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         $save_form = $con->prepare("UPDATE $certified
                                             SET intervalo_calibracion = ?,
                                                 condicion_recepcion = ?, condicion_calibracion = ?, condicion_calibracion_final = ?,
-                                                comentarios = ?,
+                                                comentarios = ?, fecha_calibracion = ?,
                                                 presion_barometrica = ?, temperatura = ?, humedad_relativa = ?,
                                                 modifica_data = ?, fecha_hora_modificacion = ?
                                     WHERE id_documento = ?");
 
         $val_save_form = $save_form->execute([$intervalo_calibracion,
                                             $condicion_fisica, $condicion_calibracion, $condicion_final,
-                                            $comentarios,
+                                            $comentarios, $fecha_calibracion,
                                             $presion_barometrica, $temperatura, $humedad_relativa,
                                             $tecnico_mod, $fecha_hora_carga,
                                             $id_documento]);
@@ -52,19 +100,23 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
             if ($val_save_move) {
                 require '../drop_con.php';
-                echo '<script>alert("Registro exitoso, continúa con el llenado de información")</script>';
-                echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/mod/modificar.php?'.$id_documento.'">';
+                mensaje_ayuda();
+                redirect_success($id_documento);
             } else {
-                echo '<script>alert("Ocurrió un error al intentar guardar la información en el auditlog, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/mod/mod_form.php?'.$id_documento.'">';
+                mensaje_error();
+                redirect_failed($id_documento);
+                die();
             }
         } else {
-            echo '<script>alert("Ocurrión un error al intentar guardar la información, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
-            echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/mod/mod_form.php?'.$id_documento.'">';
+            mensaje_error();
+            redirect_failed($id_documento);
+            die();
         }
 
     } else {
-        echo '<script>alert("No se detectó el iniciador de la petición, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
-        echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/mod/mod_form.php?'.$id_documento.'">';
+        mensaje_error();
+        redirect_failed($id_documento);
+        die();
     }
 
 } else {
