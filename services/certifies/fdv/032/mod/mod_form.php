@@ -147,7 +147,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
                                 <div class="col-sm-4">
                                     <label><i class="fa fa-calendar"></i>&nbsp;Fecha de Calibración:</label>
-                                    <input class="form-control" type="text" name="fecha_calibracion" readonly value="<?php echo $fecha_calibracion; ?>"><br>
+                                    <input class="form-control" type="text" name="fecha_calibracion" readonly value="<?php echo date('d/m/Y'); ?>"><br>
                                 </div>
 
                                 <div class="col-sm-6">
