@@ -32,10 +32,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     }
 
     if (isset($_POST['guardar_serie'])) {
+        require '../../../functions/conex_serv.php';
         // Recepción de datos
         $numero_serie = $_POST['serie_contador'];
-
-        require '../../../functions/conex_serv.php';
         $certified = 'fdv_s_032'; // Tabla de certificados
 
         // Se almacena el número de serie del contador en la DDBB
