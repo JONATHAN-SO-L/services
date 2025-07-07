@@ -1088,7 +1088,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     /***********************************************************************************
     Se indica el nombre del arcvhivo y los parámetros de exportación | Fin del documento
     ***********************************************************************************/
-    $pdf->output('I',utf8_decode('FDV-S-032 Certificado de Calibración').'.pdf');
+    $pdf->output('I',utf8_decode('FDV-S-032 Certificado de Calibración').'-'.$id_documento.'.pdf');
 
 } else {
     die(header ('Location: ../../../index.php'));
