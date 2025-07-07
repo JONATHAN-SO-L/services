@@ -59,7 +59,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     <div class="container col-sm-4">
       <form action="" method="POST" enctype="multipart/form-data">
         <label>Buscar</label>
-        <input class="form-control" type="search" name="words" placeholder="Puedes buscar por: Compañía, Modelo CI ó Número de Seie de Contador" alt="Puedes buscar por: Técnico, Compañía, Modelo CI ó Contador de Partículas">
+        <input class="form-control" type="search" name="words" placeholder="Puedes buscar por: Compañía, Modelo CI ó Número de Serie de Contador" alt="Puedes buscar por: Técnico, Compañía, Modelo CI ó Contador de Partículas">
         <input class="btn btn-sm btn-success form-control-inline" type="submit" name="buscar" value="Buscar">
       </form><br>
     </div>
@@ -75,6 +75,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
           // Conexión a la DDBB
           require '../../../functions/conex_serv.php';
           $certified = 'fdv_s_032';
+          $instruments = 'instrumentos';
           $tecnico = $_SESSION['nombre_completo'];
 
           if (isset($_POST['buscar'])) {
@@ -82,18 +83,15 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             $word = $_POST['words'];
 
             $s_register = $con->prepare("SELECT * FROM $certified 
-                                        WHERE tecnico = :tecnico 
-                                        AND empresa LIKE '%$word%' OR modelo_contador LIKE '%$word%' OR numero_serie LIKE '%$word%'
+                                        WHERE empresa LIKE '%$word%' OR modelo_contador LIKE '%$word%' OR numero_serie LIKE '%$word%'
                                         ORDER BY id_documento DESC LIMIT 30");
-            $s_register->bindValue(':tecnico', $tecnico);
             $s_register->setFetchMode(PDO::FETCH_OBJ);
             $s_register->execute();
             $f_register = $s_register->fetchAll();
 
             // Se realiza conteo de resultados
             $total_registers = $con->prepare("SELECT COUNT(*) FROM $certified
-                                              WHERE tecnico = '$tecnico'
-                                              AND empresa LIKE '%$word%' OR modelo_contador LIKE '%$word%' OR numero_serie LIKE '%$word%'");
+                                              WHERE empresa LIKE '%$word%' OR modelo_contador LIKE '%$word%' OR numero_serie LIKE '%$word%'");
             $total_registers->execute();
             $num_total_results = $total_registers->fetchColumn();
 
@@ -132,6 +130,12 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     $tecnico_certificado = $registro -> tecnico;
                     $fecha_hora_cierre = $registro -> fecha_hora_cierre;
 
+                    $dmm_activo = $registro -> dmm_activo;
+                    $pha_activo = $registro -> pha_activo;
+                    $mfm_activo = $registro -> mfm_activo;
+                    $rh_activo = $registro -> rh_activo;
+                    $balometro_activo = $registro -> balometro_activo;
+
                     echo '
                       <tbody>
                         <td class="text-center">';
@@ -148,6 +152,110 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                           
                         if ($fecha_hora_cierre != NULL || $fecha_hora_cierre != '') {
                           echo '<!--a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a-->';
+
+                          // Visualizar los certificados
+                          echo '<div class="btn-group">
+                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><i class="fa fa-certificate" aria-hidden="true"></i><span class="caret"></span></button>
+                          <ul class="dropdown-menu" role="menu">';
+
+                              // Listado de certificados
+                              // Certificado DMM
+                              $s_dmm = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                              $s_dmm->bindValue(':activo', $dmm_activo);
+                              $s_dmm->setFetchMode(PDO::FETCH_OBJ);
+                              $s_dmm->execute();
+
+                              $f_dmm = $s_dmm->fetchAll();
+
+                              if ($s_dmm -> rowCount() > 0) {
+                                  foreach ($f_dmm as $dmm) {
+                                      $activo = $dmm -> activo;
+                                      $certificado = $dmm -> certificado;
+
+                                      echo '<li><a href="../../'.$certificado.'" target="_blank"><i class="fa fa-certificate" aria-hidden="true"></i> '.$activo.' - (DMM)</a></li>';
+                                  }
+                              } else {
+                                  echo '<li><i class="fa fa-certificate" aria-hidden="true"></i> - No se encontró certificado DMM - </li>';
+                              }
+
+                              // Certificado PHA
+                              $s_pha = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                              $s_pha->bindValue(':activo', $pha_activo);
+                              $s_pha->setFetchMode(PDO::FETCH_OBJ);
+                              $s_pha->execute();
+
+                              $f_pha = $s_pha->fetchAll();
+
+                              if ($s_pha -> rowCount() > 0) {
+                                  foreach ($f_pha as $pha) {
+                                      $activo = $pha -> activo;
+                                      $certificado = $pha -> certificado;
+
+                                      echo '<li><a href="../../'.$certificado.'" target="_blank"><i class="fa fa-certificate" aria-hidden="true"></i> '.$activo.' - (PHA)</a></li>';
+                                  }
+                              } else {
+                                  echo '<li><i class="fa fa-certificate" aria-hidden="true"></i> - No se encontró certificado PHA - </li>';
+                              }
+
+                              // Certificado MFM
+                              $s_mfm = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                              $s_mfm->bindValue(':activo', $mfm_activo);
+                              $s_mfm->setFetchMode(PDO::FETCH_OBJ);
+                              $s_mfm->execute();
+
+                              $f_mfm = $s_mfm->fetchAll();
+
+                              if ($s_mfm -> rowCount() > 0) {
+                                  foreach ($f_mfm as $mfm) {
+                                      $activo = $mfm -> activo;
+                                      $certificado = $mfm -> certificado;
+
+                                      echo '<li><a href="../../'.$certificado.'" target="_blank"><i class="fa fa-certificate" aria-hidden="true"></i> '.$activo.' - (MFM)</a></li>';
+                                  }
+                              } else {
+                                  echo '<li><i class="fa fa-certificate" aria-hidden="true"></i> - No se encontró certificado MFM - </li>';
+                              }
+
+                              // Certificado RH/TEMP
+                              $s_rh = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                              $s_rh->bindValue(':activo', $rh_activo);
+                              $s_rh->setFetchMode(PDO::FETCH_OBJ);
+                              $s_rh->execute();
+
+                              $f_rh = $s_rh->fetchAll();
+
+                              if ($s_rh -> rowCount() > 0) {
+                                  foreach ($f_rh as $rh) {
+                                      $activo = $rh -> activo;
+                                      $certificado = $rh -> certificado;
+
+                                      echo '<li><a href="../../'.$certificado.'" target="_blank"><i class="fa fa-certificate" aria-hidden="true"></i> '.$activo.' - (RH/TEMP)</a></li>';
+                                  }
+                              } else {
+                                  echo '<li><i class="fa fa-certificate" aria-hidden="true"></i> - No se encontró certificado RH/TEMP - </li>';
+                              }
+
+                              // Certificado Balómetro
+                              $s_balo = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                              $s_balo->bindValue(':activo', $balometro_activo);
+                              $s_balo->setFetchMode(PDO::FETCH_OBJ);
+                              $s_balo->execute();
+
+                              $f_balo = $s_balo->fetchAll();
+
+                              if ($s_balo -> rowCount() > 0) {
+                                  foreach ($f_balo as $balo) {
+                                      $activo = $balo -> activo;
+                                      $certificado = $balo -> certificado;
+
+                                      echo '<li><a href="../../'.$certificado.'" target="_blank"><i class="fa fa-certificate" aria-hidden="true"></i> '.$activo.' - (Balómetro)</a></li>';
+                                  }
+                              } else {
+                                  echo '<li><i class="fa fa-certificate" aria-hidden="true"></i> - No se encontró certificado Balómetro - </li>';
+                              }
+
+                              echo '</ul>
+                              </div>';
                         } else {
                           echo '<a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>';
                         }
@@ -179,13 +287,14 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
           } else {
             // Se visualizan todos los registros
             $s_register = $con->prepare("SELECT * FROM $certified WHERE tecnico = :tecnico ORDER BY id_documento DESC LIMIT 30");
-            $s_register->bindValue(':tecnico', $tecnico);
+            $s_register->bindValue(':tecnico', $_SESSION['nombre_completo']);
             $s_register->setFetchMode(PDO::FETCH_OBJ);
             $s_register->execute();
             $f_register = $s_register->fetchAll();
 
             // Se realiza conteo de resultados
-            $total_registers = $con->prepare("SELECT COUNT(*) FROM $certified WHERE tecnico = '$tecnico'");
+            $total_registers = $con->prepare("SELECT COUNT(*) FROM $certified WHERE tecnico = :tecnico");
+            $total_registers->bindValue(':tecnico', $_SESSION['nombre_completo']);
             $total_registers->execute();
             $num_total_results = $total_registers->fetchColumn();
 
@@ -219,6 +328,12 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     $tecnico_certificado = $registro -> tecnico;
                     $fecha_hora_cierre = $registro -> fecha_hora_cierre;
 
+                    $dmm_activo = $registro -> dmm_activo;
+                    $pha_activo = $registro -> pha_activo;
+                    $mfm_activo = $registro -> mfm_activo;
+                    $rh_activo = $registro -> rh_activo;
+                    $balometro_activo = $registro -> balometro_activo;
+
                     echo '
                       <tbody>
                         <td class="text-center">';
@@ -239,6 +354,110 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
                         if ($fecha_hora_cierre != NULL || $fecha_hora_cierre != '') {
                           echo '<!--a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a-->';
+
+                           // Visualizar los certificados
+                          echo '<div class="btn-group">
+                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><i class="fa fa-certificate" aria-hidden="true"></i><span class="caret"></span></button>
+                          <ul class="dropdown-menu" role="menu">';
+
+                              // Listado de certificados
+                              // Certificado DMM
+                              $s_dmm = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                              $s_dmm->bindValue(':activo', $dmm_activo);
+                              $s_dmm->setFetchMode(PDO::FETCH_OBJ);
+                              $s_dmm->execute();
+
+                              $f_dmm = $s_dmm->fetchAll();
+
+                              if ($s_dmm -> rowCount() > 0) {
+                                  foreach ($f_dmm as $dmm) {
+                                      $activo = $dmm -> activo;
+                                      $certificado = $dmm -> certificado;
+
+                                      echo '<li><a href="../../'.$certificado.'" target="_blank"><i class="fa fa-certificate" aria-hidden="true"></i> '.$activo.' - (DMM)</a></li>';
+                                  }
+                              } else {
+                                  echo '<li><i class="fa fa-certificate" aria-hidden="true"></i> - No se encontró certificado DMM - </li>';
+                              }
+
+                              // Certificado PHA
+                              $s_pha = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                              $s_pha->bindValue(':activo', $pha_activo);
+                              $s_pha->setFetchMode(PDO::FETCH_OBJ);
+                              $s_pha->execute();
+
+                              $f_pha = $s_pha->fetchAll();
+
+                              if ($s_pha -> rowCount() > 0) {
+                                  foreach ($f_pha as $pha) {
+                                      $activo = $pha -> activo;
+                                      $certificado = $pha -> certificado;
+
+                                      echo '<li><a href="../../'.$certificado.'" target="_blank"><i class="fa fa-certificate" aria-hidden="true"></i> '.$activo.' - (PHA)</a></li>';
+                                  }
+                              } else {
+                                  echo '<li><i class="fa fa-certificate" aria-hidden="true"></i> - No se encontró certificado PHA - </li>';
+                              }
+
+                              // Certificado MFM
+                              $s_mfm = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                              $s_mfm->bindValue(':activo', $mfm_activo);
+                              $s_mfm->setFetchMode(PDO::FETCH_OBJ);
+                              $s_mfm->execute();
+
+                              $f_mfm = $s_mfm->fetchAll();
+
+                              if ($s_mfm -> rowCount() > 0) {
+                                  foreach ($f_mfm as $mfm) {
+                                      $activo = $mfm -> activo;
+                                      $certificado = $mfm -> certificado;
+
+                                      echo '<li><a href="../../'.$certificado.'" target="_blank"><i class="fa fa-certificate" aria-hidden="true"></i> '.$activo.' - (MFM)</a></li>';
+                                  }
+                              } else {
+                                  echo '<li><i class="fa fa-certificate" aria-hidden="true"></i> - No se encontró certificado MFM - </li>';
+                              }
+
+                              // Certificado RH/TEMP
+                              $s_rh = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                              $s_rh->bindValue(':activo', $rh_activo);
+                              $s_rh->setFetchMode(PDO::FETCH_OBJ);
+                              $s_rh->execute();
+
+                              $f_rh = $s_rh->fetchAll();
+
+                              if ($s_rh -> rowCount() > 0) {
+                                  foreach ($f_rh as $rh) {
+                                      $activo = $rh -> activo;
+                                      $certificado = $rh -> certificado;
+
+                                      echo '<li><a href="../../'.$certificado.'" target="_blank"><i class="fa fa-certificate" aria-hidden="true"></i> '.$activo.' - (RH/TEMP)</a></li>';
+                                  }
+                              } else {
+                                  echo '<li><i class="fa fa-certificate" aria-hidden="true"></i> - No se encontró certificado RH/TEMP - </li>';
+                              }
+
+                              // Certificado Balómetro
+                              $s_balo = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                              $s_balo->bindValue(':activo', $balometro_activo);
+                              $s_balo->setFetchMode(PDO::FETCH_OBJ);
+                              $s_balo->execute();
+
+                              $f_balo = $s_balo->fetchAll();
+
+                              if ($s_balo -> rowCount() > 0) {
+                                  foreach ($f_balo as $balo) {
+                                      $activo = $balo -> activo;
+                                      $certificado = $balo -> certificado;
+
+                                      echo '<li><a href="../../'.$certificado.'" target="_blank"><i class="fa fa-certificate" aria-hidden="true"></i> '.$activo.' - (Balómetro)</a></li>';
+                                  }
+                              } else {
+                                  echo '<li><i class="fa fa-certificate" aria-hidden="true"></i> - No se encontró certificado Balómetro - </li>';
+                              }
+
+                              echo '</ul>
+                              </div>';
                         } else {
                           echo '<a href="./mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-warning" title="Modificar"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>';
                         }
