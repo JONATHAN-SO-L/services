@@ -139,7 +139,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
     $pdf->SetFont("Arial","",9);
     $pdf->SetXY(16,128.5);
-    $pdf->Cell(30,5,utf8_decode('Bueno'),0,0,'L');
+    $pdf->Cell(30,5,utf8_decode(''),0,0,'L');
 
     // Centro
     $pdf->SetFont("Arial","b",10);
@@ -152,7 +152,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
     $pdf->SetFont("Arial","",9);
     $pdf->SetXY(95,128.5);
-    $pdf->Cell(30,5,utf8_decode('En tolerancia'),0,0,'L');
+    $pdf->Cell(30,5,utf8_decode(''),0,0,'L');
 
     //Derecha
     $pdf->SetFont("Arial","b",10);
@@ -165,7 +165,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
     $pdf->SetFont("Arial","",9);
     $pdf->SetXY(166,128.5);
-    $pdf->MultiCell(30,5,utf8_decode('Dentro de las especificaciones'),0,'L',false);
+    $pdf->MultiCell(30,5,utf8_decode(''),0,'L',false);
 
 
     /************************
@@ -238,10 +238,12 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->Cell(15,10,utf8_decode('Contador de partículas, Núm. Serie: ______________________'),0,0,'C');
     $pdf->SetX(165);
     $pdf->Cell(15,10,utf8_decode('Fecha de calibración: __________________'),0,0,'C');
-    $pdf->SetXY(60,65);
-    $pdf->Cell(15,10,utf8_decode('Identificación de Cliente: ____________________________________________'),0,0,'C');
-    $pdf->SetX(155);
-    $pdf->Cell(15,10,utf8_decode('Técnico:__________________________________________'),0,0,'C');
+    $pdf->SetXY(33,65);
+    $pdf->Cell(15,10,utf8_decode('Identificación de Cliente: __________'),0,0,'C');
+    $pdf->SetX(97);
+    $pdf->Cell(15,10,utf8_decode('Técnico: ________________________________________'),0,0,'C');
+    $pdf->SetX(165);
+    $pdf->Cell(15,10,utf8_decode('ID del Documento: __________________'),0,0,'C');
     $pdf->SetLineWidth(0.5);
     $pdf->Rect(10,35,195,40); // Rectángulo de 19.5 cm x 4.0 cm
 
@@ -442,8 +444,10 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetXY(10,45);
     $pdf->Cell(0,10,utf8_decode('Estándard de Trazabilidad'),0,0,'C');
     $pdf->SetFont("Arial","",8);
-    $pdf->SetXY(95,50);
-    $pdf->Cell(15,10,utf8_decode('Fecha del documento: _______________________________________________'),0,0,'C');
+    $pdf->SetXY(75,50);
+    $pdf->Cell(15,10,utf8_decode('Fecha del documento: __________'),0,0,'C');
+    $pdf->SetX(120);
+    $pdf->Cell(15,10,utf8_decode('ID del documento: __________'),0,0,'C');
 
     // DECLARACIÓN DE TRAZABILIDAD | LADO IZQUIERDO
     $pdf->SetXY(50,58);
@@ -680,6 +684,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     /*******************************************
     INFORMACIÓN COMPLEMENTARIA DE LA HOJA CUATRO
     *******************************************/
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetXY(33,30);
+    $pdf->Cell(15,10,utf8_decode('ID del documento: __________'),0,0,'C');
     //Comprender los datos de calibración y prueba
     $pdf->SetFont("Arial","b",10);
     $pdf->SetXY(10,35);

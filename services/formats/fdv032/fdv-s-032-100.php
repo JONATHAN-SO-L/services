@@ -248,7 +248,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
     $pdf->SetFont("Arial","",10);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(55,56.5);
+    $pdf->SetXY(63,56.5);
     $pdf->Cell (5,5,utf8_decode($id_documento),0,1,'C');
     $pdf->SetFont("Arial","b",10);
     $pdf->SetTextColor(0,88,147);
@@ -477,23 +477,33 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetFont("Arial","",8);
     $pdf->SetTextColor(0,88,147);
 
-    $pdf->SetXY(60,65);
-    $pdf->Cell(15,10,utf8_decode('Identificación de Cliente: ____________________________________________'),0,0,'C');
+    $pdf->SetXY(33,65);
+    $pdf->Cell(15,10,utf8_decode('Identificación de Cliente: __________'),0,0,'C');
 
     $pdf->SetFont("Arial","",9);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(60,65);
+    $pdf->SetXY(54,65);
     $pdf->Cell (5,5,utf8_decode($identificacion_cliente),0,0,'C');
     $pdf->SetFont("Arial","",8);
     $pdf->SetTextColor(0,88,147);
 
-    $pdf->SetX(155);
-    $pdf->Cell(15,10,utf8_decode('Técnico:__________________________________________'),0,0,'C');
+    $pdf->SetX(97);
+    $pdf->Cell(15,10,utf8_decode('Técnico: ________________________________________'),0,0,'C');
 
     $pdf->SetFont("Arial","",9);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(165,65);
+    $pdf->SetXY(100,65);
     $pdf->Cell (5,5,utf8_decode($tecnico),0,0,'C');
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetTextColor(0,88,147);
+
+    $pdf->SetX(165);
+    $pdf->Cell(15,10,utf8_decode('ID del Documento: __________________'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(180,65);
+    $pdf->Cell (5,5,utf8_decode($id_documento),0,0,'C');
     $pdf->SetFont("Arial","",8);
     $pdf->SetTextColor(0,88,147);
 
@@ -741,13 +751,17 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetXY(10,45);
     $pdf->Cell(0,10,utf8_decode('Estándard de Trazabilidad'),0,0,'C');
     $pdf->SetFont("Arial","",8);
-    $pdf->SetXY(95,50);
-    $pdf->Cell(15,10,utf8_decode('Fecha del documento: _______________________________________________'),0,0,'C');
+    $pdf->SetXY(75,50);
+    $pdf->Cell(15,10,utf8_decode('Fecha del documento: __________'),0,0,'C');
+    $pdf->SetX(120);
+    $pdf->Cell(15,10,utf8_decode('ID del documento: __________'),0,0,'C');
 
     $pdf->SetFont("Arial","",9);
     $pdf->SetTextColor(0,0,0);
-    $pdf->SetXY(110,52);
+    $pdf->SetXY(95,52);
     $pdf->Cell (5,5,utf8_decode($fecha_documento),0,0,'C');
+    $pdf->SetXY(137,52);
+    $pdf->Cell (5,5,utf8_decode($id_documento),0,0,'C');
     $pdf->SetTextColor(0,88,147);
 
 
@@ -1011,8 +1025,18 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     /*******************************************
     INFORMACIÓN COMPLEMENTARIA DE LA HOJA CUATRO
     *******************************************/
+    $pdf->SetFont("Arial","",8);
+    $pdf->SetXY(33,30);
+    $pdf->Cell(15,10,utf8_decode('ID del documento: __________'),0,0,'C');
+
+    $pdf->SetFont("Arial","",9);
+    $pdf->SetTextColor(0,0,0);
+    $pdf->SetXY(50,32);
+    $pdf->Cell (5,5,utf8_decode($id_documento),0,0,'C');
+
     //Comprender los datos de calibración y prueba
     $pdf->SetFont("Arial","b",10);
+    $pdf->SetTextColor(0,88,147);
     $pdf->SetXY(10,35);
     $pdf->Cell(0,10,utf8_decode('Comprender los datos de calibración y prueba'),0,0,'C');
 
@@ -1089,7 +1113,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     /***********************************************************************************
     Se indica el nombre del arcvhivo y los parámetros de exportación | Fin del documento
     ***********************************************************************************/
-    $pdf->output('I',utf8_decode('FDV-S-032 Certificado de Calibración').'.pdf');
+    $pdf->output('I',utf8_decode('FDV-S-032 Certificado de Calibración').'-'.$id_documento.'.pdf');
 
 } else {
     header ('Location: ../../../index.php');
