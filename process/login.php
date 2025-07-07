@@ -35,7 +35,7 @@ if ($val_user -> rowCount() > 0) {
         $tipo_usuario = $value->tipo_usuario;
     }
 } else {
-    mensaje_error();
+    echo '<script>alert("Ocurrió un error al iniciar sesión, por favor, intenta nuevamente o contanta al Soporte Técnico")</script>';
 }
 
 /*************************************
@@ -45,7 +45,7 @@ switch ($tipo_usuario) {
     case 'A': // Administrador
     $_SESSION['usuario'] = $usuario;
     $_SESSION['nombre_completo'] = $nombre_completo;
-    $_SESSION['nombre'] = $nombre_completo;
+    $_SESSION['nombre'] = $usuario;
     $_SESSION['clave'] = $clave;
     $_SESSION['email'] = $email;
     $_SESSION['razon_social'] = $razon_social;
@@ -59,7 +59,7 @@ switch ($tipo_usuario) {
     case 'G': // Gerente o Jefe
     $_SESSION['usuario'] = $usuario;
     $_SESSION['nombre_completo'] = $nombre_completo;
-    $_SESSION['nombre'] = $nombre_completo;
+    $_SESSION['nombre'] = $usuario;
     $_SESSION['clave'] = $clave;
     $_SESSION['email'] = $email;
     $_SESSION['razon_social'] = $razon_social;
@@ -84,16 +84,17 @@ switch ($tipo_usuario) {
         $_SESSION['tipo'] = 'admin';
         header('Location: ./inicio.php');
     }
-
     break;
 
     case 'T': // Técnico de Servicios
     $_SESSION['usuario'] = $usuario;
     $_SESSION['nombre_completo'] = $nombre_completo;
+    $_SESSION['nombre'] = $usuario;
     $_SESSION['email'] = $email;
     $_SESSION['clave'] = $clave;
     $_SESSION['razon_social'] = $razon_social;
     $_SESSION['tipo_usuario'] = $tipo_usuario;
+
 
     // Validación de la exitencia del usuario en otra tabla
     $s_user = $con -> prepare("SELECT * FROM usuario_devecchi WHERE nombre_usuario = :nombre_usuario AND clave = :clave");
@@ -108,12 +109,12 @@ switch ($tipo_usuario) {
         foreach ($found_user as $value) {
             $_SESSION['nombre'] = $value->nombre;
             $_SESSION['apellido'] = $value->apellido;
+            $_SESSION['clave'] = $value->clave;
             $_SESSION['tipo'] = 'devecchi';
             header('Location: ./seccion.php');
         }
     } else {
-        $_SESSION['nombre'] = $value->nombre;
-        $_SESSION['apellido'] = $value->apellido;
+        $_SESSION['clave'] = $value->clave;
         $_SESSION['tipo'] = 'devecchi';
         header('Location: ./seccion.php');
     }
