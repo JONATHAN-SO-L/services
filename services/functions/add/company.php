@@ -3,6 +3,50 @@ session_start();
 
 if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
     if (isset($_POST['continuar'])) {
+        include '../../assets/admin/links.php';
+
+        function mensaje_ayuda(){
+        echo '
+            <div class="alert alert-success alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="text-center"><strong>REGISTRO EXITOSO</strong></h4>
+            <p class="text-center">
+            Se registró correctamente la empresa en el sistema.
+            </p>
+            </div>
+            ';
+        }
+
+        function mensaje_error() {
+            echo '
+                <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="text-center"><strong>OCURRIÓ UN ERROR</strong></h4>
+                <p class="text-center">
+                <u>No se logró recibir información correctamente, por favor, inténtalo de nuevo o contácta al Soporte Técnico.
+                </p>
+                </div>
+                ';
+        }
+
+        function redirect_failed() {
+        echo '
+            <div class="container" style="margin-left: 40%">
+                <img src="../../assets/img/loading_dvi.gif" height="40%" weight="40%">
+                <br>
+                <a href="../../certifies/fdv/032/empresa.php" class="btn btn-sm btn-danger" style="margin-left: 15%">Regresar</a>
+            </div>';
+        }
+
+        function redirect_success($id_documento) {
+            echo '
+                <div class="container" style="margin-left: 40%">
+                    <img src="../../assets/img/loading_dvi.gif" height="40%" weight="40%">
+                    <br>
+                    <a href="../../certifies/fdv/032/contador.php?'.$id_documento.'" class="btn btn-sm btn-success" style="margin-left: 15%">Continuar</a>
+                </div>';
+        }
+
         // Recepción de datos
         $razon_social = $_POST['razon_social'];
         $rfc = $_POST['rfc'];
@@ -101,10 +145,10 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
         // Guardado de información en DDBB
         $save_data = $con->prepare(
-            "INSERT INTO $certified (empresa, direccion, id_documento, tecnico, fecha_hora_registro)
-            VALUES (?, ?, ?, ?, ?)");
+            "INSERT INTO $certified (empresa, edificio, direccion, id_documento, tecnico, fecha_hora_registro)
+            VALUES (?, ?, ?, ?, ?, ?)");
             
-        $val_save_data = $save_data->execute([$razon_social, $direccion_entrega, $id_documento, $tecnico, $fecha_hora_registro]);
+        $val_save_data = $save_data->execute([$razon_social, $sede, $direccion_entrega, $id_documento, $tecnico, $fecha_hora_registro]);
 
         if ($val_save_data) {
             // Registro en log
@@ -118,20 +162,20 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
             if ($val_save_move) {
                 require '../drop_con.php';
-                echo '<script>alert("Registro exitoso, continúa con el llenado de información")</script>';
-                echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/contador.php?'.$id_documento.'">';
+                mensaje_ayuda();
+                redirect_success($id_documento);
             } else {
-                echo '<script>alert("Ocurrió un problema al intentar guardar la información, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
-                echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/empresa.php">';
+                mensaje_error();
+                redirect_failed();
             }
 
         } else {
-            echo '<script>alert("Ocurrió un problema al intentar guardar la información, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
-            echo '<meta http-equiv="refresh" content="0; url=../../certifies/fdv/032/empresa.php">';
+            mensaje_error();
+            redirect_failed();
         }
     } else {
-        echo '<script>alert("No se detectó el iniciador de la petición, por favor, inténtalo de nuevo o contacta al Soporte Técnico")</script>';
-        echo '<meta http-equiv="refresh" content="0; url=validador_empresa.php">';
+        mensaje_error();
+        redirect_failed();
     }
 
 } else {
