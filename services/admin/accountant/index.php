@@ -41,12 +41,12 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
 
         <div class="pull-rigth col-sm-2">
             <form action="" method="POST">
-                <label>Buscar por empresa:</label>
+                <label>Buscar por edificio / sede:</label>
                 <select name="empresa_clave" class="form-control">
                     <option value=""> - Selecciona la empresa - </option>
                     <?php
                     require '../../functions/conex.php';
-                    // Lista de las empresas disponibles para buscar
+                    // Lista de las empresas disponibles para buscar, se muestra en conjunto con el edificio
                     $empresas = 'empresas';
                     $buscar_empresas = $con->prepare("SELECT id, razon_social FROM $empresas");
                     $buscar_empresas->setFetchMode(PDO::FETCH_OBJ);
@@ -59,7 +59,24 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                             $id_empresa_dispo = $empresas_disponibles -> id;
                             $razon_empresa_dispo = $empresas_disponibles -> razon_social;
 
-                            echo '<option value="'.$id_empresa_dispo.'">'.$razon_empresa_dispo.'</option>';
+                            // Buscar edificios relacionado con la empresa
+                            $edify = 'edificio';
+                            $found_edificios = $con->prepare("SELECT id_edificio, empresa_id, descripcion FROM $edify WHERE empresa_id = :id_empresa_dispo");
+                            $found_edificios->bindValue(':id_empresa_dispo', $id_empresa_dispo);
+                            $found_edificios->setFetchMode(PDO::FETCH_OBJ);
+                            $found_edificios->execute();
+
+                            $enlistar_edificios = $found_edificios->fetchAll();
+
+                            if ($found_edificios -> rowCount() > 0) {
+                                foreach ($enlistar_edificios as $edificio_dispo) {
+                                    $id_edificio_dispo2 = $edificio_dispo -> id_edificio;
+                                    $empresa_id_dispo2 = $edificio_dispo -> empresa_id;
+                                    $descripcion_dispo2 = $edificio_dispo -> descripcion;
+
+                                    echo '<option value="'.$id_edificio_dispo2.'">'.$razon_empresa_dispo.' - '.$descripcion_dispo2.'</option>';
+                                }
+                            }
                         }
                     }
                     ?>
@@ -102,6 +119,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                 <th>No. Control</th>
                 <th>Descripción</th>
                 <th>Empresa Vinculada</th>
+                <th>Edificio / Sede</th>
                 <th>Modelo</th>
                 <th>Número de Serie</th>
                 <th>Estado</th>
@@ -130,7 +148,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                     require '../../functions/conex.php';
                     // Se busca el edificio asignado
                     $build = 'edificio';
-                    $b_edificio = $con -> prepare("SELECT id_edificio, empresa_id FROM $build WHERE id_edificio = :id_edificio");
+                    $b_edificio = $con -> prepare("SELECT id_edificio, empresa_id, descripcion FROM $build WHERE id_edificio = :id_edificio");
                     $b_edificio->bindValue('id_edificio', $empresa_vinculada);
                     $b_edificio->setFetchMode(PDO::FETCH_OBJ);
                     $b_edificio->execute();
@@ -141,6 +159,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                         foreach ($e_edificio as $edificio) {
                             $id_edificio = $edificio -> id_edificio;
                             $empresa_id = $edificio -> empresa_id;
+                            $descripcion = $edificio ->descripcion;
 
                             // Se busca la empresa en base al edificio
                             $company = 'empresas';
@@ -168,6 +187,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                     <td><strong>'.$numero_control.'</strong></td>
                     <td>'.$descripcion_nombre.'</td>
                     <td><strong>'.$razon_social.'</strong></td>
+                    <td>'.$descripcion.'</td>
                     <td>'.$modelo_ci.'</td>
                     <td>'.$numero_serie.'</td>
                     <td><strong>'.$estado.'</strong></td>
@@ -193,8 +213,8 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
 
             // Obtener el edificio desde el ID obtenido por la empresa
             $builder = 'edificio';
-            $buscar_edificio = $con -> prepare("SELECT id_edificio, empresa_id, descripcion FROM $builder WHERE empresa_id = :id_empresa");
-            $buscar_edificio->bindValue(':id_empresa', $empresa_clave);
+            $buscar_edificio = $con -> prepare("SELECT id_edificio, empresa_id, descripcion FROM $builder WHERE id_edificio = :id_edificio");
+            $buscar_edificio->bindValue(':id_edificio', $empresa_clave);
             $buscar_edificio->setFetchMode(PDO::FETCH_OBJ);
             $buscar_edificio->execute();
 
@@ -243,7 +263,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                 echo '
                 <a href="index.php"><button type="submit" value="Volver" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
                 <br><br>
-                <p><strong>Búsqueda realizada: </strong><span class="badge bg-success">'.$razon_empresa2.'</span></p>
+                <p><strong>Búsqueda realizada: </strong><span class="badge bg-success">'.$razon_empresa2.' - '.$descipcion2.'</span></p>
                 <p><strong>Registros encontrados: </strong><span class="badge bg-success">'.$total_registros2.'</span></p>';
 
                 echo '<table class="table table-responsive table-hover table-striped table-bordered">
@@ -252,6 +272,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                 <th>No. Control</th>
                 <th>Descripción</th>
                 <th>Empresa Vinculada</th>
+                <th>Edificio / Sede</th>
                 <th>Modelo</th>
                 <th>Número de Serie</th>
                 <th>Estado</th>
@@ -280,7 +301,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                     require '../../functions/conex.php';
                     // Se busca el edificio asignado
                     $build = 'edificio';
-                    $b_edificio = $con -> prepare("SELECT id_edificio, empresa_id FROM $build WHERE id_edificio = :id_edificio");
+                    $b_edificio = $con -> prepare("SELECT id_edificio, empresa_id, descripcion FROM $build WHERE id_edificio = :id_edificio");
                     $b_edificio->bindValue('id_edificio', $empresa_vinculada);
                     $b_edificio->setFetchMode(PDO::FETCH_OBJ);
                     $b_edificio->execute();
@@ -291,6 +312,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                         foreach ($e_edificio as $edificio) {
                             $id_edificio = $edificio -> id_edificio;
                             $empresa_id = $edificio -> empresa_id;
+                            $descripcion = $edificio -> descripcion;
 
                             // Se busca la empresa en base al edificio
                             $company = 'empresas';
@@ -318,6 +340,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                     <td><strong>'.$numero_control.'</strong></td>
                     <td>'.$descripcion_nombre.'</td>
                     <td><strong>'.$razon_social.'</strong></td>
+                    <td>'.$descripcion.'</td>
                     <td>'.$modelo_ci.'</td>
                     <td>'.$numero_serie.'</td>
                     <td><strong>'.$estado.'</strong></td>
@@ -353,6 +376,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                 <th>No. Control</th>
                 <th>Descripción</th>
                 <th>Empresa Vinculada</th>
+                <th>Edificio / Sede</th>
                 <th>Modelo</th>
                 <th>Número de Serie</th>
                 <th>Estado</th>
@@ -381,7 +405,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                     require '../../functions/conex.php';
                     // Se busca el edificio asignado
                     $build = 'edificio';
-                    $b_edificio = $con -> prepare("SELECT id_edificio, empresa_id FROM $build WHERE id_edificio = :id_edificio");
+                    $b_edificio = $con -> prepare("SELECT id_edificio, empresa_id, descripcion FROM $build WHERE id_edificio = :id_edificio");
                     $b_edificio->bindValue('id_edificio', $empresa_vinculada);
                     $b_edificio->setFetchMode(PDO::FETCH_OBJ);
                     $b_edificio->execute();
@@ -392,6 +416,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                         foreach ($e_edificio as $edificio) {
                             $id_edificio = $edificio -> id_edificio;
                             $empresa_id = $edificio -> empresa_id;
+                            $descripcion = $edificio -> descripcion;
 
                             // Se busca la empresa en base al edificio
                             $company = 'empresas';
@@ -419,6 +444,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                     <td><strong>'.$numero_control.'</strong></td>
                     <td>'.$descripcion_nombre.'</td>
                     <td><strong>'.$razon_social.'</strong></td>
+                    <td>'.$descripcion.'</td>
                     <td>'.$modelo_ci.'</td>
                     <td>'.$numero_serie.'</td>
                     <td><strong>'.$estado.'</strong></td>
