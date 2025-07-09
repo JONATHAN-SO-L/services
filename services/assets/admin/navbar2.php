@@ -109,6 +109,20 @@ MENÚ DE NAVEGACIÓN PARA LA VISTA ADMIN
         Grafica
         </a>
         </li-->
+
+        <li>
+        <a href="../formats/">
+        <i class="fa fa-files-o" aria-hidden="true"></i>
+        Formatos y REV.
+        </a>
+        </li>
+        <li>
+        <a href="../auditlog/">
+        <i class="fa fa-search-plus" aria-hidden="true"></i>
+        AuditLog
+        </a>
+        </li>
+
         <li>
         <a href="../../../tabla_usuarios.php">
         <i class="fa fa-user"></i>
