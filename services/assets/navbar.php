@@ -111,14 +111,14 @@ MENÚ DE NAVEGACIÓN DE DENTRO DE LA SECCIÓN DEL CERTIFICADO A GENERAR
           <i class="fa fa-cogs"></i>
           Config
           </a>
-          </li>
+          </li-->
           <li>
-          <a href="seccion_admin.php">
+          <a href="../seccion_admin.php">
           <i class="fa fa-wrench"></i>
           Servicio
           </a>
           </li>	
-          <li>
+          <!--li>
           <a href="tabla_servicios.php">
           <i class="fa fa-pencil-square-o"></i>
           Editar Servicio
@@ -136,6 +136,20 @@ MENÚ DE NAVEGACIÓN DE DENTRO DE LA SECCIÓN DEL CERTIFICADO A GENERAR
           Grafica
           </a>
           </li-->
+
+          <li>
+          <a href="../services/admin/formats/">
+          <i class="fa fa-files-o" aria-hidden="true"></i>
+          Formatos y REV.
+          </a>
+          </li>
+          <li>
+          <a href="../services/admin/auditlog/">
+          <i class="fa fa-search-plus" aria-hidden="true"></i>
+          AuditLog
+          </a>
+          </li>
+
           <li>
           <a href="../tabla_usuarios.php">
           <i class="fa fa-user"></i>
