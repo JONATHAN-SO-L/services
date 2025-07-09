@@ -5,6 +5,24 @@ header('Content-Type: text/html; charset=UTF-8');
 if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="devecchi" || $_SESSION['tipo']=="admin"){ 
 	include './assets/navbar.php';
 	include './assets/links.php';
+	require './functions/conex_serv.php';
+
+	// Obtener el nombre de los formatos de certificados
+	$format = 'formatos';
+	$s_format = $con->prepare("SELECT nombre_formato FROM $format");
+	$s_format->setFetchMode(PDO::FETCH_OBJ);
+	$s_format->execute();
+
+	$f_format = $s_format->fetchAll();
+
+	if ($s_format -> rowCount() > 0) {
+		foreach ($f_format as $formats) {
+			$nombre_formato = $formats -> nombre_formato;
+		}
+	} else {
+		echo 'No se encontraron formatos cargados en el sistema';
+		die();
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,7 +78,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="dev
 
 <table>
 	<a class="button" href="./certifies/fdv/032/index.php" style="width: 234px;margin-left: 40px;">
-	<center>FDV-S-032</center>
+	<center><?php echo $nombre_formato; ?></center>
 	<div class="button__horizontal"></div>
 	<div class="button__vertical"></div>
 </a>
