@@ -85,6 +85,11 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
 include './lib/config.php';
 include 'conexi.php';
 
+// Información para auditlog
+$tecnico = $_SESSION['nombre_completo'];
+require './services/assets/timezone.php';
+$fecha_hora_carga = date("d/m/Y H:i:s");
+
 if(isset($_POST['descripcion']) && isset($_POST['calle'])){
 		$id_edit=MysqlQuery::RequestPost('id_edit');
 		$descripcion=  MysqlQuery::RequestPost('descripcion');
@@ -97,7 +102,31 @@ if(isset($_POST['descripcion']) && isset($_POST['calle'])){
           $sql=Mysql::consulta("SELECT * FROM edificio WHERE calle= '$empresa_delete' AND descripcion='$corto_delete'");
 
           if(mysqli_num_rows($sql)>=1){
-             MysqlQuery::Eliminar("edificio", "calle='$empresa_delete' and descripcion='$corto_delete'");
+             if (MysqlQuery::Eliminar("edificio", "calle='$empresa_delete' and descripcion='$corto_delete'")) {
+              // Registro en auditlog
+              $log = 'auditlog';
+                $movimiento = utf8_decode('El usuario '.$tecnico.' elimina el edificio '.$_POST['descripcion'].' el '.$fecha_hora_carga.'');
+                $url = $_SERVER['PHP_SELF'];
+                $database = 'SIS';
+                require './services/functions/conex_serv.php';
+                $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
+                                    VALUES (?, ?, ?, ?, ?)");
+                $val_save_move = $save_move->execute([$movimiento, $url, $database, $tecnico, $fecha_hora_carga]);
+
+                if ($val_save_move) {
+                  mensaje_ayuda();
+                  redirect_success();
+                  die();
+                } else {
+                    mensaje_error();
+                    redirect_failed();
+                    die();
+                }
+             } else {
+              mensaje_error();
+              redirect_failed();
+              die();
+             }
              mensaje_ayuda();
              redirect_success();
              die();
