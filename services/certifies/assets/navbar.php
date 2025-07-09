@@ -135,6 +135,20 @@ MENÚ DE NAVEGACIÓN DE DENTRO DE LA SECCIÓN DE LOS CERTIFICADOS DEL FDV-S-032
             Grafica
             </a>
             </li-->
+
+            <li>
+            <a href="../../../admin/formats/">
+            <i class="fa fa-files-o" aria-hidden="true"></i>
+            Formatos y REV.
+            </a>
+            </li>
+            <li>
+            <a href="../../../admin/auditlog/">
+            <i class="fa fa-search-plus" aria-hidden="true"></i>
+            AuditLog
+            </a>
+            </li>
+
             <li>
             <a href="../../../../tabla_usuarios.php">
             <i class="fa fa-user"></i>
