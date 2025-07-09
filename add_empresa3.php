@@ -117,7 +117,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
 
 				// Registro en auditlog empresa
 				require './services/functions/conex_serv.php';
-				$movimiento = utf8_decode('El usuario '.$tecnico.' registró la empresa '.$razon_social.' con RFC: '.$rfc.' el '.$fecha_hora_carga.'');
+				$movimiento = utf8_decode('El usuario '.$tecnico.' registra la empresa '.$razon_social.' con RFC: '.$rfc.' el '.$fecha_hora_carga.'');
 				$url = $_SERVER['PHP_SELF'];
 				$database = 'veco_sims_devecchi';
 				$save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
@@ -125,7 +125,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
 				$val_save_move = $save_move->execute([$movimiento, $url, $database, $tecnico, $fecha_hora_carga]);
 
 				// Registro en auditlog cuenta usuario
-				$movimiento2 = utf8_decode('El usuario '.$tecnico.' registró el usuario '.$razon_social.' en la base de datos '.$users_s.' el '.$fecha_hora_carga.'');
+				$movimiento2 = utf8_decode('El usuario '.$tecnico.' registra el usuario '.$razon_social.' en la base de datos '.$users_s.' el '.$fecha_hora_carga.'');
 				$url2 = $_SERVER['PHP_SELF'];
 				$save_move2 = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
 													VALUES (?, ?, ?, ?, ?)");
