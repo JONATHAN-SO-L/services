@@ -116,7 +116,7 @@ include ("conexi.php");
 
 				// Registro en auditlog empresa
 				require './services/functions/conex_serv.php';
-				$movimiento = utf8_decode('El usuario '.$tecnico.' modificó la empresa '.$razon_social.' con RFC: '.$rfc.' el '.$fecha_hora_carga.'');
+				$movimiento = utf8_decode('El usuario '.$tecnico.' modifica la empresa '.$razon_social.' con RFC: '.$rfc.' el '.$fecha_hora_carga.'');
 				$url = $_SERVER['PHP_SELF'];
 				$database = 'veco_sims_devecchi';
 				$save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
