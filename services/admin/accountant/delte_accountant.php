@@ -100,7 +100,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
 
         if ($val_delete_accountant) {
             // Registro en auditlog
-            $movimiento = utf8_decode('El usuario '.$tecnico.' eliminó '.$descripcion.' con número de serie '.$serie.' y no. control '.$no_control.' el '.$fecha_hora_eliminacion.'');
+            $movimiento = utf8_decode('El usuario '.$tecnico.' elimina '.$descripcion.' con numero de serie '.$serie.' y no. control '.$no_control.' el '.$fecha_hora_eliminacion.'');
             $url = $_SERVER['PHP_SELF'].'?'.$counter;
             $database = 'SIS';
             $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
