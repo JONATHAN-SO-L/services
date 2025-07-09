@@ -82,6 +82,12 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
     <?php
 	include './lib/class_mysql.php';
 include './lib/config.php';
+
+// Información para auditlog
+$tecnico = $_SESSION['nombre_completo'];
+require './services/assets/timezone.php';
+$fecha_hora_carga = date("d/m/Y H:i:s");
+
 if(isset($_POST['rfc']) && isset($_POST['razon_social']) && isset($_POST['nombre_corto'])){
 		$id_edit=MysqlQuery::RequestPost('id_edit');
 		$rfc=  MysqlQuery::RequestPost('rfc');
@@ -96,20 +102,7 @@ if(isset($_POST['rfc']) && isset($_POST['razon_social']) && isset($_POST['nombre
 
           if(mysqli_num_rows($sql)>=1){
              if (MysqlQuery::Eliminar("empresas", "rfc='$empresa_delete' and razon_social='$corto_delete'")) {
-              mensaje_ayuda();
-              redirect_success();
-              die();
-             } else {
-              mensaje_error();
-              redirect_failed();
-              die();
-             }
-             // Información para auditlog
-             $tecnico = $_SESSION['nombre_completo'];
-             require './services/assets/timezone.php';
-             $fecha_hora_carga = date("d/m/Y H:i:s");
-
-             // Eliminación del usuario
+              // Eliminación del usuario
               require './services/functions/conex.php';
                 $user_s = 'usuario_sis';
                 $drop_user = $con->prepare("DELETE FROM $user_s
@@ -117,19 +110,18 @@ if(isset($_POST['rfc']) && isset($_POST['razon_social']) && isset($_POST['nombre
                 $val_drop_user = $drop_user->execute([$nombre_corto]);
 
              // Registro borrado usuario
-             require './services/functions/conex_serv.php';
                 $log = 'auditlog';
                 $url = $_SERVER['PHP_SELF'];
                 $database = 'veco_sims_devecchi';
-
-              $movimiento2 = utf8_decode('El usuario '.$tecnico.' eliminó el usuario '.$nombre_corto.' el '.$fecha_hora_carga.'');
+                require './services/functions/conex_serv.php';
+              $movimiento2 = utf8_decode('El usuario '.$tecnico.' elimina el usuario '.$nombre_corto.' el '.$fecha_hora_carga.'');
              $save_move2 = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
                               VALUES (?, ?, ?, ?, ?)");
               $val_save_move2 = $save_move2->execute([$movimiento2, $url, $database, $tecnico, $fecha_hora_carga]);
                 
               if ($val_save_move2 && $val_drop_user) {                
                 // Registro borrado empresa
-                $movimiento = utf8_decode('El usuario '.$tecnico.' eliminó la empresa '.$razon.' con RFC: '.$rfc.' el '.$fecha_hora_carga.'');
+                $movimiento = utf8_decode('El usuario '.$tecnico.' elimina la empresa '.$razon.' con RFC: '.$rfc.' el '.$fecha_hora_carga.'');
                 $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
                                   VALUES (?, ?, ?, ?, ?)");
                   $val_save_move = $save_move->execute([$movimiento, $url, $database, $tecnico, $fecha_hora_carga]);
@@ -151,6 +143,11 @@ if(isset($_POST['rfc']) && isset($_POST['razon_social']) && isset($_POST['nombre
                 redirect_failed();
                 die();
               }
+             } else {
+              mensaje_error();
+              redirect_failed();
+              die();
+             }
           }else{
             mensaje_error();
             redirect_failed();
