@@ -11,6 +11,22 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     require '../../functions/conex_serv.php';
     $certified = 'fdv_s_032';
 
+    $format = 'formatos';
+    $s_format = $con->prepare("SELECT nombre_formato, revision_formato FROM $format WHERE formato = 'FDV-S-032'");
+    $s_format->setFetchMode(PDO::FETCH_OBJ);
+    $s_format->execute();
+
+    $f_format = $s_format->fetchAll();
+
+    if ($s_format -> rowCount() > 0) {
+        foreach ($f_format as $formato) {
+        $nombre_formato = $formato -> nombre_formato;
+        $revision_formato = $formato -> revision_formato;
+        }
+    } else {
+        echo 'No se encontraron formatos registrados en sistema';
+    }
+
     $recover_data = $con->prepare("SELECT * FROM $certified WHERE id_documento = :id_documento");
     $recover_data->bindValue(':id_documento', $id_documento);
     $recover_data->setFetchMode(PDO::FETCH_OBJ);
@@ -172,6 +188,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     // Clase herdada para la definición de funciones que se replicarán en todas las hojas
     class PDF extends FPDF {
         function Footer() {
+            global $nombre_formato;
+            global $revision_formato;
+
             $this->SetTextColor(0,88,147); // Color RGB azul
             $this->SetFont("Arial","",10); // Arial Normal 10
 
@@ -193,7 +212,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
             // Derecha
             $this->SetXY(160,265);
-            $this->Cell (10,5,utf8_decode('REV. 0; 05/20 FDV-S-032.'),0,1,'D'); // Objeto orientado a la derecha
+            $this->Cell (10,5,utf8_decode('REV. '.$revision_formato.' '.$nombre_formato.'.'),0,1,'D'); // Objeto orientado a la derecha
         }
     }
 
