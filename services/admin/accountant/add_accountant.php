@@ -126,7 +126,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                     if ($val_save_building) {
                       require '../../functions/conex_serv.php';
                       // Registro en auditlog
-                      $movimiento2 = utf8_decode('El usuario '.$tecnico.' agregó '.$descripcion.' con número de serie '.$serie.' y no. control '.$no_control.' en el edificio de la empresa con id '.$empresa_vinculada.' el '.$fecha_hora_carga.'');
+                      $movimiento2 = utf8_decode('El usuario '.$tecnico.' agrega '.$descripcion.' con numero de serie '.$serie.' y no. control '.$no_control.' en el edificio de la empresa con id '.$empresa_vinculada.' el '.$fecha_hora_carga.'');
                       $url2 = $_SERVER['PHP_SELF'];
                       $database = 'veco_sims_devecchi';
                       $save_move2 = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
