@@ -116,7 +116,7 @@ if(isset($_POST['descripcion']) && isset($_POST['calle']) && isset($_POST['munic
 
       // Registro en auditlog empresa
       require './services/functions/conex_serv.php';
-      $movimiento = utf8_decode('El usuario '.$tecnico.' modificó el edificio '.$descripcion.' el '.$fecha_hora_carga.'');
+      $movimiento = utf8_decode('El usuario '.$tecnico.' modifica el edificio '.$descripcion.' el '.$fecha_hora_carga.'');
       $url = $_SERVER['PHP_SELF'];
       $database = 'veco_sims_devecchi';
       $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
