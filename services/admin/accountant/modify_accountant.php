@@ -128,7 +128,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
 
         if ($val_update_accountant) {
             // Registro en auditlog
-            $movimiento = utf8_decode('El usuario '.$tecnico.' modificó '.$descripcion.' con número de serie '.$serie.' y no. control '.$no_control.' el '.$fecha_hora_modificacion.'');
+            $movimiento = utf8_decode('El usuario '.$tecnico.' modifica '.$descripcion.' con numero de serie '.$serie.' y no. control '.$no_control.' el '.$fecha_hora_modificacion.'');
             $url = $_SERVER['PHP_SELF'].'?'.$counter;
             $database = 'SIS';
             $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
