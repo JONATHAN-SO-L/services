@@ -16,6 +16,24 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `auditlog`
+--
+
+DROP TABLE IF EXISTS `auditlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auditlog` (
+  `id_movimiento` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `movimiento` text NOT NULL,
+  `link` text NOT NULL,
+  `ddbb` text NOT NULL,
+  `usuario_movimiento` text NOT NULL,
+  `fecha_hora` text NOT NULL,
+  PRIMARY KEY (`id_movimiento`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `contadores`
 --
 
@@ -29,6 +47,7 @@ CREATE TABLE `contadores` (
   `numero_serie` text NOT NULL,
   `identificacion_cliente` text NOT NULL,
   `numero_control` text NOT NULL,
+  `empresa_vinculada` text NOT NULL,
   `rango` text NOT NULL,
   `frecuencia_calibracion` text NOT NULL,
   `vigencia_inicial` text NOT NULL,
@@ -55,6 +74,7 @@ DROP TABLE IF EXISTS `fdv_s_032`;
 CREATE TABLE `fdv_s_032` (
   `id_folio` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `empresa` text NOT NULL,
+  `edificio` text NOT NULL,
   `direccion` text NOT NULL,
   `modelo_contador` text DEFAULT NULL,
   `intervalo_calibracion` text DEFAULT NULL,
@@ -191,10 +211,11 @@ CREATE TABLE `fdv_s_032` (
   `exp_fecha_50` text DEFAULT NULL,
   `tecnico` text DEFAULT NULL,
   `fecha_hora_registro` text DEFAULT NULL,
+  `fecha_hora_cierre` text DEFAULT NULL,
   `modifica_data` text DEFAULT NULL,
   `fecha_hora_modificacion` text DEFAULT NULL,
   PRIMARY KEY (`id_folio`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,17 +226,17 @@ DROP TABLE IF EXISTS `formatos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `formatos` (
-  `id_movimiento` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_formato` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `formato` text NOT NULL,
   `nombre_formato` text NOT NULL,
   `revision_formato` text NOT NULL,
-  `url` text NOT NULL,
   `registra_data` text NOT NULL,
   `fecha_hora_registro` text NOT NULL,
   `modifica_data` text DEFAULT NULL,
   `fecha_hora_modificacion` text DEFAULT NULL,
-  PRIMARY KEY (`id_movimiento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id_formato`),
+  UNIQUE KEY `UNI` (`formato`) USING HASH
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,16 +252,21 @@ CREATE TABLE `instrumentos` (
   `modelo` text NOT NULL,
   `numero_serie` text NOT NULL,
   `numero_control` text NOT NULL,
+  `rango` text NOT NULL,
+  `frecuencia_calibracion` text NOT NULL,
   `fecha_calibracion` text NOT NULL,
   `fecha_proxima_calibracion` text NOT NULL,
+  `estado` text NOT NULL,
+  `area_asignada` text NOT NULL,
   `tipo_instrumento` text NOT NULL,
+  `comentarios` text DEFAULT NULL,
+  `certificado` text NOT NULL,
   `registra_data` text NOT NULL,
   `fecha_hora_registro` text NOT NULL,
-  `estado` text NOT NULL,
   `modifica_data` text DEFAULT NULL,
   `fecha_hora_modificacion` text DEFAULT NULL,
   PRIMARY KEY (`id_instrumento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,45 +278,18 @@ DROP TABLE IF EXISTS `particulas`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `particulas` (
   `id_particula` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tamano_real_03` text NOT NULL,
-  `desviacion_tamano_03` text NOT NULL,
-  `no_lote_03` text NOT NULL,
-  `exp_fecha_03` text NOT NULL,
-  `tamano_real_04` text NOT NULL,
-  `desviacion_tamano_04` text NOT NULL,
-  `no_lote_04` text NOT NULL,
-  `exp_fecha_04` text NOT NULL,
-  `tamano_real_05` text NOT NULL,
-  `desviacion_tamano_05` text NOT NULL,
-  `no_lote_05` text NOT NULL,
-  `exp_fecha_05` text NOT NULL,
-  `tamano_real_06` text NOT NULL,
-  `desviacion_tamano_06` text NOT NULL,
-  `no_lote_06` text NOT NULL,
-  `exp_fecha_06` text NOT NULL,
-  `tamano_real_08` text NOT NULL,
-  `desviacion_tamano_08` text NOT NULL,
-  `no_lote_08` text NOT NULL,
-  `exp_fecha_08` text NOT NULL,
-  `tamano_real_10` text NOT NULL,
-  `desviacion_tamano_10` text NOT NULL,
-  `no_lote_10` text NOT NULL,
-  `exp_fecha_10` text NOT NULL,
-  `tamano_real_30` text NOT NULL,
-  `desviacion_tamano_30` text NOT NULL,
-  `no_lote_30` text NOT NULL,
-  `exp_fecha_30` text NOT NULL,
-  `tamano_real_50` text NOT NULL,
-  `desviacion_tamano_50` text NOT NULL,
-  `no_lote_50` text NOT NULL,
-  `exp_fecha_50` text NOT NULL,
+  `tamano_nominal` text NOT NULL,
+  `tamano_real` text NOT NULL,
+  `desviacion_tamano` text NOT NULL,
+  `no_lote` text NOT NULL,
+  `exp_fecha` text NOT NULL,
+  `estado` text NOT NULL,
   `registra_data` text NOT NULL,
   `fecha_hora_registro` text NOT NULL,
-  `estado` text NOT NULL,
   `modifica_data` text DEFAULT NULL,
   `fecha_hora_modificacion` text DEFAULT NULL,
   PRIMARY KEY (`id_particula`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -306,4 +305,4 @@ CREATE TABLE `particulas` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-30 16:51:48
+-- Dump completed on 2025-07-10 17:57:10
