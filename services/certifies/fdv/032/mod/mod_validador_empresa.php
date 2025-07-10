@@ -138,7 +138,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
                                         <div class="col-sm-6">
                                         <label><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;Sede:</label>
-                                        <select class="form-control" name="sede" required>
+                                        <select class="form-control" name="sede" id="sede" required>
                                             <option value=""> - Selecciona la sede - </option>
                                             <?php
                                             $s_build = $con->prepare("SELECT id_edificio, empresa_id, descripcion FROM $build WHERE empresa_id = :empresa_id");
