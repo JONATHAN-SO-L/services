@@ -89,7 +89,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         require '../conex_serv.php';
 
         /**********************************************************************************\
-        *   Generación del ID del documento                                                *
+        *   GENERACIÓN DEL ID DEL DOCUMENTO                                                *
         *                                                                                  *
         *   El formato que se utiliza para el Id del documento es el que sigue: 25-010301  *
         *   25=año                                                                         *
@@ -97,45 +97,45 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         *   03=número de semana del año                                                    *
         *   01=número consecutivo de calibraciones por año                                 *
         \**********************************************************************************/
-       /*$complemento_id1 = date("y\-mW"); // año-mesnúmero de semana del año*/
+        $complemento_id = date("y\ "); // últimos dos dígitos del año
+       $complemento_id1 = date("y\-mW"); // año-mes número de semana del año*/
 
         // Se valida que no coincida el ID con otro, en caso de que sí, se agrega 1
         $s_id_documento = $con->prepare("SELECT id_documento FROM $certified ORDER BY id_documento DESC LIMIT 1");
         $s_id_documento->setFetchMode(PDO::FETCH_OBJ);
         $s_id_documento->execute();
 
-        $f_id_documento = $s_id_documento->fetchColumn();
+        $f_id_documento = $s_id_documento->fetchAll();
 
-        if ($f_id_documento <= 0) {
+        if ($s_id_documento -> rowCount() > 0) { // Si ya existe un folio, realiza lo siguiente:
+            foreach ($f_id_documento as $folio_actual) {
+                // Obtiene el folio actualmente registrado
+                $id_documento_actual = $folio_actual -> id_documento;
+
+                // Extrae los primeros valores en el formato año (Por ejemplo: 25)
+                $complemento = substr($id_documento_actual, 0, 2);
+
+                // Verifica si el año es el que está en curso
+                if ($complemento_id == $complemento) {
+                    // En caso de que el año sea el mismo en curso, se continúa con el consecutivo, extrae el último valor y se suma el consecutivo
+                    $complemento_id2 = substr($id_documento_actual, 7);
+                    $complemento_id2 = $complemento_id2+1;
+                    $id_documento = $complemento_id1.$complemento_id2;
+                } else {
+                    // En caso de que el año sea distinto, se reinicia / inicializa para un nuevo año                    
+                    $id_documento = $complemento_id1.+1;
+                }
+            }
+        } else {
+            // Si aún no existe ningún en folio en la DDBB genera uno nuevo para la base virgen
+            $id_documento = $complemento_id1.+1;
+        }
+
+        // GENERADOR DE FOLIO COMÚN
+        /*if ($f_id_documento <= 0) {
             $id_documento = $f_id_documento+1;
         } else {
             $id_documento = $f_id_documento+1;
-        }
-        
-        // Se elimina el complemento1 perteneciente a la codificación en curso y se extrae el consecutivo restante en caso de que exista
-        /*$f_id_documento2 = str_replace($complemento_id1,'',$f_id_documento);
-        $complemento_id2 = $f_id_documento2++;
-
-        echo 'El ID ENCONTRADO en la DDBB es:';
-        echo '<br>';
-        echo $f_id_documento;
-        echo '<br><br>';
-
-        // Si el folio encontrado es el mismo al generado por el código
-        if ($f_id_documento -> $complemento_id2) {
-            // Se toma el valor generado actual y se coloca en la DDBB
-            $complemento_id2 = $f_id_documento2++;
-            $id_documento = $complemento_id1;
-            echo 'El ID GENERADO es el mismo:';
-            echo '<br>';
-            echo $id_documento;
-        } else { // Si no es igual
-            // Se suma uno al valor genereado y se coloca en la DDBB
-            $complemento_id2 = $f_id_documento2++;
-            $id_documento = $complemento_id1;
-            echo 'El ID GENERADO es distinto:';
-            echo '<br>';
-            echo $id_documento;
         }*/
 
         // Información para auditlog
@@ -153,7 +153,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         if ($val_save_data) {
             // Registro en log
             $log = 'auditlog';
-            $movimiento = utf8_decode('El usuario '.$tecnico.' registró el certificado '.$id_documento.' el '.$fecha_hora_registro.'');
+            $movimiento = utf8_decode('El usuario '.$tecnico.' registra el certificado '.$id_documento.' el '.$fecha_hora_registro.'');
             $url = $_SERVER['PHP_SELF'].'?'.$id_documento;
             $database = 'SIS';
             $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
