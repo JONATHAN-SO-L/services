@@ -60,7 +60,8 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         $sede = $_POST['sede'];
 
         // Se busca edificio relacionado con la empresa
-        $s_build = $con->prepare("SELECT * FROM $build WHERE empresa_id = :razon_social");
+        $s_build = $con->prepare("SELECT * FROM $build WHERE id_edificio = :id_edificio AND empresa_id = :razon_social");
+        $s_build->bindValue(':id_edificio', $sede);
         $s_build->bindValue(':razon_social', $razon_social);
         $s_build->setFetchMode(PDO::FETCH_OBJ);
         $s_build->execute();
@@ -69,6 +70,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
         if ($s_build -> rowCount() > 0) {
             foreach ($f_build as $edificio) {
+                $id_edificio = $edificio -> id_edificio;
                 $empresa_id = $edificio -> empresa_id;
                 $descripcion = $edificio -> descripcion;
                 $calle = $edificio -> calle;
@@ -119,12 +121,13 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
         $save_company = $con->prepare("UPDATE $certified
                                                 SET empresa = ?,
+                                                    edificio = ?,
                                                     direccion = ?,
                                                     modifica_data = ?,
                                                     fecha_hora_modificacion = ?
                                         WHERE id_documento = ?");
 
-        $val_save_company = $save_company->execute([$nombre_empresa, $direccion_completa, $tecnico_mod, $fecha_hora_modificacion, $id_documento]);
+        $val_save_company = $save_company->execute([$nombre_empresa, $id_edificio, $direccion_completa, $tecnico_mod, $fecha_hora_modificacion, $id_documento]);
 
         if ($val_save_company) {
             // Información para auditlog
@@ -134,7 +137,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
             // Registro en log
             $log = 'auditlog';
-            $movimiento = utf8_decode('El usuario '.$tecnico_mod.' modificó el registro '.$id_documento.' actualizando la empresa a '.$nombre_empresa.' el '.$fecha_hora_modificacion.'');
+            $movimiento = utf8_decode('El usuario '.$tecnico_mod.' modifica el registro '.$id_documento.' actualizando la empresa a '.$nombre_empresa.' el '.$fecha_hora_modificacion.'');
             $url = $_SERVER['PHP_SELF'].'?'.$id_documento;
             $database = 'SIS';
             $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
@@ -161,7 +164,6 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         redirect_failed($id_documento);
         die();
     }
-
 } else {
     die(header('Location: ../../../index.php'));
 }
