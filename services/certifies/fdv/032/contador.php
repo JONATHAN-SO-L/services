@@ -26,9 +26,22 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
             <h4 class="text-center"><strong>OCURRIÓ UN ERROR</strong></h4>
             <p class="text-center">
             <u>No se logró recibir información</u> de los <strong>Contadorres de Partículas</strong> en sistema, por favor, inténtalo de nuevo o contácta al Soporte Técnico.
-            </p>
-            </div>
-            ';
+            </p>';
+
+            switch ($_SESSION['tipo']) {
+                case 'admin':
+                    echo '<p class="text-center">Valida que la SEDE/EDIFICIO de la EMPRESA tenga un contador asignado.</p>
+                    <p class="text-center"><a href="../../../admin/accountant/" class="btn btn-primary" style="text-align:center" target="_blank">Ver Contadores</a></p>';
+                break;
+
+                case 'devecchi':
+                    echo '<p class="text-center">
+                    Valida que la SEDE/EDIFICIO de la EMPRESA tenga un contador asignado, solicitalo con el Jefe/Gerente o contácta al Soporte Técnico.
+                    </p>';
+                break;
+            }
+            
+        echo '</div>';
     }
 ?>
         <table>
