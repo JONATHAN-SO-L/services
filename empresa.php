@@ -6,7 +6,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
     include './services/assets/admin/links.php';
 ?>
 <script src="./services/assets/css/main.css"></script>
-
+<meta charset="utf-8">
 <section id="content">
 		 
   <header id="content-header">
@@ -144,21 +144,21 @@ while ($fila = mysqli_fetch_array( $resultado )){
 		ECHO " <TD>".utf8_decode($fila["id"])."</TD>";
 		ECHO " <TD>".utf8_decode($fila["rfc"])."</TD>";
         ECHO " <TD>".utf8_encode($fila["razon_social"])."</TD>";
-		ECHO " <TD>".utf8_encode($fila["nombre_corto"])."</TD>";
-		ECHO " <TD>".utf8_encode($fila["calle"])."</TD>";
-		ECHO " <TD>".utf8_encode($fila["numero_exterior"])."</TD>";	
-		ECHO " <TD>".utf8_encode($fila["numero_interior"])."</TD>";
-		ECHO " <TD>".utf8_encode($fila["colonia"])."</TD>";
+		ECHO " <TD>".utf8_decode($fila["nombre_corto"])."</TD>";
+		ECHO " <TD>".utf8_decode($fila["calle"])."</TD>";
+		ECHO " <TD>".utf8_decode($fila["numero_exterior"])."</TD>";	
+		ECHO " <TD>".utf8_decode($fila["numero_interior"])."</TD>";
+		ECHO " <TD>".utf8_decode($fila["colonia"])."</TD>";
 		ECHO " <TD>".utf8_encode($fila["municipio"])."</TD>";
 		ECHO " <TD>".utf8_decode($fila["entidad_federativa"])."</TD>";
-		ECHO " <TD>".utf8_encode($fila["codigo_postal"])."</TD>";
+		ECHO " <TD>".utf8_decode($fila["codigo_postal"])."</TD>";
 		ECHO " <TD>".utf8_decode($fila["pais"])."</TD>";
-		ECHO " <TD>".utf8_encode($fila["direccion_gps"])."</TD>";
-		ECHO " <TD>".utf8_encode($fila["contacto_nombre"])."</TD>";
-		ECHO " <TD>".utf8_encode($fila["contacto_apellido"])."</TD>";
-		ECHO " <TD>".utf8_encode($fila["contacto_puesto"])."</TD>";
-		ECHO " <TD>".utf8_encode($fila["contacto_email"])."</TD>";
-		ECHO " <TD>".utf8_encode($fila["contacto_telefono"])."</TD>";
+		ECHO " <TD>".utf8_decode($fila["direccion_gps"])."</TD>";
+		ECHO " <TD>".utf8_decode($fila["contacto_nombre"])."</TD>";
+		ECHO " <TD>".utf8_decode($fila["contacto_apellido"])."</TD>";
+		ECHO " <TD>".utf8_decode($fila["contacto_puesto"])."</TD>";
+		ECHO " <TD>".utf8_decode($fila["contacto_email"])."</TD>";
+		ECHO " <TD>".utf8_decode($fila["contacto_telefono"])."</TD>";
      
   echo "</tr>";
 }
