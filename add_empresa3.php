@@ -33,6 +33,18 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
             ';
     }
 
+	function error_empresa() {
+        echo '
+            <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="text-center"><strong>OCURRIÓ UN ERROR</strong></h4>
+            <p class="text-center">
+            <u>La <strong>Razón Social</strong> o el <strong>RFC</strong> ya están registrados en el sistema, por favor, inténtalo de nuevo o contácta al Soporte Técnico.
+            </p>
+            </div>
+            ';
+    }
+
 	function redirect_failed() {
 		echo '
 			<div class="container" style="margin-left: 40%">
@@ -92,7 +104,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
 		$f_company = $s_company->fetchAll();
 
 		if ($s_company -> rowCount() > 0) {
-			mensaje_error();
+			error_empresa();
 			redirect_failed();
 		} else {
 			$save_company = $con->prepare("INSERT INTO $company (rfc, razon_social, nombre_corto, calle, numero_exterior, numero_interior,
