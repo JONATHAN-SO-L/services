@@ -149,14 +149,128 @@ MENÚ DE NAVEGACIÓN 2 PARA LA VISTA ADMIN
         </a>
         </li>
 
-        <li>
+        <!--li>
         <a href="tabla_usuarios.php">
+        <i class="fa fa-user"></i>
+        Usuario
+        </a>
+        </li-->
+        </ul>
+        
+        <?php break;
+      }
+
+      switch ($_SESSION['tipo_usuario']) {
+        case 'A': ?>
+        <title>SIS - Administrador</title>
+        <ul id="main-nav">
+        <li>
+        <a href="inicio.php">
+        <i class="fa fa-grav"></i>
+        Inicio
+        </a>
+        </li>
+        <li>
+        <a href="empresa.php">
+        <i class="fa fa-hospital-o"></i>
+        Empresa
+        </a>
+        </li>
+        <li>
+        <a href="edificio.php">
+        <i class="fa fa-university"></i>
+        Edificio
+        </a>
+        </li>
+        <!--li>
+        <a href="ubicacion.php">
+        <i class="fa fa-map-marker"></i>
+        Ubicación
+        </a>
+        </li>
+        <li>
+        <a href="area.php">
+        <i class="fa fa-rss-square"></i>
+        Área
+        </a>
+        </li-->
+
+        <li>
+          <a href="./services/admin/accountant/">
+            <i class="fa fa-tachometer" aria-hidden="true"></i>
+            Contadores
+          </a>
+        </li>
+        <li>
+          <a href="./services/admin/instruments/">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+            Instrumentos
+          </a>
+        </li>
+        <li>
+          <a href="./services/admin/particles/">
+            <i class="fa fa-filter" aria-hidden="true"></i>
+            Partículas
+          </a>
+        </li>
+        
+        <!--li>
+        <a href="equipo.php">
+        <i class="fa fa-cubes"></i>
+        Equipo
+        </a>
+        </li>
+        <li>
+        <a href="tarea.php">
+        <i class="fa fa-cogs"></i>
+        Config
+        </a>
+        </li-->
+        <li>
+        <a href="seccion_admin.php">
+        <i class="fa fa-wrench"></i>
+        Servicio
+        </a>
+        </li>	
+        <!--li>
+        <a href="tabla_servicios.php">
+        <i class="fa fa-pencil-square-o"></i>
+        Editar Servicio
+        </a>
+        </li>
+        <li>
+        <a href="diario_servic.php">
+        <i class="fa fa-calendar-check-o"></i>
+        Diario
+        </a>
+        </li>	 
+        <li>
+        <a href="menu_grafica.php">
+        <i class="fa fa-line-chart"></i>
+        Grafica
+        </a>
+        </li-->
+
+        <li>
+        <a href="./services/admin/formats/">
+        <i class="fa fa-files-o" aria-hidden="true"></i>
+        Formatos y REV.
+        </a>
+        </li>
+        <li>
+        <a href="./services/admin/auditlog/">
+        <i class="fa fa-search-plus" aria-hidden="true"></i>
+        AuditLog
+        </a>
+        </li>
+
+        <li>
+        <a href="./services/admin/users/usuarios_sis.php">
         <i class="fa fa-user"></i>
         Usuario
         </a>
         </li>
         </ul>
-        
         <?php break;
       }
       ?>
