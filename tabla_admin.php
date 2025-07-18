@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="admin"){ 
+if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario']=="A"){ 
   include './services/assets/admin/navbar.php';
   include './services/assets/admin/links.php';
 ?>
