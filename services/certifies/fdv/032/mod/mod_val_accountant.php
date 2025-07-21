@@ -49,7 +49,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
              
             // Busqueda de información del certificado en base de datos de contadores
             $accountant = 'contadores'; // Tabla de contadores
-            $s_certified = $con->prepare("SELECT modelo_ci, numero_serie, numero_control, identificacion_cliente FROM $accountant WHERE numero_serie = $numero_serie AND estado = 'Calibrado'");
+            $s_certified = $con->prepare("SELECT modelo_ci, numero_serie, numero_control, identificacion_cliente FROM $accountant WHERE numero_serie = $numero_serie AND estado != 'Calibrado'");
             $s_certified->setFetchMode(PDO::FETCH_OBJ);
             $s_certified->execute();
             $f_certified = $s_certified->fetchAll();
