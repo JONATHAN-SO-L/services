@@ -54,7 +54,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
                                 <select class="form-control" name="dmm" required>
                                 <option value=""> - Selecciona el instrumento requerido - </option>
                                 <?php
-                                    $s_instrument = $con->prepare("SELECT activo FROM $instruments WHERE estado = 'Calibrado' AND tipo_instrumento = 'DMM'");
+                                    $s_instrument = $con->prepare("SELECT activo FROM $instruments WHERE estado != 'Vencido' AND tipo_instrumento = 'DMM'");
                                     $s_instrument->setFetchMode(PDO::FETCH_OBJ);
                                     $s_instrument->execute();
                                     $f_instrument = $s_instrument->fetchAll();
@@ -74,7 +74,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
                                 <select class="form-control" name="pha" required>
                                 <option value=""> - Selecciona el instrumento requerido - </option>
                                 <?php
-                                    $s_instrument = $con->prepare("SELECT activo FROM $instruments WHERE estado = 'Calibrado' AND tipo_instrumento = 'PHA'");
+                                    $s_instrument = $con->prepare("SELECT activo FROM $instruments WHERE estado != 'Vencido' AND tipo_instrumento = 'PHA'");
                                     $s_instrument->setFetchMode(PDO::FETCH_OBJ);
                                     $s_instrument->execute();
                                     $f_instrument = $s_instrument->fetchAll();
@@ -94,7 +94,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
                                 <select class="form-control" name="mfm" required>
                                 <option value=""> - Selecciona el instrumento requerido - </option>
                                 <?php
-                                    $s_instrument = $con->prepare("SELECT activo FROM $instruments WHERE estado = 'Calibrado' AND tipo_instrumento = 'MFM'");
+                                    $s_instrument = $con->prepare("SELECT activo FROM $instruments WHERE estado != 'Vencido' AND tipo_instrumento = 'MFM'");
                                     $s_instrument->setFetchMode(PDO::FETCH_OBJ);
                                     $s_instrument->execute();
                                     $f_instrument = $s_instrument->fetchAll();
@@ -114,7 +114,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
                                 <select class="form-control" name="rh_temp" required>
                                 <option value=""> - Selecciona el instrumento requerido - </option>
                                 <?php
-                                    $s_instrument = $con->prepare("SELECT activo FROM $instruments WHERE estado = 'Calibrado' AND tipo_instrumento = 'RH/TEMP'");
+                                    $s_instrument = $con->prepare("SELECT activo FROM $instruments WHERE estado != 'Vencido' AND tipo_instrumento = 'RH/TEMP'");
                                     $s_instrument->setFetchMode(PDO::FETCH_OBJ);
                                     $s_instrument->execute();
                                     $f_instrument = $s_instrument->fetchAll();
@@ -134,7 +134,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
                                 <select class="form-control" name="balometro" required>
                                 <option value=""> - Selecciona el instrumento requerido - </option>
                                 <?php
-                                    $s_instrument = $con->prepare("SELECT activo FROM $instruments WHERE estado = 'Calibrado' AND tipo_instrumento = 'Balometro'");
+                                    $s_instrument = $con->prepare("SELECT activo FROM $instruments WHERE estado != 'Vencido' AND tipo_instrumento = 'Balometro'");
                                     $s_instrument->setFetchMode(PDO::FETCH_OBJ);
                                     $s_instrument->execute();
                                     $f_instrument = $s_instrument->fetchAll();
