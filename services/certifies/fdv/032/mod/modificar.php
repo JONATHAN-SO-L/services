@@ -119,7 +119,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     <?php
                     // Listado de certificados
                     // Certificado DMM
-                    $s_dmm = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                    $s_dmm = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado != 'Vencido' AND activo = :activo");
                     $s_dmm->bindValue(':activo', $dmm_activo);
                     $s_dmm->setFetchMode(PDO::FETCH_OBJ);
                     $s_dmm->execute();
@@ -138,7 +138,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     }
 
                     // Certificado PHA
-                    $s_pha = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                    $s_pha = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado != 'Vencido' AND activo = :activo");
                     $s_pha->bindValue(':activo', $pha_activo);
                     $s_pha->setFetchMode(PDO::FETCH_OBJ);
                     $s_pha->execute();
@@ -157,7 +157,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     }
 
                     // Certificado MFM
-                    $s_mfm = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                    $s_mfm = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado != 'Vencido' AND activo = :activo");
                     $s_mfm->bindValue(':activo', $mfm_activo);
                     $s_mfm->setFetchMode(PDO::FETCH_OBJ);
                     $s_mfm->execute();
@@ -176,7 +176,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     }
 
                     // Certificado RH/TEMP
-                    $s_rh = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                    $s_rh = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado != 'Vencido' AND activo = :activo");
                     $s_rh->bindValue(':activo', $rh_activo);
                     $s_rh->setFetchMode(PDO::FETCH_OBJ);
                     $s_rh->execute();
@@ -195,7 +195,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                     }
 
                     // Certificado Balómetro
-                    $s_balo = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado = 'Calibrado' AND activo = :activo");
+                    $s_balo = $con->prepare("SELECT activo, estado, tipo_instrumento, certificado FROM $instruments WHERE estado != 'Vencido' AND activo = :activo");
                     $s_balo->bindValue(':activo', $balometro_activo);
                     $s_balo->setFetchMode(PDO::FETCH_OBJ);
                     $s_balo->execute();
