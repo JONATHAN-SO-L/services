@@ -249,7 +249,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                           <label class="col-sm-222 control-label"><i class="fa fa-arrows-h" aria-hidden="true"></i> Rango</label>
                           <div class="col-sm-110">
                               <div class='input-group'>
-                                  <input class="form-control" name="rango" placeholder="Por ejemplo: Morelos" required>
+                                  <input class="form-control" name="rango" placeholder="Por ejemplo: 0.3 - 5" required>
 								  <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
                               </div> 
                           </div>
@@ -259,7 +259,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                           <label  class="col-sm-222 control-label"><i class="fa fa-sliders" aria-hidden="true"></i> Frecuencia de Calibración</label>
                           <div class="col-sm-110">
                               <div class='input-group'>
-                                  <input type="text" class="form-control"  name="frecuencia_cal" placeholder="Por ejemplo: 0.3 - 5" required>
+                                  <input type="text" class="form-control"  name="frecuencia_cal" placeholder="Por ejemplo: 12 Meses" required>
 								  <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
                               </div> 
                           </div>
