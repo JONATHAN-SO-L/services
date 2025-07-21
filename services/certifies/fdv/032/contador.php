@@ -106,7 +106,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
 
                         // Buscar el contador de partículas que tenga el número de serie registrado en el edificio y esté calibrado
                         require '../../../functions/conex_serv.php';
-                        $s_accountant = $con->prepare("SELECT modelo_ci, numero_serie, estado from $accountant where numero_serie = :numero_serie and estado = 'Calibrado'");
+                        $s_accountant = $con->prepare("SELECT modelo_ci, numero_serie, estado FROM $accountant WHERE numero_serie = :numero_serie AND estado != 'Calibrado'");
                         $s_accountant->bindValue(':numero_serie', $serie_contador);
                         $s_accountant->setFetchMode(PDO::FETCH_OBJ);
                         $s_accountant->execute();
@@ -153,7 +153,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['n
                                                         <select class="form-control" name="serie_contador" required>
                                                         <option value=""> - Selecciona el número de serie requerido - </option>
                                                         <?php
-                                                            $s_serie = $con->prepare("SELECT modelo_ci, numero_serie, estado FROM $accountant WHERE estado = 'Calibrado' AND modelo_ci = :modelo_ci");
+                                                            $s_serie = $con->prepare("SELECT modelo_ci, numero_serie, estado FROM $accountant WHERE estado != 'Calibrado' AND modelo_ci = :modelo_ci");
                                                             $s_serie->bindValue(':modelo_ci', $modelo_ci);
                                                             $s_serie->setFetchMode(PDO::FETCH_OBJ);
                                                             $s_serie->execute();
