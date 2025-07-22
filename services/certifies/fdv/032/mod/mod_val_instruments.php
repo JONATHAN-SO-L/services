@@ -127,7 +127,7 @@ if (isset($_POST['modificar_instrumentos'])) {
                                     <tr>
                                     <td><strong>DMM</strong></td>
                                     <?php
-                                    $s_dmm = $con->prepare("SELECT * FROM $instruments WHERE activo = :dmm_activo AND estado = 'Calibrado'");
+                                    $s_dmm = $con->prepare("SELECT * FROM $instruments WHERE activo = :dmm_activo AND estado != 'Vencido'");
                                     $s_dmm->bindValue(':dmm_activo', $dmm_activo);
                                     $s_dmm->setFetchMode(PDO::FETCH_OBJ);
                                     $s_dmm->execute();
@@ -164,7 +164,7 @@ if (isset($_POST['modificar_instrumentos'])) {
                                     <tr>
                                     <td><strong>PHA</strong></td>
                                     <?php
-                                    $s_pha = $con->prepare("SELECT * FROM $instruments WHERE activo = :pha_activo AND estado = 'Calibrado'");
+                                    $s_pha = $con->prepare("SELECT * FROM $instruments WHERE activo = :pha_activo AND estado != 'Vencido'");
                                     $s_pha->bindValue(':pha_activo', $pha_activo);
                                     $s_pha->setFetchMode(PDO::FETCH_OBJ);
                                     $s_pha->execute();
@@ -201,7 +201,7 @@ if (isset($_POST['modificar_instrumentos'])) {
                                     <tr>
                                     <td><strong>Medidor de flujo de masa</strong></td>
                                     <?php
-                                    $s_mfm = $con->prepare("SELECT * FROM $instruments WHERE activo = :mfm_activo AND estado = 'Calibrado'");
+                                    $s_mfm = $con->prepare("SELECT * FROM $instruments WHERE activo = :mfm_activo AND estado != 'Vencido'");
                                     $s_mfm->bindValue(':mfm_activo', $mfm_activo);
                                     $s_mfm->setFetchMode(PDO::FETCH_OBJ);
                                     $s_mfm->execute();
@@ -238,7 +238,7 @@ if (isset($_POST['modificar_instrumentos'])) {
                                     <tr>
                                     <td><strong>RH/TEMP SENSOR</strong></td>
                                     <?php
-                                    $s_rh = $con->prepare("SELECT * FROM $instruments WHERE activo = :rh_activo AND estado = 'Calibrado'");
+                                    $s_rh = $con->prepare("SELECT * FROM $instruments WHERE activo = :rh_activo AND estado != 'Vencido'");
                                     $s_rh->bindValue(':rh_activo', $rh_activo);
                                     $s_rh->setFetchMode(PDO::FETCH_OBJ);
                                     $s_rh->execute();
@@ -275,7 +275,7 @@ if (isset($_POST['modificar_instrumentos'])) {
                                     <tr>
                                     <td><strong>Balómetro</strong></td>
                                     <?php
-                                    $s_balo = $con->prepare("SELECT * FROM $instruments WHERE activo = :balometro_activo AND estado = 'Calibrado'");
+                                    $s_balo = $con->prepare("SELECT * FROM $instruments WHERE activo = :balometro_activo AND estado != 'Vencido'");
                                     $s_balo->bindValue(':balometro_activo', $balometro_activo);
                                     $s_balo->setFetchMode(PDO::FETCH_OBJ);
                                     $s_balo->execute();
