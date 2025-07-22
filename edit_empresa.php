@@ -101,12 +101,12 @@ include ("conexi.php");
   $fecha_hora_carga = date("d/m/Y H:i:s");
 
   $update_company = $con->prepare("UPDATE $comapny
-                                          SET razon_social = ?, calle = ?, numero_exterior = ?, numero_interior = ?, colonia = ?,
+                                          SET razon_social = ?, rfc = ?, calle = ?, numero_exterior = ?, numero_interior = ?, colonia = ?,
                                               municipio = ?, entidad_federativa = ?, codigo_postal = ?, pais = ?, direccion_gps = ?,
                                               contacto_nombre = ?, contacto_apellido = ?, contacto_puesto = ?, contacto_email = ?, contacto_telefono = ?
                                           WHERE id = ?");
 
-  $val_update_company = $update_company->execute([$razon_social, $calle, $numero_exterior, $numero_interior, $colonia,
+  $val_update_company = $update_company->execute([$razon_social, $rfc, $calle, $numero_exterior, $numero_interior, $colonia,
                                                   $municipio, $entidad_federativa, $codigo_postal, $pais, $direccion_gps,
                                                   $contacto_nombre, $contacto_apellido, $contacto_puesto, $contacto_email, $contacto_telefono,
                                                   $id_edit]);
@@ -148,21 +148,13 @@ $id = MysqlQuery::RequestGet('id');
                             <label class="col-sm-222 control-label"><i class="fa fa-building" aria-hidden="true"></i> RFC</label>
                              <div class="col-sm-110">
                               <div class='input-group'>
-                                <input type="text" class="form-control" readonly="" name="rfc" maxlength="20" value="<?php echo utf8_decode($reg['rfc'])?>">
+                                <input type="text" class="form-control" required name="rfc" maxlength="20" value="<?php echo utf8_decode($reg['rfc'])?>">
                                 <span class="input-group-addon"><i class="fa fa-eye"></i></span>
                               </div>
                           </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-222 control-label"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Nombre Usuario</label>
-                             <div class="col-sm-110">
-                              <div class='input-group'>
-                                <input type="text" class="form-control" required="" name="nombre_corto" value="<?php echo utf8_decode($reg['nombre_corto'])?>" readonly>
-                                <span class="input-group-addon"><i class="fa fa-eye"></i></span>
-                              </div>
-                          </div>
-                        </div>
+                        
+                        <input type="hidden" required="" name="nombre_corto" value="<?php echo utf8_decode($reg['nombre_corto'])?>">
 						
 						<div class="form-group">
                             <label class="col-sm-222 control-label"><i class="fa fa-building-o" aria-hidden="true"></i> Razón Social</label>
