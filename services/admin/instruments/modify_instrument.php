@@ -69,13 +69,8 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
         $numero_control = $instrumento -> numero_control;
         $rango = $instrumento -> rango;
         $frecuencia_calibracion = $instrumento -> frecuencia_calibracion;
-
         $fecha_calibracion = $instrumento -> fecha_calibracion;
-        $fecha_calibracion = date("Y-d-m", strtotime($fecha_calibracion));
-
         $fecha_proxima_calibracion = $instrumento -> fecha_proxima_calibracion;
-        $fecha_proxima_calibracion = date("Y-d-m", strtotime($fecha_proxima_calibracion));
-
         $estado = $instrumento -> estado;
         $area_asignada = $instrumento -> area_asignada;
         $tipo_instrumento = $instrumento -> tipo_instrumento;
