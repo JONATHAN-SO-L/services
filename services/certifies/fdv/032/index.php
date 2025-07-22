@@ -75,7 +75,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     <div class="container col-sm-4">
       <form action="" method="POST" enctype="multipart/form-data">
         <label>Buscar</label>
-        <input class="form-control" type="search" name="words" placeholder="Puedes buscar por: Compañía, Modelo CI ó Número de Serie de Contador" alt="Puedes buscar por: Técnico, Compañía, Modelo CI ó Contador de Partículas">
+        <input class="form-control" type="search" name="words" placeholder="Puedes buscar por: ID, Compañía, Modelo CI ó Número de Serie de Contador" alt="Puedes buscar por: Técnico, Compañía, Modelo CI ó Contador de Partículas">
         <input class="btn btn-sm btn-success form-control-inline" type="submit" name="buscar" value="Buscar">
       </form><br>
     </div>
@@ -98,7 +98,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             $word = $_POST['words'];
 
             $s_register = $con->prepare("SELECT * FROM $certified 
-                                        WHERE empresa LIKE '%$word%' OR modelo_contador LIKE '%$word%' OR numero_serie LIKE '%$word%'
+                                        WHERE empresa LIKE '%$word%' OR modelo_contador LIKE '%$word%' OR numero_serie LIKE '%$word%' OR id_documento LIKE '%$word%'
                                         ORDER BY id_documento DESC LIMIT 30");
             $s_register->setFetchMode(PDO::FETCH_OBJ);
             $s_register->execute();
@@ -106,7 +106,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
             // Se realiza conteo de resultados
             $total_registers = $con->prepare("SELECT COUNT(*) FROM $certified
-                                              WHERE empresa LIKE '%$word%' OR modelo_contador LIKE '%$word%' OR numero_serie LIKE '%$word%'");
+                                              WHERE empresa LIKE '%$word%' OR modelo_contador LIKE '%$word%' OR numero_serie LIKE '%$word%' OR id_documento LIKE '%$word%'");
             $total_registers->execute();
             $num_total_results = $total_registers->fetchColumn();
 
