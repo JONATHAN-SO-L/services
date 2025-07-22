@@ -877,11 +877,13 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->Cell(20,5,utf8_decode($rh_activo),1,0,'C');
     $pdf->Cell(20,5,utf8_decode($rh_modelo),1,0,'C');
     $pdf->Cell(35,5,utf8_decode($rh_numero_serie),1,0,'C');
+    $pdf->SetFont("Arial","",6);
     $pdf->Cell(30,5,utf8_decode($rh_numero_control),1,0,'C');
     $pdf->Cell(25,5,utf8_decode($rh_fecha_calibracion),1,0,'C');
     $pdf->Cell(25,5,utf8_decode($rh_proxima_calibracion),1,0,'C');
 
     // Balómetro
+    $pdf->SetFont("Arial","",8);
     $pdf->SetXY(13,205);
      $pdf->SetTextColor(0,88,147);
     $pdf->Cell(40,5,utf8_decode('Balómetro'),1,0,'L');
