@@ -40,12 +40,12 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             </div>';
     }
 
-    function redirect_success($id_documento) {
+    function redirect_success() {
         echo '
             <div class="container" style="margin-left: 40%">
                 <img src="../../assets/img/loading_dvi.gif" height="40%" weight="40%">
                 <br>
-                <a href="../../certifies/fdv/032/mod/modificar.php?'.$id_documento.'" class="btn btn-sm btn-success" style="margin-left: 15%">Continuar</a>
+                <a href="../../certifies/fdv/032/index.php" class="btn btn-sm btn-success" style="margin-left: 15%">Continuar</a>
             </div>';
     }
 
@@ -134,7 +134,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
             if ($val_save_move) {
                 require '../drop_con.php';
                 mensaje_ayuda();
-                redirect_success($id_documento);
+                redirect_success();
             } else {
                 mensaje_error();
                 redirect_failed($id_documento);
