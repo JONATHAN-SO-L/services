@@ -77,7 +77,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                 <?php
                                 echo '<option value="'.$dmm_activo.'">'.$dmm_activo.' - (Actual seleccionado)</option>';
 
-                                $s_dmm = $con->prepare("SELECT activo FROM $instruments WHERE estado = 'Calibrado' AND tipo_instrumento = 'DMM'");
+                                $s_dmm = $con->prepare("SELECT activo FROM $instruments WHERE estado != 'Vencido' AND tipo_instrumento = 'DMM'");
                                 $s_dmm->setFetchMode(PDO::FETCH_OBJ);
                                 $s_dmm->execute();
 
@@ -98,7 +98,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                 <select class="form-control" name="pha">
                                 <?php echo '<option value="'.$pha_activo.'">'.$pha_activo.' - (Actual seleccionado)</option>';
 
-                                $s_pha = $con->prepare("SELECT activo FROM $instruments WHERE estado = 'Calibrado' AND tipo_instrumento = 'PHA'");
+                                $s_pha = $con->prepare("SELECT activo FROM $instruments WHERE estado != 'Vencido' AND tipo_instrumento = 'PHA'");
                                 $s_pha->setFetchMode(PDO::FETCH_OBJ);
                                 $s_pha->execute();
 
@@ -119,7 +119,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                 <select class="form-control" name="mfm">
                                 <?php echo '<option value="'.$mfm_activo.'">'.$mfm_activo.' - (Actual seleccionado)</option>';
 
-                                $s_mfm = $con->prepare("SELECT activo FROM $instruments WHERE estado = 'Calibrado' AND tipo_instrumento = 'MFM'");
+                                $s_mfm = $con->prepare("SELECT activo FROM $instruments WHERE estado != 'Vencido' AND tipo_instrumento = 'MFM'");
                                 $s_mfm->setFetchMode(PDO::FETCH_OBJ);
                                 $s_mfm->execute();
 
@@ -140,7 +140,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                 <select class="form-control" name="rh_temp">
                                 <?php echo '<option value="'.$rh_activo.'">'.$rh_activo.' - (Actual seleccionado)</option>';
 
-                                $s_rh = $con->prepare("SELECT activo FROM $instruments WHERE estado = 'Calibrado' AND tipo_instrumento = 'RH/TEMP'");
+                                $s_rh = $con->prepare("SELECT activo FROM $instruments WHERE estado != 'Vencido' AND tipo_instrumento = 'RH/TEMP'");
                                 $s_rh->setFetchMode(PDO::FETCH_OBJ);
                                 $s_rh->execute();
 
@@ -161,7 +161,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                 <select class="form-control" name="balometro">
                                 <?php echo '<option value="'.$balometro_activo.'">'.$balometro_activo.' - (Actual seleccionado)</option>';
 
-                                $s_balo = $con->prepare("SELECT activo FROM $instruments WHERE estado = 'Calibrado' AND tipo_instrumento = 'Balometro'");
+                                $s_balo = $con->prepare("SELECT activo FROM $instruments WHERE estado != 'Vencido' AND tipo_instrumento = 'Balometro'");
                                 $s_balo->setFetchMode(PDO::FETCH_OBJ);
                                 $s_balo->execute();
 
