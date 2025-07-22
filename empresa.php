@@ -136,7 +136,16 @@ while ($fila = mysqli_fetch_array( $resultado )){
                     
                     <a href="copy_empresa.php?id=<?php echo $fila['id']; ?>"class="btn btn-sm btn-warning" title="Copiar"><i class="fa fa-clone" aria-hidden="true"></i></a>
 					
-					<a href="eliminar_empresa.php?id=<?php echo $fila['id']; ?>"class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+					<?php
+                    switch ($_SESSION['tipo_usuario']) {
+                        case 'A':
+                            echo '<a href="eliminar_empresa.php?id='.$fila['id'].'"class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
+                        break;
+
+                        default:
+                        break;
+                    }
+                    ?>
 					
 					<a href="ver_empresa.php?id=<?php echo $fila['id']; ?>" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>
         </td>
