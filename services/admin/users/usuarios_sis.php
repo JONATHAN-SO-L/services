@@ -8,7 +8,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
   function mensaje_error() {
     echo'
                 <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;">
-                    <h4 class="text-center">OCURRIÓ UN ERROR</h4>
+                    <h4 class="text-center"><strong>OCURRIÓ UN ERROR</strong></h4>
                     <p class="text-center">
                         No fue posible obtener la información de los usuarios, asegúrate que la conexión con la base de datos esté funcionando o que haya usuarios registrados
                     </p>
@@ -43,7 +43,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
   <table>
   <td>
   <tr>
-		    <a href="add_usuario.php" ><button type="submit" value="Adicionar" name="" class="btn btn-success" style="text-align:center"><i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Usuario</button></a>
+		    <a href="add_user.php" ><button type="submit" value="Adicionar" name="" class="btn btn-success" style="text-align:center"><i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Usuario</button></a>
 			<td>
  <tr>
       <button onClick="document.location.reload();" type="submit" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Click Actualizar Datos" HSPACE="10" VSPACE="10"><i class="fa fa-refresh fa-spin  fa-fw"></i>
@@ -89,6 +89,70 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
         $count_users = $con -> prepare("SELECT COUNT(*) FROM $sis WHERE nombre_completo LIKE '%$palabra_clave%' OR usuario LIKE '%$palabra_clave%'");
         $count_users->execute();
         $total_registros = $count_users->fetchColumn();
+
+        //? Consulta la información de todos los usuarios y los ordena por tipo de usuario
+        $s_users = $con->prepare("SELECT id_usuario, nombre_completo, usuario, tipo_usuario FROM $sis WHERE nombre_completo LIKE '%$palabra_clave%' OR usuario LIKE '%$palabra_clave%' ORDER BY tipo_usuario ASC");
+        $s_users->setFetchMode(PDO::FETCH_OBJ);
+        $s_users->execute();
+
+        $f_users = $s_users->fetchAll();
+
+        if ($s_users -> rowCount() > 0) {
+            echo '
+            <a href="usuarios_sis.php"><button type="submit" value="Volver" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
+            <br><br>
+            <p><strong>Búsqueda realizada: </strong><span class="badge bg-success">'.$palabra_clave.'</span></p>
+            <p><strong>Registros encontrados: </strong><span class="badge bg-success">'.$total_registros.'</span></p>';
+
+            echo "<table class='table table-hover table-striped table-bordered'>
+            <th WIDTH=25%>Acción</th>
+            <th WIDTH=25%>Nombre Usuario</th>
+            <th WIDTH=25%>Nombre Completo</th>
+            <th WIDTH=25%>Tipo de Usuario</th>";
+
+            foreach ($f_users as $users) {
+                $nombre_completo = $users -> nombre_completo;
+                $usuario = $users -> usuario;
+                $tipo_usuario = $users -> tipo_usuario;
+
+                switch ($tipo_usuario) {
+                    case 'A':
+                        $type = 'Administrador';
+                    break;
+
+                    case 'G':
+                        $type = 'Gerente';
+                    break;
+
+                    case 'T':
+                        $type = 'Técnico de Servicios';
+                    break;
+
+                    case 'C':
+                        $type = 'Cliente';
+                    break;
+                }
+
+                echo '<tr>
+                <td class="text-center">
+                <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </td>
+
+                <td><strong>'.$usuario.'</strong></td>
+                <td>'.$nombre_completo.'</td>
+                <td>'.$type.'</td>
+                </tr>';
+            }
+            echo "</table>";
+        } else {
+            mensaje_error();
+            echo '<br><br><br><br><br><br><br>
+            <a href="usuarios_sis.php" style="padding-left:15%;"><button type="submit" value="Volver" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
+            <br><br>
+            <center><h2 class="pull-left" style="padding-left:15%;">No se encontraron resultados para: <strong><u>'.$palabra_clave.'</u></strong></h2></center>';
+            echo '<br><br>';
+        }
 
     } else {
         //* Conteo de los resultados
@@ -149,6 +213,9 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
             echo "</table>";
         } else {
             mensaje_error();
+            echo '<br><br><br><br><br><br><br>
+            <a href="usuarios_sis.php" style="padding-left:15%;"><button type="submit" value="Volver" class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
+            <br><br>';
             echo '<h3>No se encontraron usuarios registrados en el sistema</h3>';
         }
     }
@@ -157,6 +224,8 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
 
      </div>
  <?php
+ echo '<br><br>';
+ include '../../assets/footer.php';
 }else{
 	header('Location: ../../../index.php');
 	 }
