@@ -1,9 +1,5 @@
 <?php
-session_start();
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);   
+session_start(); 
 
 if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="admin"){
     include '../../assets/admin/navbar2.php';
@@ -12,7 +8,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
     function mensaje_error() {
         echo '<div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <h4 class="text-center"><strong>OCURRIÓ UN ERROR<</strong>/h4>
+            <h4 class="text-center"><strong>OCURRIÓ UN ERROR</strong></h4>
             <p class="text-center">
                 No fue posible crear el usuario, por favor inténtalo de nuevo o contacta al Soporte Técnico.
             </p>
@@ -74,17 +70,14 @@ function redirect_success() {
         $tipo_usuario = $_POST['tipo_usuario'];
 
         //Obtención del archivo
-        $size_max = 15728640; //! Definición de tamaño máximo (15 MB)
+        /*$size_max = 15728640; //! Definición de tamaño máximo (15 MB)
         $carpeta_save = '../users/sign'; // Se define directorio donde se guarda el certificado del instrumento en el servidor
         $firma_doc = $_FILES['firma_doc']['name']; // Nombre del archivo a guardar
-        /*$tipo_archivo = $_FILES['firma_doc']['type']; // Tipo de archivo
+        $tipo_archivo = $_FILES['firma_doc']['type']; // Tipo de archivo
         $tamano_archivo = $_FILES['firma_doc']['size']; // Tamaño del archivo
         $temp_file = $_FILES['firma_doc']['tmp_name']; // Asignación de memoria para procesamiento
         $nombre_save = $carpeta_save.'/'.$firma_doc; // Nombre del archivo para guardar
         $almacenamiento_firma = '../../services/admin/users/'.$firma_doc;*/
-        
-        echo '<script>console.log('.$firma_doc.')</script>';
-        die();
 
         // Información para auditlog
 		$admin = $_SESSION['nombre_completo'];
@@ -116,7 +109,7 @@ function redirect_success() {
         Saludos Cordiales.");
 
         //! Validación de que el usuario no exista
-        /*$s_user = $con->prepare("SELECT * FROM $sis WHERE usuario = :usuario");
+        $s_user = $con->prepare("SELECT * FROM $sis WHERE usuario = :usuario");
         $s_user->bindValue(':usuario', $usuario);
         $s_user->setFetchMode(PDO::FETCH_OBJ);
         $s_user->execute();
@@ -131,7 +124,7 @@ function redirect_success() {
             if ($min_user >= 10) { //! Valida que el NOMBRE DE USUARIO cumpla con los caracteres mínimos (10)
                 if ($min_pass >= 8) { //! Valida que la CONTRASEÑA cumpla con los caracteres mínimos (8)
                     if ($min_name >= 15) { //! Valida que el NOMBRE COMPLETO cumpla con los caracteres mínimos (15)
-                        if ($firma != NULL) { //! Valida si se cargó una firma para el usuario
+                        /*if ($firma != NULL) { //! Valida si se cargó una firma para el usuario
                             if ($tamano_archivo <= $size_max) { // Valida que el tamaño del archivo no supere el máximo (15 MB)
                                 if ($tipo_archivo == 'image/png') { // Valida que el tipo de archivo sea imagen en PNG
                                     move_uploaded_file($temp_file, $nombre_save);
@@ -217,7 +210,7 @@ function redirect_success() {
                                 redirect_failed();
                                 die();
                             }
-                        } else { //* Si nose cargó una firma, se capturan los datos del usuario sin esta
+                        } else {*/ //* Si nose cargó una firma, se capturan los datos del usuario sin esta
                             $save_user = $con->prepare("INSERT INTO $sis (nombre_completo, usuario, clave, email,
                                                                             tipo_usuario, registra_data, fecha_hora_registro)
                                                                     VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -289,7 +282,7 @@ function redirect_success() {
                                 redirect_failed();
                                 die();
                             }
-                        }
+                        //}
                     } else {
                         mensaje_error();
                         redirect_failed();
@@ -305,7 +298,7 @@ function redirect_success() {
                 redirect_failed();
                 die();
             }
-        }*/
+        }
 
     }
 ?>
@@ -316,7 +309,7 @@ function redirect_success() {
   <table>  
     <td>
 		<tr>
-       <a href="usuarios_sis.php" ><button type="submit" value="Regresar"class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
+       <a href="usuarios_sis.php"><button type="submit" value="Regresar"class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
 	   </tr>
 	</td>
 	   </table>
@@ -337,7 +330,7 @@ function redirect_success() {
 <div class="container">
   <div class="row">
     <div class="col-sm-8">
-      <div class="panel panel-danger">
+      <div class="panel panel-primary">
         <div class="panel-heading text-center"><strong>¡IMPORTANTE!</strong> Los usuarios de tipo CLIENTE son generados automáticamente por el sistema al crear una nueva empresa</div>
         <div class="panel-body">
             <form role="form" action="" method="POST">
@@ -367,7 +360,7 @@ function redirect_success() {
                             <label class="col-sm-222 control-label"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Nombre Completo: <i>(Utiliza mayúsculas para la primera letra, mínimo 15 caracteres)</i></label>
                             <div class='col-sm-110'>
                                 <div class="input-group">
-                                   <input class="form-control" required placeholder="Por ejemplo: Omar Courtz" type="text" name="nombre_completo" pattern=".{15,}" maxlength="50">
+                                   <input class="form-control" placeholder="Por ejemplo: Omar Courtz" type="text" name="nombre_completo" pattern=".{15,}" maxlength="50" required>
 								   <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
                                 </div>
                             </div>
@@ -377,7 +370,7 @@ function redirect_success() {
                             <label class="col-sm-222 control-label"><i class="fa fa-envelope" aria-hidden="true"></i> Correo Electrónico:</label>
                             <div class='col-sm-110'>
                                 <div class="input-group">
-                                   <input class="form-control" required type="email" placeholder="Por ejemplo: o.courtz@veco.mx" name="email">
+                                   <input class="form-control" type="email" placeholder="Por ejemplo: o.courtz@veco.mx" name="email" required>
 								   <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
                                 </div>
                             </div>
@@ -398,17 +391,17 @@ function redirect_success() {
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <!--div class="form-group">
                             <label class="col-sm-222 control-label"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> * Firma Digital: <i>(Solo se admiten archivos en <u>formato PNG</u> con un tamaño <u>máximo de 15 MB</u>)</i></label>
                             <div class='col-sm-110'>
                                 <div class="input-group">
-                                   <input type="file" accept="image/png" class="form-control" name="firma_doc" required>
+                                   <input type="file" accept="image/png" class="form-control" name="firma_doc">
 								   <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
                                 </div>
                             </div>
                         </div>
 
-                        <label class="col-sm-222 control-label">* <i>Campos opcionales</i></label>
+                        <label class="col-sm-222 control-label">* <i>Campos opcionales</i></label-->
 						
 						<div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10 text-center">
