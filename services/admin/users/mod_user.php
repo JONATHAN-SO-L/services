@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);   
-
 if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="admin"){
     include '../../assets/admin/navbar2.php';
     include '../../assets/admin/links2.php';
@@ -25,7 +21,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
         echo '
             <div class="alert alert-success alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <h4 class="text-center"><strong>REGISTRO EXITOSO</strong></h4>
+            <h4 class="text-center"><strong>MODIFICACIÓN EXITOSA</strong></h4>
             <p class="text-center">
             Se modificó correctamente el usuario.
             </p>
@@ -467,7 +463,7 @@ if (isset($_POST['modificar_usuario'])) {
   <table>  
     <td>
 		<tr>
-       <a href="usuarios_sis.php" ><button type="submit" value="Regresar"class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
+       <a href="usuarios_sis.php"><button type="submit" value="Regresar"class="btn btn-primary" style="text-align:center"><i class="fa fa-reply"></i>&nbsp;&nbsp;Volver</button></a>
 	   </tr>
 	</td>
 	   </table>
