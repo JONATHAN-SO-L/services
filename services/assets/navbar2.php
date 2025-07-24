@@ -135,15 +135,26 @@ MENÚ DE NAVEGACIÓN DENTRO DE LA VISTA DE EDICIÓN
             Grafica
             </a>
             </li-->
-            <li>
+            <!--li>
             <a href="../../../../../tabla_usuarios.php">
             <i class="fa fa-user"></i>
             Usuario
             </a>
             </li>
-            </ul>
+            </ul-->
             
             <?php break;
+      }
+
+      switch ($_SESSION['tipo_usuario']) {
+        case 'A': ?>
+        <li>
+        <a href="../../../../admin/users/usuarios_sis.php">
+        <i class="fa fa-user"></i>
+        Usuario
+        </a>
+        </li>
+        <?php break;
       }
       ?>
     </ul>
