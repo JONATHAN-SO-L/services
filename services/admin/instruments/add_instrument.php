@@ -245,7 +245,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                           <label  class="col-sm-222 control-label"><i class="fa fa-calendar" aria-hidden="true"></i> Fecha de Calibración</label>
                           <div class="col-sm-110">
                               <div class='input-group'>
-                                  <input type="text" minlength="1" maxlength="7" class="form-control" placeholder="Por ejemplo: 01AGO25" name="fecha_calibracion" required>
+                                  <input type="text" minlength="1" class="form-control" placeholder="Por ejemplo: 01AGO25" name="fecha_calibracion" required>
 								                  <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
                               </div> 
                           </div>
@@ -255,7 +255,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                             <label class="col-sm-222 control-label"><i class="fa fa-calendar" aria-hidden="true"></i> Fecha de Próxima Calibración</label>
                              <div class="col-sm-110">
                               <div class='input-group'>
-                                <input type="text" minlength="1" maxlength="7" class="form-control" placeholder="Por ejemplo: 01AGO26" name="fecha_proxima_calibracion" required>
+                                <input type="text" minlength="1" class="form-control" placeholder="Por ejemplo: 01AGO26" name="fecha_proxima_calibracion" required>
                                 <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
                               </div>
                           </div>
