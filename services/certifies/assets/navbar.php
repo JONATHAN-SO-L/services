@@ -149,12 +149,23 @@ MENÚ DE NAVEGACIÓN DE DENTRO DE LA SECCIÓN DE LOS CERTIFICADOS DEL FDV-S-032
             </a>
             </li>
 
-            <li>
+            <!--li>
             <a href="../../../../tabla_usuarios.php">
             <i class="fa fa-user"></i>
             Usuario
             </a>
-            </li>
+            </li-->
+        <?php break;
+      }
+
+      switch ($_SESSION['tipo_usuario']) {
+        case 'A': ?>
+        <li>
+        <a href="../../../admin/users/usuarios_sis.php">
+        <i class="fa fa-user"></i>
+        Usuario
+        </a>
+        </li>
         <?php break;
       }
       ?>
