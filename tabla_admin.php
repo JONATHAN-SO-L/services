@@ -25,11 +25,11 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
           <div class="row">
             <div class="col-sm-12">
            <div class="page-header2">
-<a class="boton_personalizado" href="tabla_usuarios.php"><i class="fa fa-pencil"></i></a><strong>&nbsp;&nbsp;&nbsp;&nbsp;Usuario</strong>
+<a class="btn btn-sm btn-primary" href="tabla_usuarios.php"><i class="fa fa-pencil"></i><strong>&nbsp;&nbsp;&nbsp;&nbsp;Clientes</strong> (Obsoleto)</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a class="boton_personalizado" href="tabla_devecchi.php"><i class="fa fa-pencil"></i></a><strong>&nbsp;&nbsp;&nbsp;&nbsp;Usuario De Vecchi</strong>
+<a class="btn btn-sm btn-danger" href="tabla_devecchi.php"><i class="fa fa-pencil"></i><strong>&nbsp;&nbsp;&nbsp;&nbsp;Claves de Tarjetas</strong></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a class="boton_personalizado" href="tabla_admin.php"><i class="fa fa-pencil"></i></a><strong>&nbsp;&nbsp;&nbsp;&nbsp;Administrador</strong>
+<a class="btn btn-sm btn-warning" href=tabla_admin.php"><i class="fa fa-pencil"></i><strong>&nbsp;&nbsp;&nbsp;&nbsp;Gerentes</strong> (Obsoleto)</a>
 				</div>
             </div>
           </div>
@@ -41,10 +41,10 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
   <table>
   <td>
   <tr>
-		    <a href="add_admin.php" ><button type="submit" value="Adicionar" name="" class="btn btn-primary" style="text-align:center"><i class="fa fa-plus"></i>&nbsp;&nbsp;Adicionar</button></a>
+		    <!--a href="add_admin.php" ><button type="submit" value="Adicionar" name="" class="btn btn-primary" style="text-align:center"><i class="fa fa-plus"></i>&nbsp;&nbsp;Adicionar</button></a-->
 			<td>
  <tr>
-      <button onClick="document.location.reload();" type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click Actualizar Datos" HSPACE="10" VSPACE="10"><i class="fa fa-refresh fa-spin  fa-fw"></i>
+      <button onClick="document.location.reload();" type="submit" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Click Actualizar Datos" HSPACE="10" VSPACE="10"><i class="fa fa-refresh fa-spin  fa-fw"></i>
 <span class="sr-only">Loading...</span></button>
         </tr>
           </td>
