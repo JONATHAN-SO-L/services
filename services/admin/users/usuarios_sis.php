@@ -111,6 +111,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
             <th WIDTH=25%>Tipo de Usuario</th>";
 
             foreach ($f_users as $users) {
+                $id_usuario = $users -> id_usuario;
                 $nombre_completo = $users -> nombre_completo;
                 $usuario = $users -> usuario;
                 $tipo_usuario = $users -> tipo_usuario;
@@ -135,8 +136,8 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
 
                 echo '<tr>
                 <td class="text-center">
-                <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                <a href="mod_user.php?'.$id_usuario.'" class="btn btn-sm btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="drop_user.php?'.$id_usuario.'" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </td>
 
                 <td><strong>'.$usuario.'</strong></td>
@@ -177,6 +178,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
             <th WIDTH=25%>Tipo de Usuario</th>";
 
             foreach ($f_users as $users) {
+                $id_usuario = $users -> id_usuario;
                 $nombre_completo = $users -> nombre_completo;
                 $usuario = $users -> usuario;
                 $tipo_usuario = $users -> tipo_usuario;
@@ -201,8 +203,8 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
 
                 echo '<tr>
                 <td class="text-center">
-                <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                <a href="mod_user.php?'.$id_usuario.'" class="btn btn-sm btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="drop_user.php?'.$id_usuario.'" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </td>
 
                 <td><strong>'.$usuario.'</strong></td>
