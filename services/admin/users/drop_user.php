@@ -115,7 +115,7 @@ if (isset($_POST['eliminar_usuario'])) {
                 $database = 'veco_sims_devecchi';
                 $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
                                     VALUES (?, ?, ?, ?, ?)");
-                $val_save_move = $save_move->execute([$movimiento, $url, $database, $admin, $fecha_hora_registro]);
+                $val_save_move = $save_move->execute([$movimiento, $url, $database, $user_admin, $fecha_hora_registro]);
 
                 if ($val_save_move) {
                     require '../../functions/drop_con.php';
@@ -153,7 +153,7 @@ if (isset($_POST['eliminar_usuario'])) {
                     $database = 'veco_sims_devecchi';
                     $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
                                         VALUES (?, ?, ?, ?, ?)");
-                    $val_save_move = $save_move->execute([$movimiento, $url, $database, $admin, $fecha_hora_registro]);
+                    $val_save_move = $save_move->execute([$movimiento, $url, $database, $user_admin, $fecha_hora_registro]);
 
                     if ($val_save_move) {
                         require '../../functions/drop_con.php';
@@ -175,7 +175,7 @@ if (isset($_POST['eliminar_usuario'])) {
                     $database = 'veco_sims_devecchi';
                     $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
                                         VALUES (?, ?, ?, ?, ?)");
-                    $val_save_move = $save_move->execute([$movimiento, $url, $database, $admin, $fecha_hora_registro]);
+                    $val_save_move = $save_move->execute([$movimiento, $url, $database, $user_admin, $fecha_hora_registro]);
 
                     if ($val_save_move) {
                         require '../../functions/drop_con.php';
@@ -214,7 +214,7 @@ if (isset($_POST['eliminar_usuario'])) {
                     $database = 'veco_sims_devecchi';
                     $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
                                         VALUES (?, ?, ?, ?, ?)");
-                    $val_save_move = $save_move->execute([$movimiento, $url, $database, $admin, $fecha_hora_registro]);
+                    $val_save_move = $save_move->execute([$movimiento, $url, $database, $user_admin, $fecha_hora_registro]);
 
                     if ($val_save_move) {
                         require '../../functions/drop_con.php';
@@ -236,7 +236,7 @@ if (isset($_POST['eliminar_usuario'])) {
                     $database = 'veco_sims_devecchi';
                     $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
                                         VALUES (?, ?, ?, ?, ?)");
-                    $val_save_move = $save_move->execute([$movimiento, $url, $database, $admin, $fecha_hora_registro]);
+                    $val_save_move = $save_move->execute([$movimiento, $url, $database, $user_admin, $fecha_hora_registro]);
 
                     if ($val_save_move) {
                         require '../../functions/drop_con.php';
@@ -270,7 +270,7 @@ if (isset($_POST['eliminar_usuario'])) {
                 $database = 'veco_sims_devecchi';
                 $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
                                     VALUES (?, ?, ?, ?, ?)");
-                $val_save_move = $save_move->execute([$movimiento, $url, $database, $admin, $fecha_hora_registro]);
+                $val_save_move = $save_move->execute([$movimiento, $url, $database, $user_admin, $fecha_hora_registro]);
 
                 if ($val_save_move) {
                     require '../../functions/drop_con.php';
