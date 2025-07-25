@@ -29,7 +29,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a class="btn btn-sm btn-danger" href="tabla_devecchi.php"><i class="fa fa-pencil"></i><strong>&nbsp;&nbsp;&nbsp;&nbsp;Claves de Tarjetas</strong></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a class="btn btn-sm btn-warning" href=tabla_admin.php"><i class="fa fa-pencil"></i><strong>&nbsp;&nbsp;&nbsp;&nbsp;Gerentes</strong> (Obsoleto)</a>
+<a class="btn btn-sm btn-warning" href="tabla_admin.php"><i class="fa fa-pencil"></i><strong>&nbsp;&nbsp;&nbsp;&nbsp;Gerentes</strong> (Obsoleto)</a>
 
 				</div>
             </div>
