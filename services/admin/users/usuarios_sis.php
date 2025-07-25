@@ -43,7 +43,8 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo_usuario
   <table>
   <td>
   <tr>
-		    <a href="add_user.php" ><button type="submit" value="Adicionar" name="" class="btn btn-success" style="text-align:center"><i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Usuario</button></a>
+		    <a href="add_user.php" ><button type="submit" name="" class="btn btn-success" style="text-align:center"><i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Usuario</button></a>
+            <a href="change_password.php" ><button type="submit" name="" class="btn btn-danger" style="text-align:center"><i class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp;&nbsp;Cambiar contraseña de usuario</button></a>
 			<td>
  <tr>
       <button onClick="document.location.reload();" type="submit" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Click Actualizar Datos" HSPACE="10" VSPACE="10"><i class="fa fa-refresh fa-spin  fa-fw"></i>
