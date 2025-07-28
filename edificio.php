@@ -1,4 +1,4 @@
-<?php
+z<?php
 session_start();
 
 if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="admin"){
@@ -136,7 +136,18 @@ while ($fila = mysqli_fetch_array($resultado)){
 		<td class="text-center">
 					<a href="edit_edificio.php?id=<?php echo $fila['id_edificio']; ?>" class="btn btn-sm btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 				    <a href="copy_edificio.php?id=<?php echo $fila['id_edificio']; ?>"class="btn btn-sm btn-warning"><i class="fa fa-clone" aria-hidden="true"></i></a>
-					<a href="eliminar_edificio.php?id=<?php echo $fila['id_edificio']; ?>"class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+					
+          <?php
+          switch ($_SESSION['tipo_usuario']) {
+            case 'A':
+              echo '<a href="eliminar_edificio.php?id='.$fila['id_edificio'].'" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
+            break;
+            
+            default:
+            break;
+          }
+          ?>
+
 					<a href="ver_edificio.php?id=<?php echo $fila['id_edificio']; ?>" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>
         </td>
         <?php
