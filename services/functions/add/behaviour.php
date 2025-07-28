@@ -69,7 +69,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
     if (isset($_POST['guardar_comportamiento'])) {
         require '../conex_serv.php';
-        $certified = 'fdv_S_032';
+        $certified = 'fdv_s_032';
 
         // Buscar el valor de Flujo de Aire Esperado (LPM)
         $s_measure = $con->prepare("SELECT fa_esperado FROM $certified WHERE id_documento = :id_documento");

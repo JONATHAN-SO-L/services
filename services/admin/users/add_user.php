@@ -82,7 +82,7 @@ function redirect_success() {
         // Información para auditlog
 		$admin = $_SESSION['nombre_completo'];
 		require '../../assets/timezone.php';
-		$fecha_hora_registro = date("d/m/Y H:i:s");
+		$fecha_hora_registro = date("Y-m-d H:i:s");
 
         //* Se contabilizan los caracteres de las variables ingresadas
         $min_user = strlen($usuario);
