@@ -116,7 +116,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                     <td>'.$id_movimiento.'</td>
                     <td>'.$fecha_hora.'</td>
                     <td>'.$usuario_movimiento.'</td>
-                    <td>'.utf8_decode($movimiento).'</td>
+                    <td>'.utf8_encode($movimiento).'</td>
                     <td>'.$link.'</td>
                     <tr>';
                 }
@@ -176,7 +176,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
                     <td>'.$id_movimiento.'</td>
                     <td>'.$fecha_hora.'</td>
                     <td>'.$usuario_movimiento.'</td>
-                    <td>'.utf8_decode($movimiento).'</td>
+                    <td>'.utf8_encode($movimiento).'</td>
                     <td>'.$link.'</td>
                     <tr>';
                 }
