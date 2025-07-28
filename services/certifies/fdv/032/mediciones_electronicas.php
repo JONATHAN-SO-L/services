@@ -53,9 +53,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                                 <tbody>
                                                     <tr>
                                                     <td><strong>VOLTAJE LÁSER</strong></td>
-                                                    <td><input class="form-control" type="number" name="esperado_voltaje" step="0.01" min="0" placeholder="Por ejemplo: 1.570" required>  Vdc †</td>
+                                                    <td><input class="form-control" type="number" name="esperado_voltaje" step="any" min="0" placeholder="Por ejemplo: 1.570" required>  Vdc †</td>
                                                     <td>(Valor de referencia)</td>
-                                                    <td><input class="form-control" type="number" name="condicion_encontrada_voltaje" step="0.01" min="0" placeholder="Por ejemplo: 1.746" required> Vdc</td>
+                                                    <td><input class="form-control" type="number" name="condicion_encontrada_voltaje" step="any" min="0" placeholder="Por ejemplo: 1.746" required> Vdc</td>
                                                     <td>
                                                         <select class="form-control" name="pasa_voltaje" required>
                                                             <option value=""> - Selecciona la opción correcta - </option>
@@ -64,7 +64,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                                             <option value="N/A">N/A</option>
                                                         </select>
                                                     </td>
-                                                    <td><input class="form-control" type="number" name="condicion_final_voltaje" step="0.01" min="0" placeholder="Por ejemplo: 1.570" required> Vdc</td>
+                                                    <td><input class="form-control" type="number" name="condicion_final_voltaje" step="any" min="0" placeholder="Por ejemplo: 1.570" required> Vdc</td>
                                                     </tr>
                                                 </tbody>
 
