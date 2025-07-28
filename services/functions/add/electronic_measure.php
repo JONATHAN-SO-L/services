@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+
 if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['tipo'] == 'admin') {
 
     $id_documento = $_SERVER['QUERY_STRING'];
@@ -106,7 +108,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
                     // Registro en log
                     $log = 'auditlog';
-                    $movimiento = utf8_decode('El usuario '.$tecnico.' guardó mediciones electrónicas del certificado '.$id_documento.' el '.$fecha_hora_carga.'');
+                    $movimiento = utf8_encode('El usuario '.$tecnico.' guardó mediciones electrónicas del certificado '.$id_documento.' el '.$fecha_hora_carga.'');
                     $url = $_SERVER['PHP_SELF'].'?'.$id_documento;
                     $database = 'SIS';
                     $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
@@ -131,7 +133,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
 
                     // Registro en log
                     $log = 'auditlog';
-                    $movimiento = utf8_decode('El usuario '.$tecnico.' guardó mediciones electrónicas del certificado '.$id_documento.' el '.$fecha_hora_carga.'');
+                    $movimiento = utf8_encode('El usuario '.$tecnico.' guardó mediciones electrónicas del certificado '.$id_documento.' el '.$fecha_hora_carga.'');
                     $url = $_SERVER['PHP_SELF'].'?'.$id_documento;
                     $database = 'SIS';
                     $save_move = $con->prepare("INSERT INTO $log (movimiento, link, ddbb, usuario_movimiento, fecha_hora)
