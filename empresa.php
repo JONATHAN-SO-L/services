@@ -152,13 +152,13 @@ while ($fila = mysqli_fetch_array( $resultado )){
         <?php
 		ECHO " <TD>".utf8_decode($fila["id"])."</TD>";
 		ECHO " <TD>".utf8_decode($fila["rfc"])."</TD>";
-        ECHO " <TD>".utf8_encode($fila["razon_social"])."</TD>";
+        ECHO " <TD>".utf8_decode($fila["razon_social"])."</TD>";
 		ECHO " <TD>".utf8_decode($fila["nombre_corto"])."</TD>";
 		ECHO " <TD>".utf8_decode($fila["calle"])."</TD>";
 		ECHO " <TD>".utf8_decode($fila["numero_exterior"])."</TD>";	
 		ECHO " <TD>".utf8_decode($fila["numero_interior"])."</TD>";
 		ECHO " <TD>".utf8_decode($fila["colonia"])."</TD>";
-		ECHO " <TD>".utf8_encode($fila["municipio"])."</TD>";
+		ECHO " <TD>".utf8_decode($fila["municipio"])."</TD>";
 		ECHO " <TD>".utf8_decode($fila["entidad_federativa"])."</TD>";
 		ECHO " <TD>".utf8_decode($fila["codigo_postal"])."</TD>";
 		ECHO " <TD>".utf8_decode($fila["pais"])."</TD>";
