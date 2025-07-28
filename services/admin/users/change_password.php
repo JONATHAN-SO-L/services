@@ -88,7 +88,7 @@ if( $_SESSION['nombre']!="" && $_SESSION['clave']!="" && $_SESSION['tipo']=="adm
             $website = 'https://veco.lat';
             $soporte = 'https://veco.lat/soporte.php';
             $cabecera = 'From: VecoLAT <no-reply@veco.lat>';
-            $asunto = 'VecoLAT | Cambio de Contraseña';
+            $asunto = utf8_decode('VecoLAT | Cambio de Contraseña');
             $mensaje = utf8_decode("Estimado(a) ".$nombre_completo.", le informamos que su contraseña de la Plataforma VecoLAT fue modificada, a continuación le compartimos sus nuevas credenciales de acceso.\r\n\r\n
             Usuario: ".$usuario_f."\r\n
             Contraseña: ".$clave."\r\n
