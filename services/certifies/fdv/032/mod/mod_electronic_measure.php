@@ -93,9 +93,9 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                     <tbody>
                                     <tr>
                                     <td><strong>VOLTAJE LÁSER</strong></td>
-                                    <td><input class="form-control" type="number" name="esperado_voltaje" step="0.01" min="0" placeholder="Por ejemplo: 1.570" value="<?php echo $vl_esperado; ?>">  Vdc †</td>
+                                    <td><input class="form-control" type="number" name="esperado_voltaje" step="any" min="0" placeholder="Por ejemplo: 1.570" value="<?php echo $vl_esperado; ?>">  Vdc †</td>
                                     <td>(Valor de referencia)</td>
-                                    <td><input class="form-control" type="number" name="condicion_encontrada_voltaje" step="0.01" min="0" placeholder="Por ejemplo: 1.746" value="<?php echo $vl_condicion_encontrada; ?>"> Vdc</td>
+                                    <td><input class="form-control" type="number" name="condicion_encontrada_voltaje" step="any" min="0" placeholder="Por ejemplo: 1.746" value="<?php echo $vl_condicion_encontrada; ?>"> Vdc</td>
                                     <td>
                                     <select class="form-control" name="pasa_voltaje">
                                     <?php echo '<option value="'.$vl_pasa.'">'.$vl_pasa.' - (Actual seleccionado)</option>'; ?>
@@ -104,7 +104,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
                                     <option value="N/A">N/A</option>
                                     </select>
                                     </td>
-                                    <td><input class="form-control" type="number" name="condicion_final_voltaje" step="0.01" min="0" placeholder="Por ejemplo: 1.570" value="<?php echo $vl_condicion_final; ?>"> Vdc</td>
+                                    <td><input class="form-control" type="number" name="condicion_final_voltaje" step="any" min="0" placeholder="Por ejemplo: 1.570" value="<?php echo $vl_condicion_final; ?>"> Vdc</td>
                                     </tr>
                                     </tbody>
 
