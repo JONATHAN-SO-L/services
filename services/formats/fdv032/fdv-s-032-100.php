@@ -283,8 +283,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $size = 5;
     $level = 'S';
     $framesize = 1;
-    $website = 'https://dvi.mx';
-    $contenido = 'CERTIFICADO: '.$id_documento.', MODELO: '.$modelo_contador.', No. DE SERIE: '.$numero_serie.', FECHA DE CALIBRACIÓN: '.$fecha_calibracion.', TÉCNICO: '.$tecnico.' '.$website;
+    $contenido = 'https://veco.lat/services/formats/qr_codes/certificate_info.php?'.$id_documento;
 
     QRCode::png($contenido, $filename, $level, $size, $framesize);
 
