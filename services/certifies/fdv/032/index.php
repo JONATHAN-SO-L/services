@@ -59,7 +59,12 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
         <li><a href="../../../formats/fdv032/FDV-S-032_SGC-100.php" target="_blank">FDV-S-032 (100 LPM)</a></li>
       </ul>
     </div>
-    <a href="../../../functions/search/report.php" class="btn btn-sm btn-info form-control-inline" name="descargar_csv"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar CSV</a>
+
+    <?php
+    if ($_SESSION['tipo'] == 'admin') {
+      echo '<a href="../../../functions/search/report.php" class="btn btn-sm btn-info form-control-inline" name="descargar_csv"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar CSV</a>';
+    }
+    ?>
 
     <td>
     <tr>
