@@ -222,17 +222,17 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetXY(44,237);
     $pdf->Cell(15,5,utf8_decode('Nombre y Firma del Técnico Certificado'),0,0,'C');
 
-    // Firma Cliente
+    // Firma Revisión
     $pdf->SetXY(153,220);
     $pdf->SetFont("Arial","b",10);
-    $pdf->Cell(15,5,utf8_decode('APROBADO POR:'),0,0,'C');
+    $pdf->Cell(15,5,utf8_decode('REVISADO POR:'),0,0,'C');
     $pdf->SetFont("Arial","",10);
     $pdf->Line(190,236,130,236);
     $pdf->SetXY(153,237);
-    $pdf->Cell(15,5,utf8_decode('Nombre Completo y Firma'),0,0,'C');
+    $pdf->Cell(15,5,utf8_decode('Nombre y Firma'),0,0,'C');
 
     // Selección de aprobación
-    $pdf->SetXY(116,244);
+    /*$pdf->SetXY(116,244);
     $pdf->Cell(3,3,'',1,1,'C');
     $pdf->SetXY(135,243);
     $pdf->Cell(5,5,utf8_decode('Gerencia de Servicios'),0,0,'C');
@@ -245,7 +245,7 @@ if ($_SESSION['nombre'] != '' && $_SESSION['tipo'] == 'devecchi' || $_SESSION['t
     $pdf->SetXY(167,244);
     $pdf->Cell(3,3,'',1,1,'C');
     $pdf->SetXY(165,243);
-    $pdf->MultiCell(35,5,utf8_decode('Gerencia de Sistemas de Gestión'),0,'C',false);
+    $pdf->MultiCell(35,5,utf8_decode('Gerencia de Sistemas de Gestión'),0,'C',false);*/
 
 
     /*****************************************************************************************************************************
